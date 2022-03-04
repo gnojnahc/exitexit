@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="erp.exit.mapper.InformationMapper">
+
+	<select id="list" resultType="erp.exit.domain.ProductVO">
+	<![CDATA[
+			SELECT * FROM exit_product
+		]]>
+	</select>
+
+	<insert id="register">
+	<![CDATA[
+		INSERT INTO exit_product(code, codeName, buyer, buyerName, purchasing, purchasingName
+		, buyCompany, buyCompanyName, inspectperson, currentInventory, price, inspect, disuse)
+		VALUES (#{code},#{codeName},#{buyer},#{buyerName},#{purchasing},#{purchasingName}
+		,#{buyCompany},#{buyCompanyName},#{inspectperson},#{currentInventory},#{price}
+		,#{inspect},#{disuse})
+	]]>
+	</insert>
+
+</mapper>
