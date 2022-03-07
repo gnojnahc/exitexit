@@ -15,6 +15,5 @@
 
 <br>
 	<a href="/information/register"><b> 첫번째 과제 바로가기 </b></a>
-TEST
 </body>
 </html>
