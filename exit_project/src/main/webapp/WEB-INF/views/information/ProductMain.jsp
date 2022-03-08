@@ -101,6 +101,8 @@
 			//class 요소가 "inputtext" 인 placeholder 속성 값을 '000'으로 변경하기
 			$('.dataTable-input').attr('placeholder', '전체검색..');
 		});
+
+		
 	</script>
 	
 </html>
