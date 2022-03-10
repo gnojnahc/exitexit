@@ -61,12 +61,12 @@
                             </a> -->
                             
                             <div class="sb-sidenav-menu-heading">품질관리</div>
-	                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+	                            <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts1" aria-expanded="true" aria-controls="collapseLayouts1">
 	                                <div class="sb-nav-link-icon"><i class="fas fa-folder"></i></div>
 									<b>수입검사</b>
 	                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
 	                            </a>
-	                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+	                            <div class="collapse show" id="collapseLayouts1" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 	                                <nav class="sb-sidenav-menu-nested nav">
 	                                    <a class="nav-link" id="ft_style" href="#">수입검사등록</a>
 	                                    <a class="nav-link" id="ft_style" href="#">수입검사현황</a>
@@ -74,12 +74,12 @@
 	                                </nav>
 	                            </div>
 	                            
-	                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+	                            <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts2" aria-expanded="true" aria-controls="collapseLayouts2">
 	                                <div class="sb-nav-link-icon"><i class="fas fa-folder"></i></div>
 									<b>공정품질</b>
 	                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
 	                            </a>
-	                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+	                            <div class="collapse show" id="collapseLayouts2" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 	                                <nav class="sb-sidenav-menu-nested nav">
 	                                    <a class="nav-link" id="ft_style" href="#">공정검사등록</a>
 	                                    <a class="nav-link" id="ft_style" href="#">입고검사등록</a>
@@ -89,23 +89,23 @@
 	                                </nav>
 	                            </div>
 	                            
-	                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+	                            <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts3" aria-expanded="true" aria-controls="collapseLayouts3">
 	                                <div class="sb-nav-link-icon"><i class="fas fa-folder"></i></div>
 									<b>검사성적서</b>
 	                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
 	                            </a>
-	                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+	                            <div class="collapse show" id="collapseLayouts3" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 	                                <nav class="sb-sidenav-menu-nested nav">
 	                                    <a class="nav-link" id="ft_style" href="#">검사성적서</a>
 	                                </nav>
 	                            </div>
 	                            
-	                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+	                            <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts4" aria-expanded="true" aria-controls="collapseLayouts4">
 	                                <div class="sb-nav-link-icon"><i class="fas fa-folder"></i></div>
 									<b>기준정보</b>
 	                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
 	                            </a>
-	                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+	                            <div class="collapse show" id="collapseLayouts4" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 	                                <nav class="sb-sidenav-menu-nested nav">
 	                                    <a class="nav-link" id="ft_style" href="#">검사항목관리</a>
 	                                    <a class="nav-link" id="ft_style" href="#">검사표준관리</a>

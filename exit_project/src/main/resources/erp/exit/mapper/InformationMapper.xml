@@ -6,7 +6,9 @@
 
 	<select id="list" resultType="erp.exit.domain.ProductVO">
 	<![CDATA[
-			SELECT * FROM exit_product
+		SELECT rownum rn, code, codeName, buyer, buyerName, purchasing, purchasingName
+		, buyCompany, buyCompanyName, inspectperson, currentInventory, price, inspect, disuse
+		FROM exit_product ORDER BY rownum DESC
 		]]>
 	</select>
 
@@ -19,5 +21,23 @@
 		,#{inspect},#{disuse})
 	]]>
 	</insert>
+	
+	<select id="getListWithPaging" resultType="erp.exit.domain.ProductVO">
+	<![CDATA[ 
+		SELECT rn, code, codeName, buyer, buyerName, purchasing, purchasingName
+		, buyCompany, buyCompanyName, inspectperson, currentInventory, price, inspect, disuse
+		FROM (SELECT /*+ INDEX_desc(exit_product exit_product_pk) */
+		rownum rn, code, codeName, buyer, buyerName, purchasing, purchasingName
+		, buyCompany, buyCompanyName, inspectperson, currentInventory, price, inspect, disuse
+		FROM exit_product WHERE
+      ]]>	      
+      	      
+      <!-- <include refid="criteria"></include> -->
+    
+    <![CDATA[   	      
+      	      rownum <= (#{pageNum} * #{amount}))
+		where rn > ((#{pageNum}-1) * #{amount})
+	]]>
+	</select>
 
 </mapper>

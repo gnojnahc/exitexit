@@ -13,7 +13,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
     </head>
     
-    <body style="background-color: gray;">
+    <body style="background-color: gray; font-size: 100%">
                 <main>
                     <div class="container">
                         <div class="row justify-content-center">
@@ -24,8 +24,7 @@
                                     
                                         <form action="/information/product/reg" method="post">
                                             <div class="row mb-3">
-                                                <div class="col-md-6">
-                                                    <div class="form-floating mb-3 mb-md-0">
+                                                <div class="col-md-6">                                                    <div class="form-floating mb-3 mb-md-0">
                                                         <input class="form-control" id="inputcode" type="text" name="code" placeholder="자재코드" required/>
                                                         <label for="inputcode">자재코드<span class="form-required">*</span></label>
                                                     </div>
@@ -138,6 +137,7 @@
 	        $(document).ready(function(){
 	        	if(schack == "success") {
 	        		alert('등록되었습니다.');
+	        		opener.location.href="/information/register";
                     window.close();
 	        	};
 			});

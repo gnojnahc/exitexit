@@ -19,34 +19,14 @@ public class InformationController {
 	
 	public InformationService service;
 	
-	@RequestMapping("/test1")
-	public String test1(ProductVO vo, Model md) {
-		log.info("Information Register 페이지 접속");
-		
-		md.addAttribute("list", service.list());
-		
-		return "/information/data";
-	}
-	
 	@GetMapping("/register")
-	public String registerMain(ProductVO vo, Model md) {
+	public String registerMainGet(ProductVO vo, Model md) {
 		log.info("Information Product_M 페이지 접속");
 		
 		md.addAttribute("list", service.list());
 		
 		return "/information/ProductMain";
 	}
-	
-//	@PostMapping("/register")
-//	public String registerPost(ProductVO vo, Model md) {
-//		log.info("Information Post 제품조회 ..");
-//		
-//		service.register(vo);
-//		
-//		md.addAttribute("list", service.list());
-//		
-//		return "/information/ProductM";
-//	}
 	
 	@GetMapping("/product/reg")
 	public String registerGet(ProductVO vo, Model md) {
