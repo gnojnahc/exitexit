@@ -64,8 +64,8 @@
 												<td>${vo.buyCompany}</td>
 												<td>${vo.buyCompanyName}</td>
 												<td>${vo.inspectperson}</td>
-												<td>${vo.currentInventory}</td>
-												<td>${vo.price}</td>
+												<td><fmt:formatNumber value="${vo.currentInventory}" pattern="###,###"/></td>
+												<td><fmt:formatNumber value="${vo.price}" pattern="###,###"/></td>
 												<td>${vo.inspect}</td>
 												<td>${vo.disuse}</td>
 											</tr>
