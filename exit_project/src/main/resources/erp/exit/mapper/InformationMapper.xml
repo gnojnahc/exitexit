@@ -40,4 +40,21 @@
 	]]>
 	</select>
 
+	<select id="delCodeSearch" resultType="erp.exit.domain.ProductVO">
+	<![CDATA[
+		SELECT * FROM exit_product WHERE code = #{code}
+      ]]>
+	</select>
+	
+	<select id="delCodeSearch2" resultType="erp.exit.domain.ProductVO">
+	<![CDATA[
+		SELECT * FROM exit_product WHERE code = #{code}
+      ]]>
+	</select>
+	
+	<delete id="delCodeComplete">
+		DELETE FROM exit_product WHERE code = #{code}
+	</delete>
+	
+
 </mapper>

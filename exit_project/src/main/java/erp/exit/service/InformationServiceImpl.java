@@ -24,4 +24,19 @@ public class InformationServiceImpl implements InformationService {
 		return mapper.list();
 	}
 
+	@Override
+	public ProductVO delCodeSearch(String code) {
+		return mapper.delCodeSearch(code);
+	}
+	@Override
+	public List<ProductVO> delCodeSearch2(String code) {
+		return mapper.delCodeSearch2(code);
+	}
+
+	@Override
+	public void delCodeComplete(String code) {
+		mapper.delCodeComplete(code);
+	}
+
+
 }
