@@ -8,7 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import erp.exit.domain.ProductDTO;
 import erp.exit.domain.ProductVO;
 import erp.exit.service.InformationService;
 import lombok.AllArgsConstructor;
@@ -71,7 +74,7 @@ public class InformationController {
 		return "/information/ProductDel";
 	}
 
-	// 자재 삭제폼 안에 조회기능
+	// 자재 삭제폼 제품코드 조회
 	@PostMapping("/product/searchcode")
 	public String searchcodePost(ProductVO vo, Model md) {
 		log.info("Information 삭제자재 조회중..");
@@ -88,8 +91,16 @@ public class InformationController {
 		return "/information/ProductDel";
 	}
 	
-//	@PostMapping("/product/tablesearch")
-//	public
+	// 테이블 Ajax 검색 조회
+	@GetMapping("/product/getSearchList")
+	@ResponseBody
+	public List<ProductDTO> getSearchList(ProductDTO dto, Model md) {
+		log.info("Information 테이블 Ajax검색 진행");
+		
+		List<ProductDTO> searchList = service.selectSearchList(dto.getType(), dto.getKeyword());
+		
+		return searchList;
+	}
 	
 }
 

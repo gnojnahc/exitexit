@@ -2,6 +2,7 @@ package erp.exit.service;
 
 import java.util.List;
 
+import erp.exit.domain.ProductDTO;
 import erp.exit.domain.ProductVO;
 
 public interface InformationService {
@@ -14,5 +15,7 @@ public interface InformationService {
 	public List<ProductVO> delCodeSearch2(String code);
 	
 	public void delCodeComplete(String code);
+	
+	public List<ProductDTO> selectSearchList(String type, String keyword);
 	
 }

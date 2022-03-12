@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import erp.exit.domain.ProductDTO;
 import erp.exit.domain.ProductVO;
 import erp.exit.mapper.InformationMapper;
 import lombok.AllArgsConstructor;
@@ -36,6 +37,20 @@ public class InformationServiceImpl implements InformationService {
 	@Override
 	public void delCodeComplete(String code) {
 		mapper.delCodeComplete(code);
+	}
+
+	@Override
+	public List<ProductDTO> selectSearchList(String type, String keyword) {
+		
+		List<ProductDTO> list = mapper.selectSearchList(type, keyword);
+		
+		// 공백 없애기..
+		for (ProductDTO data : list) {
+			data.setCurrentInventory(data.getCurrentInventory().replace(" ", ""));
+			data.setPrice(data.getPrice().replace(" ", ""));
+		}
+		
+		return list;
 	}
 
 

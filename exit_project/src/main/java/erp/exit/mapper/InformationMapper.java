@@ -2,6 +2,9 @@ package erp.exit.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
+import erp.exit.domain.ProductDTO;
 import erp.exit.domain.ProductVO;
 
 public interface InformationMapper {
@@ -18,5 +21,9 @@ public interface InformationMapper {
 	
 	//코드 확인해서 삭제하기
 	public void delCodeComplete(String code);
+
+	// 쿼리+ajax 검색기능
+	public List<ProductDTO> selectSearchList(@Param("type") String type, 
+			@Param("keyword") String keyword);
 	
 }

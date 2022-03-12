@@ -57,4 +57,17 @@
 	</delete>
 	
 
+	<select id="selectSearchList" resultType="erp.exit.domain.ProductDTO">
+		<![CDATA[
+			SELECT code, codeName, buyer, buyerName, purchasing, purchasingName
+			, buyCompany, buyCompanyName, inspectperson,
+			to_char(currentInventory, '999,999,999') "currentInventory",
+			to_char(price, '999,999,999') "price",
+			inspect, disuse FROM exit_product 
+			WHERE ${type} LIKE '%'||#{keyword}||'%'
+		]]>
+	</select>
+	
+	
+
 </mapper>

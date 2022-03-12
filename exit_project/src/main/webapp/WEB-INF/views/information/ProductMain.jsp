@@ -29,15 +29,16 @@
                         	<a class="btn btn-primary" href="/information/product/del" target="_blank" onClick="window.open(this.href, '_blank', 'width=600, height=800'); return false;">
                         	삭제</a>
                         	
-                        	<form action="#" method="post" style="float: right;">
+                        	<form name="search-form" autocomplete="off" style="float: right;">
 		                       	<div class="input-group" style="float: right; width: 260px">
-				                    <input class="form-control" type="text" placeholder="검색어 입력" aria-label="검색어 입력" aria-describedby="btnNavbarSearch"/>
-				                    <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+				                    <input class="form-control" type="text" placeholder="검색어 입력" aria-label="검색어 입력" aria-describedby="btnNavbarSearch" name="keyword" />
+				                    <button class="btn btn-primary" id="btnNavbarSearch" type="button" onclick="getSearchList();"><i class="fas fa-search"></i></button>
 				                </div>
+				                
 	                        	<div style="float: right;">
 	                        		<!-- 옵션  selected="" -->
-		                        	<select class="dataTable-selector">
-			                        	<option value="code">자재코드</option>
+		                        	<select class="dataTable-selector" name="type">
+			                        	<option selected value="code">자재코드</option>
 			                        	<option value="codeName">자재명</option>
 			                        	<option value="buyer">구매자</option>
 		                        	</select>
@@ -106,6 +107,44 @@
                 </main>
 	
 	<%@ include file="../includes/footer.jsp" %>
+	
+	<script>
+		// getSearchList
+		function getSearchList(){
+			$.ajax({
+				type: 'GET',
+				url : "/information/product/getSearchList",
+				data : $("form[name=search-form]").serialize(),
+				success : function(result){
+					//테이블 초기화
+					$('#resultTable > tbody').empty();
+					if(result.length >= 1){
+						let str = "";
+						result.forEach(function(item){
+							str+='<tr>'
+								str+="<td>"+item.code+"</td>"
+								str+="<td>"+item.codeName+"</td>"
+								str+="<td>"+item.buyer+"</td>"
+								str+="<td>"+item.buyerName+"</td>"
+								str+="<td>"+item.purchasing+"</td>"
+								str+="<td>"+item.purchasingName+"</td>"
+								str+="<td>"+item.buyCompany+"</td>"
+								str+="<td>"+item.buyCompanyName+"</td>"
+								str+="<td>"+item.inspectperson+"</td>"
+								str+="<td>"+item.currentInventory+"</td>"
+								str+="<td>"+item.price+"</td>"
+								str+="<td>"+item.inspect+"</td>"
+								str+="<td>"+item.disuse+"</td>"
+							str+="</tr>"
+							/* $('#resultTable').append(str); */
+		        		});
+						$('#resultTable > tbody').html(str);
+					}
+				}
+			});
+		}
+		
+	</script>
 	
 	<script>
 	function fnExcelReport(id, title) {
