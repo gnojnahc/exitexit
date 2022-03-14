@@ -63,9 +63,9 @@
 								</div>
                             </div>
 
-                            <div class="card-body" style="height:500px; overflow:auto">
-                                <table id="resultTable" class="dataTable-table" style="font-size: 90%;">
-                                    <thead>
+                            <div class="card-body-table">
+								<table id="resultTable" class="dataTable-table">
+									<thead>
                                         <tr>
                                         	<th>No</th>
 											<th>자재코드<span class="form-required">*</span></th>
@@ -108,7 +108,7 @@
                         </div>
                     </div>
                 </main>
-	
+
 	<%@ include file="../includes/footer.jsp" %>
 	
 	<script>

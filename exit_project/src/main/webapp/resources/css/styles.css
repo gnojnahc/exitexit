@@ -4562,6 +4562,14 @@ textarea.form-control-lg {
   padding: 1rem 1rem;
 }
 
+/* div */
+.card-body-table {
+  flex: 1 1 auto;
+  padding: 1rem 1rem;
+  overflow: auto;
+  height:500px;
+}
+
 .card-title {
   margin-bottom: 0.5rem;
 }
@@ -11616,6 +11624,7 @@ body {
 /* TABLE */
 .dataTable-table {
   border-collapse: collapse;
+  font-size: 90%;
 }
 
 .dataTable-table > tbody > tr > td,
@@ -11629,9 +11638,9 @@ body {
 }
 
 .dataTable-table > thead > tr > th {
-  vertical-align: bottom;
-  text-align: left;
-  border-bottom: none;
+	vertical-align: bottom;
+	/* border-bottom: none; */
+	text-align: center;
 }
 
 .dataTable-table > tfoot > tr > th {
@@ -11712,12 +11721,3 @@ body {
 .dataTable-sorter {
 	padding-right: 0rem;
 }
-
-.dataTable-table > thead > tr > th {
-	text-align: center;
-}
-/* 
-.dataTable-table > thead > tr > td > .rownum {
-	text-align: center;
-	font-weight: bold;
-} */

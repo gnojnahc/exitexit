@@ -21,9 +21,7 @@
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                                     <div class="card-header"><h3 class="text-center font-weight-light my-2"><b>검사자재 등록</b></h3></div>
                                     <div class="card-body">
-                                    
                                         <form action="/information/product/reg" method="post">
-                                            <div class="row mb-3">
                                                 <div class="col-md-6">
                                                 	<div class="form-floating mb-3 mb-md-0">
                                                         <input class="form-control" id="inputcode" type="text" name="code" placeholder="자재코드" required/>
@@ -38,7 +36,7 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputbuyer" type="text" name="buyer" placeholder="구매자"/>
+                                                        <input class="form-control" id="inputbuyer" type="text" name="buyer" placeholder="구매자" required/>
                                                         <label for="inputbuyer">구매자<span class="form-required">*</span></label>
                                                     </div>
                                                 </div>
