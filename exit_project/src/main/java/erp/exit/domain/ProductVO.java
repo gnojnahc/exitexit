@@ -1,7 +1,5 @@
 package erp.exit.domain;
 
-import java.text.DecimalFormat;
-
 import lombok.Data;
 
 @Data
@@ -21,13 +19,9 @@ public class ProductVO {
 	private char inspect;//검사여부
 	private char disuse;//폐기여부
 	
-	private String DFcurrentInven;
-	private String DFprice;
 	
-	private void DF() {
-		DecimalFormat df = new DecimalFormat("###,###");
-		
-		this.DFcurrentInven = df.format(currentInventory);
-		this.DFprice = df.format(price);
-	}
+	//숫자 단위 표기형식
+	private String df_currentInventory;
+	private String df_price;
+	
 }

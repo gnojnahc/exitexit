@@ -94,8 +94,8 @@
 												<td>${vo.buyCompany}</td>
 												<td>${vo.buyCompanyName}</td>
 												<td>${vo.inspectperson}</td>
-												<td><fmt:formatNumber value="${vo.currentInventory}" pattern="###,###"/></td>
-												<td><fmt:formatNumber value="${vo.price}" pattern="###,###"/></td>
+												<td>${vo.df_currentInventory}</td>
+												<td>${vo.df_price}</td>
 												<td>${vo.inspect}</td>
 												<td>${vo.disuse}</td>
 											</tr>
@@ -132,8 +132,8 @@
 								str+="<td>"+item.buyCompany+"</td>"
 								str+="<td>"+item.buyCompanyName+"</td>"
 								str+="<td>"+item.inspectperson+"</td>"
-								str+="<td>"+item.currentInventory+"</td>"
-								str+="<td>"+item.price+"</td>"
+								str+="<td>"+item.df_currentInventory+"</td>"
+								str+="<td>"+item.df_price+"</td>"
 								str+="<td>"+item.inspect+"</td>"
 								str+="<td>"+item.disuse+"</td>"
 							str+="</tr>"

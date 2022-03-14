@@ -1,7 +1,5 @@
 package erp.exit.domain;
 
-import java.text.DecimalFormat;
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -21,13 +19,17 @@ public class ProductDTO {
 	private String buyCompany;
 	private String buyCompanyName;
 	private String inspectperson;
-	private String currentInventory;
-	private String price;
+	private long currentInventory;
+	private long price;
 	private char inspect;
 	private char disuse;
 	
 	//검색필터
 	private String type;
 	private String keyword;
+	
+	//숫자 단위 표기형식
+	private String df_currentInventory;
+	private String df_price;
 	
 }

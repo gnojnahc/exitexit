@@ -1,5 +1,6 @@
 package erp.exit.service;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -22,7 +23,16 @@ public class InformationServiceImpl implements InformationService {
 
 	@Override
 	public List<ProductVO> list() {
-		return mapper.list();
+		
+		List<ProductVO> list = mapper.list();
+		
+		DecimalFormat df = new DecimalFormat("###,###");
+		for (ProductVO data : list) {
+			data.setDf_price(df.format(data.getPrice()));
+			data.setDf_currentInventory(df.format(data.getCurrentInventory()));
+		}
+		
+		return list;
 	}
 
 	@Override
@@ -44,10 +54,10 @@ public class InformationServiceImpl implements InformationService {
 		
 		List<ProductDTO> list = mapper.selectSearchList(type, keyword);
 		
-		// 공백 없애기..
+		DecimalFormat df = new DecimalFormat("###,###");
 		for (ProductDTO data : list) {
-			data.setCurrentInventory(data.getCurrentInventory().replace(" ", ""));
-			data.setPrice(data.getPrice().replace(" ", ""));
+			data.setDf_price(df.format(data.getPrice()));
+			data.setDf_currentInventory(df.format(data.getCurrentInventory()));
 		}
 		
 		return list;
