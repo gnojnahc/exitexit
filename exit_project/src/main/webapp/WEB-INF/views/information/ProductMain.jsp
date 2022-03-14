@@ -29,9 +29,9 @@
                         	<a class="btn btn-primary" href="/information/product/del" target="_blank" onClick="window.open(this.href, '_blank', 'width=600, height=800'); return false;">
                         	삭제</a>
                         	
-                        	<form name="search-form" autocomplete="off" style="float: right;">
+                        	<form name="search-form" autocomplete="off" style="float: right;" onsubmit="return false">
 		                       	<div class="input-group" style="float: right; width: 260px">
-				                    <input class="form-control" type="text" placeholder="검색어 입력" aria-label="검색어 입력" aria-describedby="btnNavbarSearch" name="keyword" />
+				                    <input class="form-control" type="text" placeholder="검색어 입력" aria-label="검색어 입력" aria-describedby="btnNavbarSearch" name="keyword" onkeypress="if( event.keyCode == 13 ){getSearchList();}" />
 				                    <button class="btn btn-primary" id="btnNavbarSearch" type="button" onclick="getSearchList();"><i class="fas fa-search"></i></button>
 				                </div>
 				                
