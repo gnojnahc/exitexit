@@ -10,6 +10,7 @@ import lombok.ToString;
 public class ProductDTO {
 	
 	// 검색기능 DTO 필드
+	private long rn;
 	private String code;
 	private String codeName;
 	private String buyer;

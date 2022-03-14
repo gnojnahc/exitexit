@@ -67,6 +67,7 @@
                                 <table id="resultTable" class="dataTable-table" style="font-size: 90%;">
                                     <thead>
                                         <tr>
+                                        	<th>No</th>
 											<th>자재코드<span class="form-required">*</span></th>
 								            <th>자재명<span class="form-required">*</span></th>
 								            <th>구매자<span class="form-required">*</span></th>
@@ -85,6 +86,7 @@
                                     <tbody>
                                         <c:forEach var="vo" items="${list}">
 											<tr>
+												<td style="text-align: center; font-weight: bold; font-size: 10pt;">${vo.rn}</td>
 												<td>${vo.code}</td>
 												<td>${vo.codeName}</td>
 												<td>${vo.buyer}</td>
@@ -123,6 +125,7 @@
 						let str = "";
 						result.forEach(function(item){
 							str+='<tr>'
+								str+='<td style="text-align: center; font-weight: bold; font-size: 10pt;">'+item.rn+'</td>'
 								str+="<td>"+item.code+"</td>"
 								str+="<td>"+item.codeName+"</td>"
 								str+="<td>"+item.buyer+"</td>"

@@ -6,7 +6,7 @@
 
 	<select id="list" resultType="erp.exit.domain.ProductVO">
 	<![CDATA[
-		SELECT rownum rn, code, codeName, buyer, buyerName, purchasing, purchasingName
+		SELECT rownum "rn", code, codeName, buyer, buyerName, purchasing, purchasingName
 		, buyCompany, buyCompanyName, inspectperson, currentInventory, price, inspect, disuse
 		FROM exit_product ORDER BY rownum DESC
 		]]>
@@ -59,10 +59,10 @@
 
 	<select id="selectSearchList" resultType="erp.exit.domain.ProductDTO">
 		<![CDATA[
-			SELECT code, codeName, buyer, buyerName, purchasing, purchasingName
+			SELECT rownum "rn", code, codeName, buyer, buyerName, purchasing, purchasingName
 			, buyCompany, buyCompanyName, inspectperson, currentInventory, price,
 			inspect, disuse FROM exit_product 
-			WHERE ${type} LIKE '%'||#{keyword}||'%'
+			WHERE ${type} LIKE '%'||#{keyword}||'%' ORDER BY rownum DESC
 		]]>
 	</select>
 	

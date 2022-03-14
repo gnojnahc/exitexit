@@ -11716,4 +11716,8 @@ body {
 .dataTable-table > thead > tr > th {
 	text-align: center;
 }
-
+/* 
+.dataTable-table > thead > tr > td > .rownum {
+	text-align: center;
+	font-weight: bold;
+} */
