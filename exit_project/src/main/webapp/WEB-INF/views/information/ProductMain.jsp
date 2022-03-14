@@ -41,6 +41,7 @@
 			                        	<option selected value="code">자재코드</option>
 			                        	<option value="codeName">자재명</option>
 			                        	<option value="buyer">구매자</option>
+			                        	<option value="inspectperson">수입검사자</option>
 		                        	</select>
 	                        	</div>
                         	</form>
