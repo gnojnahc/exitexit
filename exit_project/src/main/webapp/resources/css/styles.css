@@ -4565,7 +4565,7 @@ textarea.form-control-lg {
 /* div */
 .card-body-table {
   flex: 1 1 auto;
-  padding: 1rem 1rem;
+/*   padding: 1rem 1rem; */
   overflow: auto;
   height:500px;
 }
@@ -11641,6 +11641,20 @@ body {
 	vertical-align: bottom;
 	/* border-bottom: none; */
 	text-align: center;
+	position: sticky;
+	top: 0px;
+	/* background-color: #686868; */
+	/* background-color: #eeeeee; */
+	background-color: #dddddd;
+	/* color: white; */
+	/* border-bottom: 2px solid; */
+	border-top-style: hidden;
+	border-bottom-style: hidden;
+	/* border-bottom-style: solid; */
+}
+
+.dataTable-table > tbody > tr > td {
+	border-collapse: collapse;
 }
 
 .dataTable-table > tfoot > tr > th {
@@ -11721,3 +11735,5 @@ body {
 .dataTable-sorter {
 	padding-right: 0rem;
 }
+
+
