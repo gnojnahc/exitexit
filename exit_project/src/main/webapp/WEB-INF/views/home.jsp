@@ -14,6 +14,6 @@
 <P>  The time on the server is ${serverTime}. </P>
 
 <br>
-	<a href="/information/register"><b> 첫번째 과제 바로가기 </b></a>
+	<a href="/account/login"><b> 첫번째 과제 바로가기 </b></a>
 </body>
 </html>

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import erp.exit.domain.MemberVO;
 import erp.exit.domain.ProductDTO;
 import erp.exit.domain.ProductVO;
 
@@ -25,5 +26,12 @@ public interface InformationMapper {
 	// 쿼리+ajax 검색기능
 	public List<ProductDTO> selectSearchList(@Param("type") String type, 
 			@Param("keyword") String keyword);
+	
+	//로그인 하기
+	public Integer login(@Param("userId") String userId, 
+			@Param("userPass") String userPass);
+	
+	//회원가입 하기
+	public void create(MemberVO vo);
 	
 }

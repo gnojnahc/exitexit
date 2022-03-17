@@ -67,5 +67,21 @@
 	</select>
 	
 	
+<!--회원가입 -->
+	<insert id="create">
+	<![CDATA[
+		INSERT INTO EXIT_MEMBER(userId, userPass, userDepart, userName, userEmail) 
+			VALUES(#{userId}, #{userPass}, #{userDepart}, #{userName}, #{userEmail})
+
+	]]>
+	</insert>
+	<!-- 로그인 -->
+	<select id="login" resultType="int">
+		<![CDATA[
+		select count(*) from exit_member where userId=#{userId} and userPass=#{userPass}	
+	]]>
+	</select>
+
+	
 
 </mapper>

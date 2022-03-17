@@ -112,6 +112,14 @@
 	<%@ include file="../includes/footer.jsp" %>
 	
 	<script>
+	document.addEventListener('DOMContentLoaded', function(event){
+		
+		getSearchList();
+	});
+
+	
+	
+	
 		// getSearchList
 		function getSearchList(){
 			$.ajax({
