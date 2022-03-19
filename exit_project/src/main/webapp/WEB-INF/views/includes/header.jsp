@@ -8,7 +8,7 @@
 	<meta name="description" content="" />
 	<meta name="author" content="" />
 	<title>EXIT - ERP System</title>
-	<link href="/resources/css/styles.css?after" rel="stylesheet" />
+	<link href="/resources/css/styles.css?aftertwo" rel="stylesheet" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
@@ -58,11 +58,11 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                         
-                            <!-- <div class="sb-sidenav-menu-heading">메인</div>
+                            <%-- <div class="sb-sidenav-menu-heading">메인</div>
                             <a class="nav-link" href="index.html">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Dashboard
-                            </a> -->
+                            </a> --%>
                             
                             <div class="sb-sidenav-menu-heading">품질관리</div>
 	                            <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts1" aria-expanded="true" aria-controls="collapseLayouts1">
@@ -113,21 +113,12 @@
 	                                <nav class="sb-sidenav-menu-nested nav">
 	                                    <a class="nav-link" id="ft_style" href="#">검사항목관리</a>
 	                                    <a class="nav-link" id="ft_style" href="#">검사표준관리</a>
-	                                    <a class="nav-link" id="ft_style" href="/information/register">검사자재등록</a>
+	                                    <a class="nav-link" id="ft_style" href="/information/main">검사자재등록</a>
+	                                    <a class="nav-link" id="ft_style" href="/inspection/main">검사항목등록</a>
 	                                </nav>
 	                            </div>
-	                            
-                            <!-- <div class="sb-sidenav-menu-heading">Addons</div>
-                            <a class="nav-link" href="charts.html">
-                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                Charts
-                            </a>
-                            <a class="nav-link" href="tables.html">
-                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                Tables
-                            </a> -->
-                        </div>
-                    </div>
+	                        </div>
+	                    </div>
 							<div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
                         Exit Page Admin

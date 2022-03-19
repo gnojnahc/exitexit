@@ -6,57 +6,51 @@
 
 	<select id="list" resultType="erp.exit.domain.ProductVO">
 	<![CDATA[
-		SELECT rownum "rn", code, codeName, buyer, buyerName, purchasing, purchasingName
+		SELECT rownum "rn", idx, code, codeName, buyer, buyerName, purchasing, purchasingName
 		, buyCompany, buyCompanyName, inspectperson, currentInventory, price, inspect, disuse
-		FROM exit_product ORDER BY rownum DESC
+        FROM 
+        (SELECT idx, code, codeName, buyer, buyerName, purchasing, purchasingName
+		, buyCompany, buyCompanyName, inspectperson, currentInventory, price, inspect, disuse
+        FROM exit_product WHERE disuse='N' ORDER BY idx DESC)
 		]]>
 	</select>
 
 	<insert id="register">
 	<![CDATA[
-		INSERT INTO exit_product(code, codeName, buyer, buyerName, purchasing, purchasingName
+		INSERT INTO exit_product(idx, code, codeName, buyer, buyerName, purchasing, purchasingName
 		, buyCompany, buyCompanyName, inspectperson, currentInventory, price, inspect, disuse)
-		VALUES (#{code},#{codeName},#{buyer},#{buyerName},#{purchasing},#{purchasingName}
+		VALUES (PRODUCT_IDX_SEQ.nextval,#{code},#{codeName},#{buyer},#{buyerName},#{purchasing},#{purchasingName}
 		,#{buyCompany},#{buyCompanyName},#{inspectperson},#{currentInventory},#{price}
 		,#{inspect},#{disuse})
 	]]>
 	</insert>
 	
-	<select id="getListWithPaging" resultType="erp.exit.domain.ProductVO">
-	<![CDATA[ 
-		SELECT rn, code, codeName, buyer, buyerName, purchasing, purchasingName
-		, buyCompany, buyCompanyName, inspectperson, currentInventory, price, inspect, disuse
-		FROM (SELECT /*+ INDEX_desc(exit_product exit_product_pk) */
-		rownum rn, code, codeName, buyer, buyerName, purchasing, purchasingName
-		, buyCompany, buyCompanyName, inspectperson, currentInventory, price, inspect, disuse
-		FROM exit_product WHERE
-      ]]>	      
-      	      
-      <!-- <include refid="criteria"></include> -->
-    
-    <![CDATA[   	      
-      	      rownum <= (#{pageNum} * #{amount}))
-		where rn > ((#{pageNum}-1) * #{amount})
-	]]>
-	</select>
-
-	<select id="delCodeSearch" resultType="erp.exit.domain.ProductVO">
+	<!-- 삭제품목 조회 기능 -->
+	<select id="delSearch" resultType="erp.exit.domain.ProductVO">
 	<![CDATA[
 		SELECT * FROM exit_product WHERE code = #{code}
       ]]>
 	</select>
 	
-	<select id="delCodeSearch2" resultType="erp.exit.domain.ProductVO">
+	<select id="delSearch2" resultType="erp.exit.domain.ProductVO">
 	<![CDATA[
 		SELECT * FROM exit_product WHERE code = #{code}
       ]]>
 	</select>
+	<!-- 삭제품목 조회 기능 -->
 	
-	<delete id="delCodeComplete">
+	<!-- 삭제 & 백업 기능 -->
+	<update id="delUpdateDD">
+		UPDATE exit_product SET DISUSE = 'Y' WHERE code = #{code}
+	</update>
+	<insert id="delBackUpData">
+		INSERT INTO exit_product_del_save SELECT * FROM exit_product WHERE DISUSE = 'Y'
+	</insert>
+	<delete id="delComplete">
 		DELETE FROM exit_product WHERE code = #{code}
 	</delete>
+	<!-- 삭제 & 백업 기능 끝 -->
 	
-
 	<select id="selectSearchList" resultType="erp.exit.domain.ProductDTO">
 		<![CDATA[
 			SELECT rownum "rn", code, codeName, buyer, buyerName, purchasing, purchasingName
@@ -66,22 +60,4 @@
 		]]>
 	</select>
 	
-	
-<!--회원가입 -->
-	<insert id="create">
-	<![CDATA[
-		INSERT INTO EXIT_MEMBER(userId, userPass, userDepart, userName, userEmail) 
-			VALUES(#{userId}, #{userPass}, #{userDepart}, #{userName}, #{userEmail})
-
-	]]>
-	</insert>
-	<!-- 로그인 -->
-	<select id="login" resultType="int">
-		<![CDATA[
-		select count(*) from exit_member where userId=#{userId} and userPass=#{userPass}	
-	]]>
-	</select>
-
-	
-
 </mapper>

@@ -34,21 +34,32 @@ public class InformationServiceImpl implements InformationService {
 		
 		return list;
 	}
-
+	
 	@Override
-	public ProductVO delCodeSearch(String code) {
-		return mapper.delCodeSearch(code);
-	}
-	@Override
-	public List<ProductVO> delCodeSearch2(String code) {
-		return mapper.delCodeSearch2(code);
+	public ProductVO delSearch(String code) {
+		return mapper.delSearch(code);
 	}
 
 	@Override
-	public void delCodeComplete(String code) {
-		mapper.delCodeComplete(code);
+	public List<ProductVO> delSearch2(String code) {
+		return mapper.delSearch2(code);
 	}
 
+	@Override
+	public void delUpdateDD(String code) {
+		mapper.delUpdateDD(code);
+	}
+	
+	@Override
+	public void delBackUpData() {
+		mapper.delBackUpData();
+	}
+	
+	@Override
+	public void delComplete(String code) {
+		mapper.delComplete(code);
+	}
+	
 	@Override
 	public List<ProductDTO> selectSearchList(String type, String keyword) {
 		

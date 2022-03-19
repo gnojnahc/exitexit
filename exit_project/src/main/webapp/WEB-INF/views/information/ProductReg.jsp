@@ -137,7 +137,7 @@
 	        $(document).ready(function(){
 	        	if(schack == "success") {
 	        		alert('등록 되었습니다.');
-	        		opener.location.href="/information/register";
+	        		opener.location.href="/information/main";
                     window.close();
 	        	};
 			});

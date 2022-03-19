@@ -60,7 +60,7 @@ body:after {
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                                     <div class="card-header">
        										<h3 class="text-center font-weight-light my-4">
-                                       <a href="http://localhost:8080/information/register" >
+                                       <a href="/" >
        											<img src="/resources/assets/img/logo.png" class="container"/>
       								   </a>
        										</h3>

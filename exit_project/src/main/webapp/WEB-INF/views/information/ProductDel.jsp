@@ -143,8 +143,14 @@
 	        $(document).ready(function(){
 	        	if(schack == "success") {
 	        		alert('삭제 되었습니다.');
-	        		opener.location.href="/information/register";
+	        		opener.location.href="/information/main";
                     window.close();
+	        	}
+			});
+	        
+	        $(document).ready(function(){
+	        	if("${test}" == "test") {
+	        		alert('창이 이미 띄워져 있습니다.');
 	        	}
 			});
 	        

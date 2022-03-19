@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="erp.exit.mapper.InspectionitemMapper">
+
+	<select id="list" resultType="erp.exit.domain.ItemVO">
+	<![CDATA[
+		SELECT rownum "rn", idx, inspectionitem, inspectionitemname, qua, samplewater, ac
+		, re, usl, sl, lsl, ucl, cl, lcl, unit, creationdate, modifieddate, deldate
+		, disposal, note
+        FROM
+        (SELECT idx, inspectionitem, inspectionitemname, qua, samplewater, ac
+		, re, usl, sl, lsl, ucl, cl, lcl, unit, creationdate, modifieddate, deldate
+		, disposal, note 
+		FROM exit_item WHERE disposal='N' ORDER BY idx DESC)
+		]]>
+	</select>
+
+	<insert id="register">
+	<![CDATA[
+		INSERT INTO exit_item(idx, inspectionitem, inspectionitemname, qua, samplewater, ac
+		, re, usl, sl, lsl, ucl, cl, lcl, unit, creationdate, modifieddate, deldate
+		, disposal, note) 
+		VALUES (ITEM_IDX_SEQ.nextval,#{inspectionItem},#{inspectionItemName},#{qua},#{sampleWater},#{ac}
+		,#{re},#{usl},#{sl},#{lsl},#{ucl},#{cl},#{lcl},#{unit}
+		,#{creationDate},#{modifiedDate},#{delDate},#{disposal},#{note})
+	]]>
+	</insert>
+	
+	<!-- 삭제품목 조회 기능 -->
+	<select id="delSearch" resultType="erp.exit.domain.ItemVO">
+	<![CDATA[
+		SELECT * FROM exit_item WHERE inspectionitem = #{inspectionItem}
+      ]]>
+	</select>
+	
+	<select id="delSearch2" resultType="erp.exit.domain.ItemVO">
+	<![CDATA[
+		SELECT * FROM exit_item WHERE inspectionitem = #{inspectionItem}
+      ]]>
+	</select>
+	<!-- 삭제품목 조회 기능 -->
+	
+	<!-- 삭제 & 백업 기능 -->
+	<update id="delUpdateDD">
+	BEGIN
+		UPDATE exit_item SET disposal = 'Y' WHERE INSPECTIONITEM = #{inspectionItem};
+		UPDATE exit_item SET deldate = SYSDATE WHERE INSPECTIONITEM = #{inspectionItem};
+	END;
+	</update>
+	<insert id="delBackUpData">
+		INSERT INTO exit_item_del_save SELECT * FROM exit_item WHERE DISPOSAL = 'Y'
+	</insert>
+	<delete id="delComplete">
+		DELETE FROM exit_item WHERE INSPECTIONITEM = #{inspectionItem}
+	</delete>
+	<!-- 삭제 & 백업 기능 끝 -->
+	
+	<select id="selectSearchList" resultType="erp.exit.domain.ItemDTO">
+		<![CDATA[
+			SELECT rownum "rn", inspectionitem, inspectionitemname, qua, samplewater, ac
+			, re, usl, sl, lsl, ucl, cl, lcl, unit, creationdate, modifieddate, deldate
+			, disposal, note 
+			FROM exit_item 
+			WHERE ${type} LIKE '%'||#{keyword}||'%' ORDER BY rownum DESC
+		]]>
+	</select>
+	
+</mapper>

@@ -1,6 +1,5 @@
 package erp.exit.controller;
 
-import java.text.DecimalFormat;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -8,7 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import erp.exit.domain.ProductDTO;
@@ -26,7 +24,7 @@ public class InformationController {
 	public InformationService service;
 	
 	// 검사자재 등록&조회 페이지 실행
-	@GetMapping("/register")
+	@GetMapping("/main")
 	public String registerMainGet(ProductVO vo, Model md) {
 		log.info("Information Product_M 페이지 접속");
 		
@@ -67,7 +65,9 @@ public class InformationController {
 	public String deletePost(ProductVO vo, Model md) {
 		log.info("Information 자재 삭제중..");
 		
-		service.delCodeComplete(vo.getCode());
+		service.delUpdateDD(vo.getCode());
+		service.delBackUpData();
+		service.delComplete(vo.getCode());
 		
 		md.addAttribute("ServiceCheck", "success");
 		
@@ -79,8 +79,8 @@ public class InformationController {
 	public String searchcodePost(ProductVO vo, Model md) {
 		log.info("Information 삭제자재 조회중..");
 		
-		ProductVO delVO = service.delCodeSearch(vo.getCode());
-		List<ProductVO> delVO2 = service.delCodeSearch2(vo.getCode());
+		ProductVO delVO = service.delSearch(vo.getCode());
+		List<ProductVO> delVO2 = service.delSearch2(vo.getCode());
 		
 		if(delVO2.size() == 0) {
 			md.addAttribute("ServiceCheck", "none");

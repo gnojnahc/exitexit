@@ -10,23 +10,22 @@
 	
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">검사 자재 등록</h1>
+                        <h1 class="mt-4">검사 항목 등록</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item">품질관리</li>
-                            <li class="breadcrumb-item active">검사자재등록</li>
+                            <li class="breadcrumb-item active">검사항목등록</li>
                         </ol>
                         <div class="card mb-4">
                             <div class="card-body">
-								검사가 필요한 자재를 등록 하거나, 검사 자재 조회가 가능합니다.
+								검사가 필요한 항목을 등록 하거나, 검사 항목 조회가 가능합니다.
                                 <br>
-                                <%-- <a target="_blank" href="https://datatables.net/">DataTables documentation css & js</a> --%>
                             </div>
                         </div>
                         
                         <div>
-                        	<a class="btn btn-primary" href="/information/product/reg" target="_blank" onClick="window.open(this.href, '_blank', 'width=600, height=800'); return false;">
-                        	자재등록</a>
-                        	<a class="btn btn-primary" href="/information/product/del" target="_blank" onClick="window.open(this.href, '_blank', 'width=600, height=800'); return false;">
+                        	<a class="btn btn-primary" href="/inspection/item/reg" target="_blank" onClick="window.open(this.href, '_blank', 'width=600, height=800'); return false;">
+                        	항목등록</a>
+                        	<a class="btn btn-primary" href="/inspection/item/del" target="_blank" onClick="window.open(this.href, '_blank', 'width=600, height=800'); return false;">
                         	삭제</a>
                         	
                         	<form name="search-form" autocomplete="off" style="float: right;" onsubmit="return false">
@@ -38,10 +37,10 @@
 	                        	<div style="float: right;">
 	                        		<!-- 옵션  selected="" -->
 		                        	<select class="dataTable-selector" name="type">
-			                        	<option selected value="code">자재코드</option>
-			                        	<option value="codeName">자재명</option>
-			                        	<option value="buyer">구매자</option>
-			                        	<option value="inspectperson">수입검사자</option>
+			                        	<option selected value="inspectionitem">검사항목</option>
+			                        	<option value="inspectionitemname">검사항목명</option>
+			                        	<option value="qua">정성정량</option>
+			                        	<option value="samplewater">시료수</option>
 		                        	</select>
 	                        	</div>
                         	</form>
@@ -54,10 +53,10 @@
                             <div class="card-header">
 								<div style="float: left; padding: 0.375rem 0.5rem;">
 									<i class="fas fa-table me-1"></i>
-									<b>자재 검색내역</b>
+									<b>항목 검색내역</b>
 								</div>
 
-								<div class="btn btn-success" onclick="fnExcelReport('resultTable','material_List');" style="float: right;">
+								<div class="btn btn-success" onclick="fnExcelReport('resultTable','item_List');" style="float: right;">
 									<i class="fas fa-table me-1"></i>
 									<a>Excel 다운로드</a>
 								</div>
@@ -68,38 +67,48 @@
 									<thead>
                                         <tr>
                                         	<th>No</th>
-											<th>자재코드<span class="form-required">*</span></th>
-								            <th>자재명<span class="form-required">*</span></th>
-								            <th>구매자<span class="form-required">*</span></th>
-								            <th>구매자명</th>
-								            <th>구매부서</th>
-								            <th>구매부서명</th>
-								            <th>구매업체</th>
-								            <th>구매업체명</th>
-								            <th>수입검사자</th>	
-								            <th>현재고<span class="yn_select">(개)</span></th>
-								            <th>구매단가<span class="yn_select">(원)</span></th>
-								            <th>검사여부<span class="yn_select">(Y/N)</span></th>
-								            <th>폐기여부<span class="yn_select">(Y/N)</span></th>
+											<th>검사항목<span class="form-required">*</span></th>
+								            <th>검사항목명</th>
+								            <th>정성정량</th>
+								            <th>시료수</th>
+								            <th>AC값</th>
+								            <th>RE값</th>
+								            <th>USL</th>
+								            <th>SL</th>
+								            <th>LSL</th>	
+								            <th>UCL</th>
+								            <th>CL</th>
+								            <th>LCL</th>
+								            <th>단위</th>
+								            <th>생성일자</th>
+								            <th>수정일자</th>
+								            <th>삭제일</th>
+								            <th>폐기여부</th>
+								            <th>비고</th>
 										</tr>
                                     </thead>
                                     <tbody>
                                         <c:forEach var="vo" items="${list}">
 											<tr>
 												<td style="text-align: center; font-weight: bold; font-size: 10pt;">${vo.rn}</td>
-												<td>${vo.code}</td>
-												<td>${vo.codeName}</td>
-												<td>${vo.buyer}</td>
-												<td>${vo.buyerName}</td>
-												<td>${vo.purchasing}</td>
-												<td>${vo.purchasingName}</td>
-												<td>${vo.buyCompany}</td>
-												<td>${vo.buyCompanyName}</td>
-												<td>${vo.inspectperson}</td>
-												<td>${vo.df_currentInventory}</td>
-												<td>${vo.df_price}</td>
-												<td>${vo.inspect}</td>
-												<td>${vo.disuse}</td>
+												<td>${vo.inspectionItem}</td>
+												<td>${vo.inspectionItemName}</td>
+												<td>${vo.qua}</td>
+												<td>${vo.sampleWater}</td>
+												<td>${vo.ac}</td>
+												<td>${vo.re}</td>
+												<td>${vo.usl}</td>
+												<td>${vo.sl}</td>
+												<td>${vo.lsl}</td>
+												<td>${vo.ucl}</td>
+												<td>${vo.cl}</td>
+												<td>${vo.lcl}</td>
+												<td>${vo.unit}</td>
+												<td>${vo.df_creationDate}</td>
+												<td>${vo.df_modifiedDate}</td>
+												<td>${vo.df_delDate}</td>
+												<td>${vo.disposal}</td>
+												<td>${vo.note}</td>
 											</tr>
 										</c:forEach>
                                     </tbody>
@@ -116,7 +125,7 @@
 		function getSearchList(){
 			$.ajax({
 				type: 'GET',
-				url : "/information/product/getSearchList",
+				url : "/inspection/item/getSearchList",
 				data : $("form[name=search-form]").serialize(),
 				success : function(result){
 					//테이블 초기화
@@ -126,21 +135,25 @@
 						result.forEach(function(item){
 							str+='<tr>'
 								str+='<td style="text-align: center; font-weight: bold; font-size: 10pt;">'+item.rn+'</td>'
-								str+="<td>"+item.code+"</td>"
-								str+="<td>"+item.codeName+"</td>"
-								str+="<td>"+item.buyer+"</td>"
-								str+="<td>"+item.buyerName+"</td>"
-								str+="<td>"+item.purchasing+"</td>"
-								str+="<td>"+item.purchasingName+"</td>"
-								str+="<td>"+item.buyCompany+"</td>"
-								str+="<td>"+item.buyCompanyName+"</td>"
-								str+="<td>"+item.inspectperson+"</td>"
-								str+="<td>"+item.df_currentInventory+"</td>"
-								str+="<td>"+item.df_price+"</td>"
-								str+="<td>"+item.inspect+"</td>"
-								str+="<td>"+item.disuse+"</td>"
+								str+="<td>"+item.inspectionItem+"</td>"
+								str+="<td>"+item.inspectionItemName+"</td>"
+								str+="<td>"+item.qua+"</td>"
+								str+="<td>"+item.sampleWater+"</td>"
+								str+="<td>"+item.ac+"</td>"
+								str+="<td>"+item.re+"</td>"
+								str+="<td>"+item.usl+"</td>"
+								str+="<td>"+item.sl+"</td>"
+								str+="<td>"+item.lsl+"</td>"
+								str+="<td>"+item.ucl+"</td>"
+								str+="<td>"+item.cl+"</td>"
+								str+="<td>"+item.lcl+"</td>"
+								str+="<td>"+item.unit+"</td>"
+								str+="<td>"+item.df_creationDate+"</td>"
+								str+="<td>"+item.df_modifiedDate+"</td>"
+								str+="<td>"+item.df_delDate+"</td>"
+								str+="<td>"+item.disposal+"</td>"
+								str+="<td>"+item.note+"</td>"
 							str+="</tr>"
-							/* $('#resultTable').append(str); */
 		        		});
 						$('#resultTable > tbody').html(str);
 					}
