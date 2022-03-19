@@ -59,11 +59,11 @@
 	
 	<select id="selectSearchList" resultType="erp.exit.domain.ItemDTO">
 		<![CDATA[
-			SELECT rownum "rn", inspectionitem, inspectionitemname, qua, samplewater, ac
+			SELECT rownum "rn", idx, inspectionitem, inspectionitemname, qua, samplewater, ac
 			, re, usl, sl, lsl, ucl, cl, lcl, unit, creationdate, modifieddate, deldate
 			, disposal, note 
 			FROM exit_item 
-			WHERE ${type} LIKE '%'||#{keyword}||'%' ORDER BY rownum DESC
+			WHERE ${type} LIKE '%'||#{keyword}||'%' ORDER BY idx DESC
 		]]>
 	</select>
 	

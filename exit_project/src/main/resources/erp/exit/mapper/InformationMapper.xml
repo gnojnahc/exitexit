@@ -53,10 +53,10 @@
 	
 	<select id="selectSearchList" resultType="erp.exit.domain.ProductDTO">
 		<![CDATA[
-			SELECT rownum "rn", code, codeName, buyer, buyerName, purchasing, purchasingName
+			SELECT rownum "rn", idx, code, codeName, buyer, buyerName, purchasing, purchasingName
 			, buyCompany, buyCompanyName, inspectperson, currentInventory, price,
 			inspect, disuse FROM exit_product 
-			WHERE ${type} LIKE '%'||#{keyword}||'%' ORDER BY rownum DESC
+			WHERE ${type} LIKE '%'||#{keyword}||'%' ORDER BY idx DESC
 		]]>
 	</select>
 	
