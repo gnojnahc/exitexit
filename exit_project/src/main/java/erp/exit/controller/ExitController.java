@@ -29,7 +29,7 @@ public class ExitController {
 		int cnt = service.login(vo.getUserId(), vo.getUserPass());
 		if(cnt==1) {
 			log.info("로그인성공할까나?");
-			return "/information/ProductMain";
+			return "redirect:/information/main";
 		}else
 			return "/account/Login";
 	}
