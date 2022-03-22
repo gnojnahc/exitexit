@@ -40,7 +40,7 @@
 		SELECT * FROM exit_item WHERE inspectionitem = #{inspectionItem}
       ]]>
 	</select>
-	<!-- 삭제품목 조회 기능 -->
+	<!-- 삭제품목 조회 기능 끝 -->
 	
 	<!-- 삭제 & 백업 기능 -->
 	<update id="delUpdateDD">
@@ -50,7 +50,7 @@
 	END;
 	</update>
 	<insert id="delBackUpData">
-		INSERT INTO exit_item_del_save SELECT * FROM exit_item WHERE DISPOSAL = 'Y'
+		INSERT INTO exit_item_del_save SELECT * FROM exit_item WHERE INSPECTIONITEM = #{inspectionItem} and DISPOSAL = 'Y'
 	</insert>
 	<delete id="delComplete">
 		DELETE FROM exit_item WHERE INSPECTIONITEM = #{inspectionItem}

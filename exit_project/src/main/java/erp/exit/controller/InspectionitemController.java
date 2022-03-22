@@ -70,7 +70,7 @@ public class InspectionitemController {
 		log.info("inspectionitem 항목 삭제중..");
 		
 		service.delUpdateDD(vo.getInspectionItem());
-		service.delBackUpData();
+		service.delBackUpData(vo.getInspectionItem());
 		service.delComplete(vo.getInspectionItem());
 		
 		md.addAttribute("ServiceCheck", "success");

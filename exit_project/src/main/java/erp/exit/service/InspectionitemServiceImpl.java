@@ -66,8 +66,8 @@ public class InspectionitemServiceImpl implements InspectionitemService {
 	}
 	
 	@Override
-	public void delBackUpData() {
-		mapper.delBackUpData();
+	public void delBackUpData(String inspectionItem) {
+		mapper.delBackUpData(inspectionItem);
 	}
 	
 	@Override
