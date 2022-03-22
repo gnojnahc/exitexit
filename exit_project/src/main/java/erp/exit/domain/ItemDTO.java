@@ -22,12 +22,12 @@ public class ItemDTO {
 	private int sampleWater; //시료수 
 	private int ac; //AC값
 	private int re; //RE값
-	private String usl; //USL
-	private String sl; //SL
-	private String lsl; //LSL
-	private String ucl; //UCL
-	private String cl; //CL
-	private String lcl; //LCL
+	private float usl; //USL
+	private float sl; //SL
+	private float lsl; //LSL
+	private float ucl; //UCL
+	private float cl; //CL
+	private float lcl; //LCL
 	private int unit; //단위
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")

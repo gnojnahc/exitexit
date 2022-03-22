@@ -46,7 +46,8 @@ public class InspectionitemController {
 	@PostMapping("/item/reg")
 	public String registerPost(ItemVO vo, Model md) {
 		log.info("inspectionitem 항목 등록중..");
-		log.info(vo);
+		
+		log.info("등록 데이터 검토 : "+vo);
 		
 		service.register(vo);
 		

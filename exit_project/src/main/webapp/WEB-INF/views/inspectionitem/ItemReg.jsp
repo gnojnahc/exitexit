@@ -47,38 +47,37 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputsampleWater" type="text" name="sampleWater" placeholder="시료수" maxlength="9" pattern="[0-9]+" />
+                                                        <input class="form-control" id="inputsampleWater" type="text" name="sampleWater" placeholder="시료수" />
                                                         <label for="inputsampleWater">시료수<span style="color: red; font-size: 9pt;"> (숫자)</span></label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputac" type="text" name="ac" placeholder="AC" maxlength="9" pattern="[0-9]+" />
+                                                        <input class="form-control" id="inputac" type="text" name="ac" placeholder="AC" />
                                                         <label for="inputac">AC<span style="color: red; font-size: 9pt;"> (숫자)</span></label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputre" type="text" name="re" placeholder="RE" maxlength="9" pattern="[0-9]+" />
+                                                        <input class="form-control" id="inputre" type="text" name="re" placeholder="RE" />
                                                         <label for="inputre">RE<span style="color: red; font-size: 9pt;"> (숫자)</span></label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputusl" type="text" name="usl" placeholder="USL" readonly />
+                                                        <input class="form-control" id="inputusl" type="text" name="usl" placeholder="USL" disabled />
                                                         <label for="inputusl">USL</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputsl" type="text" name="sl" placeholder="SL" readonly />
+                                                        <input class="form-control" id="inputsl" type="text" name="sl" placeholder="SL" disabled />
                                                         <label for="inputsl">SL</label>
                                                     </div>
                                                     </div>
-                                                </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputlsl" type="text" name="lsl" placeholder="LSL" readonly />
+                                                        <input class="form-control" id="inputlsl" type="text" name="lsl" placeholder="LSL" disabled />
                                                         <label for="inputlsl">LSL</label>
                                                     </div>
                                                 </div>
@@ -150,8 +149,8 @@
                                             </div>
                                             <input class="SCheck" type="hidden" value="${ServiceCheck}">
                                             </div>
-                                        </form>
-                                        
+                                            </div>
+										</form>
                                     </div>
                                 </div>
                             </div>
@@ -190,13 +189,13 @@
 	                    $('#inputac').val('');
 	                    $('#inputre').val('');
 	                    
-	                    $('#inputusl').removeAttr('readonly');
-	                    $('#inputsl').removeAttr('readonly');
-	                    $('#inputlsl').removeAttr('readonly');
+	                    $('#inputusl').removeAttr('disabled');
+	                    $('#inputsl').removeAttr('disabled');
+	                    $('#inputlsl').removeAttr('disabled');
 		        	}else if(optval == "정성"){
-	                    $('#inputusl').attr('readonly', 'true');
-	                    $('#inputsl').attr('readonly', 'true');
-	                    $('#inputlsl').attr('readonly', 'true');
+	                    $('#inputusl').attr('disabled', 'true');
+	                    $('#inputsl').attr('disabled', 'true');
+	                    $('#inputlsl').attr('disabled', 'true');
 	                    $('#inputusl').val('');
 	                    $('#inputsl').val('');
 	                    $('#inputlsl').val('');
