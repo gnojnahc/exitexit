@@ -28,6 +28,8 @@
                         	자재등록</a>
                         	<a class="btn btn-primary" href="/information/product/del" target="_blank" onClick="window.open(this.href, '_blank', 'width=600, height=800'); return false;">
                         	삭제</a>
+                        	<a class="btn btn-primary" href="/information/product/mod" target="_blank" onClick="window.open(this.href, '_blank', 'width=600, height=800'); return false;">
+                        	수정</a>
                         	
                         	<form name="search-form" autocomplete="off" style="float: right;" onsubmit="return false">
 		                       	<div class="input-group" style="float: right; width: 260px">

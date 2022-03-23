@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import erp.exit.domain.ItemDTO;
 import erp.exit.domain.ItemVO;
+import erp.exit.domain.ProductVO;
 import erp.exit.mapper.InspectionitemMapper;
 import lombok.AllArgsConstructor;
 
@@ -50,13 +51,13 @@ public class InspectionitemServiceImpl implements InspectionitemService {
 	}
 
 	@Override
-	public ItemVO delSearch(String inspectionItem) {
-		return mapper.delSearch(inspectionItem);
+	public ItemVO itemSearch(String inspectionItem) {
+		return mapper.itemSearch(inspectionItem);
 	}
 
 	@Override
-	public List<ItemVO> delSearch2(String inspectionItem) {
-		return mapper.delSearch2(inspectionItem);
+	public List<ItemVO> itemSearch2(String inspectionItem) {
+		return mapper.itemSearch2(inspectionItem);
 	}
 
 	// 삭제&백업 서비스
@@ -73,6 +74,11 @@ public class InspectionitemServiceImpl implements InspectionitemService {
 	@Override
 	public void delComplete(String inspectionItem) {
 		mapper.delComplete(inspectionItem);
+	}
+
+	@Override
+	public void modify(ItemVO vo) {
+		mapper.modify(vo);
 	}
 	// 삭제&백업 서비스 끝
 

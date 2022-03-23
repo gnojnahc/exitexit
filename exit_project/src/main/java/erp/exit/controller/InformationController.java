@@ -74,13 +74,13 @@ public class InformationController {
 		return "/information/ProductDel";
 	}
 
-	// 자재 삭제폼 제품코드 조회
+	// 자재 제품코드 조회
 	@PostMapping("/product/searchcode")
 	public String searchcodePost(ProductVO vo, Model md) {
-		log.info("Information 삭제자재 조회중..");
+		log.info("Information 자재 조회중..");
 		
-		ProductVO delVO = service.delSearch(vo.getCode());
-		List<ProductVO> delVO2 = service.delSearch2(vo.getCode());
+		ProductVO delVO = service.codeSearch(vo.getCode());
+		List<ProductVO> delVO2 = service.codeSearch2(vo.getCode());
 		
 		if(delVO2.size() == 0) {
 			md.addAttribute("ServiceCheck", "none");
@@ -89,6 +89,44 @@ public class InformationController {
 		}
 		
 		return "/information/ProductDel";
+	}
+	
+	// 자재 수정 팝업실행
+	@GetMapping("/product/mod")
+	public String modifyGet(ProductVO vo, Model md) {
+		log.info("Information 자재 수정창 띄움 ..");
+		
+		return "/information/ProductMod";
+	}
+	
+	// 자재 수정기능
+	@PostMapping("/product/mod")
+	public String modifyPost(ProductVO vo, Model md) {
+		log.info("Information 자재 수정중..");
+		
+		service.modify(vo);
+		
+		md.addAttribute("ServiceCheck", "success");
+		
+		return "/information/ProductMod";
+	}
+	
+	// 자재수정 코드 조회
+	@PostMapping("/product/modsearchcode")
+	public String modSearchCodePost(ProductVO vo, Model md) {
+		log.info("Information 자재 조회중..");
+		
+		ProductVO delVO = service.codeSearch(vo.getCode());
+		List<ProductVO> delVO2 = service.codeSearch2(vo.getCode());
+		
+		if(delVO2.size() == 0) {
+			md.addAttribute("ServiceCheck", "none");
+		}else {
+			md.addAttribute("ServiceCheck", "searchOK");
+			md.addAttribute("vo", delVO);
+		}
+		
+		return "/information/ProductMod";
 	}
 	
 	// 테이블 Ajax 검색 조회

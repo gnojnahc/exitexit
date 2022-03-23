@@ -36,13 +36,13 @@ public class InformationServiceImpl implements InformationService {
 	}
 	
 	@Override
-	public ProductVO delSearch(String code) {
-		return mapper.delSearch(code);
+	public ProductVO codeSearch(String code) {
+		return mapper.codeSearch(code);
 	}
 
 	@Override
-	public List<ProductVO> delSearch2(String code) {
-		return mapper.delSearch2(code);
+	public List<ProductVO> codeSearch2(String code) {
+		return mapper.codeSearch2(code);
 	}
 
 	@Override
@@ -72,6 +72,11 @@ public class InformationServiceImpl implements InformationService {
 		}
 		
 		return list;
+	}
+
+	@Override
+	public void modify(ProductVO vo) {
+		mapper.modify(vo);
 	}
 
 

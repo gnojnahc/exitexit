@@ -83,8 +83,8 @@ public class InspectionitemController {
 	public String searchcodePost(ItemVO vo, Model md) {
 		log.info("inspectionitem 삭제 항목 조회중..");
 		
-		ItemVO delVO = service.delSearch(vo.getInspectionItem());
-		List<ItemVO> delVO2 = service.delSearch2(vo.getInspectionItem());
+		ItemVO delVO = service.itemSearch(vo.getInspectionItem());
+		List<ItemVO> delVO2 = service.itemSearch2(vo.getInspectionItem());
 		
 		if(delVO2.size() == 0) {
 			md.addAttribute("ServiceCheck", "none");
@@ -95,6 +95,46 @@ public class InspectionitemController {
 		return "/inspectionitem/ItemDel";
 	}
 	
+	// 팝업실행
+	@GetMapping("/item/mod")
+	public String modifyGet(ItemVO vo, Model md) {
+		log.info("inspectionitem 항목 수정창 띄움 ..");
+		
+		return "/inspectionitem/ItemMod";
+	}
+	
+	// 수정기능
+	@PostMapping("/item/mod")
+	public String modifyPost(ItemVO vo, Model md) {
+		log.info("inspectionitem 항목 수정중..");
+		
+		service.modify(vo);
+		
+		md.addAttribute("ServiceCheck", "success");
+		
+		return "/inspectionitem/ItemMod";
+	}
+	
+	// 삭제폼 조회
+		@PostMapping("/item/itemsearch")
+		public String searchItemPost(ItemVO vo, Model md) {
+			log.info("inspectionitem 삭제 항목 조회중..");
+			
+			ItemVO delVO = service.itemSearch(vo.getInspectionItem());
+			List<ItemVO> delVO2 = service.itemSearch2(vo.getInspectionItem());
+			
+			if(delVO2.size() == 0) {
+				md.addAttribute("ServiceCheck", "none");
+			}else {
+				md.addAttribute("ServiceCheck", "searchOK");
+				md.addAttribute("vo", delVO);
+			}
+			
+			return "/inspectionitem/ItemMod";
+		}
+	
+	
+	/* /item/mod */
 	// 테이블 Ajax 검색 조회
 	@GetMapping("/item/getSearchList")
 	@ResponseBody

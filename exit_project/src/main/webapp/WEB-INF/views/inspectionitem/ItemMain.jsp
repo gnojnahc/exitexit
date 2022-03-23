@@ -27,6 +27,8 @@
                         	항목등록</a>
                         	<a class="btn btn-primary" href="/inspection/item/del" target="_blank" onClick="window.open(this.href, '_blank', 'width=600, height=800'); return false;">
                         	삭제</a>
+                        	<a class="btn btn-primary" href="/inspection/item/mod" target="_blank" onClick="window.open(this.href, '_blank', 'width=600, height=800'); return false;">
+                        	수정</a>
                         	
                         	<form name="search-form" autocomplete="off" style="float: right;" onsubmit="return false">
 		                       	<div class="input-group" style="float: right; width: 260px">
@@ -82,7 +84,6 @@
 								            <th>단위</th>
 								            <th>생성일자</th>
 								            <th>수정일자</th>
-								            <th>삭제일</th>
 								            <th>폐기여부</th>
 								            <th>비고</th>
 										</tr>
@@ -106,7 +107,6 @@
 												<td>${vo.unit}</td>
 												<td>${vo.df_creationDate}</td>
 												<td>${vo.df_modifiedDate}</td>
-												<td>${vo.df_delDate}</td>
 												<td>${vo.disposal}</td>
 												<td>${vo.note}</td>
 											</tr>
@@ -150,7 +150,6 @@
 								str+="<td>"+item.unit+"</td>"
 								str+="<td>"+item.df_creationDate+"</td>"
 								str+="<td>"+item.df_modifiedDate+"</td>"
-								str+="<td>"+item.df_delDate+"</td>"
 								str+="<td>"+item.disposal+"</td>"
 								str+="<td>"+item.note+"</td>"
 							str+="</tr>"

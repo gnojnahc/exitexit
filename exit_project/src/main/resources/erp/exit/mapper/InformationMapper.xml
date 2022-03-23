@@ -26,13 +26,13 @@
 	</insert>
 	
 	<!-- 삭제품목 조회 기능 -->
-	<select id="delSearch" resultType="erp.exit.domain.ProductVO">
+	<select id="codeSearch" resultType="erp.exit.domain.ProductVO">
 	<![CDATA[
 		SELECT * FROM exit_product WHERE code = #{code}
       ]]>
 	</select>
 	
-	<select id="delSearch2" resultType="erp.exit.domain.ProductVO">
+	<select id="codeSearch2" resultType="erp.exit.domain.ProductVO">
 	<![CDATA[
 		SELECT * FROM exit_product WHERE code = #{code}
       ]]>
@@ -50,6 +50,15 @@
 		DELETE FROM exit_product WHERE code = #{code}
 	</delete>
 	<!-- 삭제 & 백업 기능 끝 -->
+	
+	<update id="modify">
+		UPDATE exit_product SET codeName = #{codeName}, buyer = #{buyer}, buyerName = #{buyerName}
+		, purchasing = #{purchasing}, purchasingName = #{purchasingName}
+		, buyCompany = #{buyCompany}, buyCompanyName = #{buyCompanyName}, inspectperson = #{inspectperson}
+		, currentInventory = #{currentInventory}, price = #{price},
+		inspect = #{inspect}, disuse = #{disuse}
+		WHERE code = #{code}
+	</update>
 	
 	<select id="selectSearchList" resultType="erp.exit.domain.ProductDTO">
 		<![CDATA[

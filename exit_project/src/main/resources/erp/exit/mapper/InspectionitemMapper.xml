@@ -20,34 +20,31 @@
 	<insert id="register">
 	<![CDATA[
 		INSERT INTO exit_item(idx, inspectionitem, inspectionitemname, qua, samplewater, ac
-		, re, usl, sl, lsl, ucl, cl, lcl, unit, creationdate, modifieddate, deldate
+		, re, usl, sl, lsl, ucl, cl, lcl, unit, modifieddate, deldate
 		, disposal, note) 
 		VALUES (ITEM_IDX_SEQ.nextval,#{inspectionItem},#{inspectionItemName},#{qua},#{sampleWater},#{ac}
-		,#{re},#{usl},#{sl},#{lsl},#{ucl},#{cl},#{lcl},#{unit}
-		,#{creationDate},#{modifiedDate},#{delDate},#{disposal},#{note})
+		,#{re},#{usl},#{sl},#{lsl},#{ucl},#{cl},#{lcl},#{unit},'1999-01-01','1999-01-01'
+		,#{disposal},#{note})
 	]]>
 	</insert>
 	
-	<!-- 삭제품목 조회 기능 -->
-	<select id="delSearch" resultType="erp.exit.domain.ItemVO">
+	<!-- 단일품목 조회 기능 -->
+	<select id="itemSearch" resultType="erp.exit.domain.ItemVO">
 	<![CDATA[
 		SELECT * FROM exit_item WHERE inspectionitem = #{inspectionItem}
       ]]>
 	</select>
 	
-	<select id="delSearch2" resultType="erp.exit.domain.ItemVO">
+	<select id="itemSearch2" resultType="erp.exit.domain.ItemVO">
 	<![CDATA[
 		SELECT * FROM exit_item WHERE inspectionitem = #{inspectionItem}
       ]]>
 	</select>
-	<!-- 삭제품목 조회 기능 끝 -->
+	<!-- 단일품목 조회 기능 끝 -->
 	
 	<!-- 삭제 & 백업 기능 -->
 	<update id="delUpdateDD">
-	BEGIN
-		UPDATE exit_item SET disposal = 'Y' WHERE INSPECTIONITEM = #{inspectionItem};
-		UPDATE exit_item SET deldate = SYSDATE WHERE INSPECTIONITEM = #{inspectionItem};
-	END;
+		UPDATE exit_item SET disposal = 'Y', deldate = SYSDATE WHERE INSPECTIONITEM = #{inspectionItem};
 	</update>
 	<insert id="delBackUpData">
 		INSERT INTO exit_item_del_save SELECT * FROM exit_item WHERE INSPECTIONITEM = #{inspectionItem} and DISPOSAL = 'Y'
@@ -56,6 +53,16 @@
 		DELETE FROM exit_item WHERE INSPECTIONITEM = #{inspectionItem}
 	</delete>
 	<!-- 삭제 & 백업 기능 끝 -->
+	
+	<update id="modify">
+		UPDATE exit_item SET inspectionitem = #{inspectionItem}
+		, inspectionitemname = #{inspectionItemName}
+        , qua = #{qua}, samplewater = #{sampleWater}, ac = #{ac}
+		, re = #{re}, usl = #{usl}, sl = #{sl}, lsl = #{lsl}, ucl = #{ucl}
+        , cl = #{cl}, lcl = #{lcl}, unit = #{unit}, modifieddate = sysdate
+		, disposal = #{disposal}, note = #{note}
+		WHERE idx = #{idx}
+	</update>
 	
 	<select id="selectSearchList" resultType="erp.exit.domain.ItemDTO">
 		<![CDATA[

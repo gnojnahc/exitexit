@@ -15,14 +15,17 @@ public interface InformationMapper {
 	//전체 글목록 가져오기
 	public List<ProductVO> list();
 	
-	//삭제코드 검색해서 데이터 가져오기
-	public ProductVO delSearch(String code); //검색데이터
-	public List<ProductVO> delSearch2(String code); //데이터검토
+	//코드 검색해서 데이터 가져오기
+	public ProductVO codeSearch(String code); //검색데이터
+	public List<ProductVO> codeSearch2(String code); //데이터검토
 	
-	//검사항목 확인해서 삭제하기
+	//자재 확인해서 삭제하기
 	public void delUpdateDD(String code); //폐기여부 'Y' & 삭제날짜 update
 	public void delBackUpData(); //데이터 삭제테이블에 백업
 	public void delComplete(String code); //본데이터 삭제
+	
+	//수정
+	public void modify(ProductVO vo);
 
 	// 쿼리+ajax 검색기능
 	public List<ProductDTO> selectSearchList(@Param("type") String type, 

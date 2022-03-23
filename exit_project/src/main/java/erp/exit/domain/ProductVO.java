@@ -6,6 +6,7 @@ import lombok.Data;
 public class ProductVO {
 	
 	private long rn;
+	private long idx;
 	private String code;	//자재코드
 	private String codeName;//자재명
 	private String buyer;	//구매자

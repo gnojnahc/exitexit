@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>검사자재 등록</title>
+        <title>검사자재 삭제</title>
         <link href="/resources/css/styles.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
     </head>
@@ -110,25 +110,6 @@
                                                         <label for="inputunit">단위</label>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputcreationDate" type="date" name="creationDate" placeholder="생성일자" value="${vo.creationDate}" disabled />
-                                                        <label for="inputcreationDate">생성일자</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputmodifiedDate" type="date" name="modifiedDate" placeholder="수정일자" value="${vo.modifiedDate}" disabled />
-                                                        <label for="inputmodifiedDate">수정일자</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputdelDate" type="date" name="delDate" placeholder="삭제일" value="${vo.delDate}" disabled />
-                                                        <label for="inputdelDate">삭제일</label>
-                                                    </div>
-                                                </div>
-                                                
 												<div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
                                                         <select class="dataTable-selector" id="inputdisposal" name="disposal" style="width: 100%" disabled>
