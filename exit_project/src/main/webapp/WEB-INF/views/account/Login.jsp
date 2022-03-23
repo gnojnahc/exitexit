@@ -111,6 +111,20 @@ body:after {
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="/resources/js/scripts.js"></script>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script>
+        
+        var check = "${check}";
+        $(document).ready(function(){
+        	if(check =="fail"){
+        		alert('아이디, 비밀번호를 확인해주세요');
+        		
+        	}
+        		
+        });
+        
+        
+        </script>
         
     </body>
 </html>

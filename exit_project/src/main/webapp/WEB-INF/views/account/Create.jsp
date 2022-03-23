@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<html lang="en">
+<html>
 <style>
 body {
    position: relative; /* #wrapper에 투명도를 주면 컨텐츠도 같이 투명해지기 때문에.. */
@@ -63,7 +63,8 @@ body:after {
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
                                                         <input class="form-control" id="inputPasswordConfirm" name="checkUserPass" type="password" placeholder="비밀번호 재확인" />
-                                                        <label for="inputPasswordConfirm">비밀번호 재확인</label>
+                                                        <label for="inputPasswordConfirm">비밀번호 재확인</label> 
+                                                        <span id="message"></span>                                                	
                                                     </div>
                                                 </div>
                                             </div>     
@@ -84,7 +85,9 @@ body:after {
                                             
                                        
                                             <div class="mt-4 mb-0">
-                                                <div class="d-grid"><button class="btn btn-primary btn-block" type="submit">계정 생성</button></div>
+                                                <div class="d-grid">
+                                                	<input type="button" class="btn btn-primary btn-block" id="createjoin" onclick="join()" value="계정 생성"/>
+                                                </div>
                                             </div>
                                         </form>
                                     </div>
@@ -109,6 +112,38 @@ body:after {
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="js/scripts.js"></script>
+        <script src="/resources/js/scripts.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        
+
+	<script>
+	
+	function join(){
+		var pw1 = document.getElementById('inputPassword').value;
+		var pw2 = document.getElementById('inputPasswordConfirm').value;
+		if(pw1 != pw2){
+			alert("비밀번호가 일치하지 않습니다.")			
+		}else if(pw1 == pw2){
+			$('form').submit();
+		}
+	}
+	
+    
+    $('#inputPassword, #inputPasswordConfirm').on('keyup', function () {
+           if ($('#inputPassword').val() == $('#inputPasswordConfirm').val()) {
+             $('#message').html('비밀번호가 같습니다').css('color', 'green');
+           } else 
+             $('#message').html('비밀번호가 다릅니다.').css('color', 'red');
+    });
+      
+
+
+	
+	
+	
+	</script>
+		
+
+    
     </body>
 </html>
