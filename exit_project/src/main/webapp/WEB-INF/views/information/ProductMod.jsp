@@ -84,13 +84,13 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputcurrentInventory" type="text" name="currentInventory" placeholder="현재고" value="${vo.currentInventory}" disabled />
+                                                        <input class="form-control" id="inputcurrentInventory" type="number" name="currentInventory" placeholder="현재고" value="${vo.currentInventory}" disabled />
                                                         <label for="inputcurrentInventory">현재고</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputprice" type="text" name="price" placeholder="구매단가" value="${vo.price}" disabled />
+                                                        <input class="form-control" id="inputprice" type="number" name="price" placeholder="구매단가" value="${vo.price}" disabled />
                                                         <label for="inputprice">구매단가</label>
                                                     </div>
                                                 </div>

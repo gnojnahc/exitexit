@@ -78,13 +78,13 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputcurrentInventory" type="text" name="currentInventory" placeholder="현재고" maxlength="9" pattern="[0-9]+" />
+                                                        <input class="form-control" id="inputcurrentInventory" type="number" name="currentInventory" placeholder="현재고" maxlength="9" pattern="[0-9]+" />
                                                         <label for="inputcurrentInventory">현재고</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputprice" type="text" name="price" placeholder="구매단가" maxlength="9" pattern="[0-9]+" />
+                                                        <input class="form-control" id="inputprice" type="number" name="price" placeholder="구매단가" maxlength="9" pattern="[0-9]+" />
                                                         <label for="inputprice">구매단가</label>
                                                     </div>
                                                 </div>

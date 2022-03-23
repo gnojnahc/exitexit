@@ -47,55 +47,55 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputsampleWater" type="text" name="sampleWater" placeholder="시료수" />
-                                                        <label for="inputsampleWater">시료수<span style="color: red; font-size: 9pt;"> (숫자)</span></label>
+                                                        <input class="form-control" id="inputsampleWater" type="number" step="0.1" name="sampleWater" placeholder="시료수" />
+                                                        <label for="inputsampleWater">시료수</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputac" type="text" name="ac" placeholder="AC" />
-                                                        <label for="inputac">AC<span style="color: red; font-size: 9pt;"> (숫자)</span></label>
+                                                        <input class="form-control" id="inputac" type="number" step="0.1" type="text" name="ac" placeholder="AC" />
+                                                        <label for="inputac">AC</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputre" type="text" name="re" placeholder="RE" />
-                                                        <label for="inputre">RE<span style="color: red; font-size: 9pt;"> (숫자)</span></label>
+                                                        <input class="form-control" id="inputre" type="number" step="0.1" name="re" placeholder="RE" />
+                                                        <label for="inputre">RE</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputusl" type="text" name="usl" placeholder="USL" disabled />
+                                                        <input class="form-control" id="inputusl" type="number" step="0.1" name="usl" placeholder="USL" disabled />
                                                         <label for="inputusl">USL</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputsl" type="text" name="sl" placeholder="SL" disabled />
+                                                        <input class="form-control" id="inputsl" type="number" step="0.1" name="sl" placeholder="SL" disabled />
                                                         <label for="inputsl">SL</label>
                                                     </div>
                                                     </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputlsl" type="text" name="lsl" placeholder="LSL" disabled />
+                                                        <input class="form-control" id="inputlsl" type="number" step="0.1" name="lsl" placeholder="LSL" disabled />
                                                         <label for="inputlsl">LSL</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputucl" type="text" name="ucl" placeholder="UCL" />
+                                                        <input class="form-control" id="inputucl" type="number" step="0.1" name="ucl" placeholder="UCL" />
                                                         <label for="inputucl">UCL</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputcl" type="text" name="cl" placeholder="CL" />
+                                                        <input class="form-control" id="inputcl" type="number" step="0.1" name="cl" placeholder="CL" />
                                                         <label for="inputcl">CL</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputlcl" type="text" name="lcl" placeholder="LCL" />
+                                                        <input class="form-control" id="inputlcl" type="number" step="0.1" name="lcl" placeholder="LCL" />
                                                         <label for="inputlcl">LCL</label>
                                                     </div>
                                                 </div>

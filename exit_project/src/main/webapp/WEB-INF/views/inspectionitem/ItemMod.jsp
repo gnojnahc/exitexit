@@ -55,55 +55,55 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputsampleWater" type="text" name="sampleWater" placeholder="시료수" maxlength="9" pattern="[0-9]+" value="${vo.sampleWater}" disabled />
-                                                        <label for="inputsampleWater">시료수<span style="color: red; font-size: 9pt;"> (숫자)</span></label>
+                                                        <input class="form-control" id="inputsampleWater" type="number" step="0.1" name="sampleWater" placeholder="시료수" value="${vo.sampleWater}" disabled />
+                                                        <label for="inputsampleWater">시료수</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputac" type="text" name="ac" placeholder="AC" maxlength="9" pattern="[0-9]+" value="${vo.ac}" disabled />
-                                                        <label for="inputac">AC<span style="color: red; font-size: 9pt;"> (숫자)</span></label>
+                                                        <input class="form-control" id="inputac" type="number" step="0.1" name="ac" placeholder="AC" value="${vo.ac}" disabled />
+                                                        <label for="inputac">AC</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputre" type="text" name="re" placeholder="RE" maxlength="9" pattern="[0-9]+" value="${vo.re}" disabled />
-                                                        <label for="inputre">RE<span style="color: red; font-size: 9pt;"> (숫자)</span></label>
+                                                        <input class="form-control" id="inputre" type="number" step="0.1" name="re" placeholder="RE" value="${vo.re}" disabled />
+                                                        <label for="inputre">RE</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputusl" type="text" name="usl" placeholder="USL" value="${vo.usl}" disabled />
+                                                        <input class="form-control" id="inputusl" type="number" step="0.1" name="usl" placeholder="USL" value="${vo.usl}" disabled />
                                                         <label for="inputusl">USL</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputsl" type="text" name="sl" placeholder="SL" value="${vo.sl}" disabled />
+                                                        <input class="form-control" id="inputsl" type="number" step="0.1" name="sl" placeholder="SL" value="${vo.sl}" disabled />
                                                         <label for="inputsl">SL</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputlsl" type="text" name="lsl" placeholder="LSL" value="${vo.lsl}" disabled />
+                                                        <input class="form-control" id="inputlsl" type="number" step="0.1" name="lsl" placeholder="LSL" value="${vo.lsl}" disabled />
                                                         <label for="inputlsl">LSL</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputucl" type="text" name="ucl" placeholder="UCL" value="${vo.ucl}" disabled />
+                                                        <input class="form-control" id="inputucl" type="number" step="0.1" name="ucl" placeholder="UCL" value="${vo.ucl}" disabled />
                                                         <label for="inputucl">UCL</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputcl" type="text" name="cl" placeholder="CL" value="${vo.cl}" disabled />
+                                                        <input class="form-control" id="inputcl" type="number" step="0.1" name="cl" placeholder="CL" value="${vo.cl}" disabled />
                                                         <label for="inputcl">CL</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputlcl" type="text" name="lcl" placeholder="LCL" value="${vo.lcl}" disabled />
+                                                        <input class="form-control" id="inputlcl" type="number" step="0.1" name="lcl" placeholder="LCL" value="${vo.lcl}" disabled />
                                                         <label for="inputlcl">LCL</label>
                                                     </div>
                                                 </div>

@@ -50,7 +50,7 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputsampleWater" type="text" name="sampleWater" placeholder="시료수" maxlength="9" pattern="[0-9]+" value="${vo.sampleWater}" disabled />
+                                                        <input class="form-control" id="inputsampleWater" type="number" step="0.1" name="sampleWater" placeholder="시료수" maxlength="9" pattern="[0-9]+" value="${vo.sampleWater}" disabled />
                                                         <label for="inputsampleWater">시료수<span style="color: red; font-size: 9pt;"> (숫자)</span></label>
                                                     </div>
                                                 </div>
