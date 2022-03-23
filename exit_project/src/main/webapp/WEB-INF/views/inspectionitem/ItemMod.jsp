@@ -194,15 +194,15 @@
 	        		
 	        		let strqua = "";
 	        		var quaChack = "${vo.qua}";
-	        		if(quaChack == "정성"){
+	        		if(quaChack == "정량"){
 	        			$('#inputac').removeAttr('disabled');
 		        		$('#inputre').removeAttr('disabled');
-		        		strqua += '<option value="정량">정량</option>'
-	        		}else if(quaChack == "정량"){
+		        		strqua += '<option value="정성">정성</option>'
+	        		}else if(quaChack == "정성"){
 	        			$('#inputusl').removeAttr('disabled');
 		        		$('#inputsl').removeAttr('disabled');
 		        		$('#inputlsl').removeAttr('disabled');
-		        		strqua += '<option value="정성">정성</option>'
+		        		strqua += '<option value="정량">정량</option>'
 	        		}
 	        		
 	        		var unitChack = "${vo.unit}";
