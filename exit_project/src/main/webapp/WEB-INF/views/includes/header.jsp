@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<%  // 인증된 세션이 없는경우, 해당페이지를 볼 수 없게 함.
+    if (session.getAttribute("vo") == null) {
+        response.sendRedirect("/account/login");
+    }
+%>     
+    
 <head>
 	<meta charset="UTF-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -11,6 +17,7 @@
 	<link href="/resources/css/styles.css?aftertwo" rel="stylesheet" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 </head>
 
 <style>
@@ -45,7 +52,7 @@
 							<li><a class="dropdown-item" href="#!">내 활동 기록</a></li>
 							<li><hr class="dropdown-divider" /></li>
 							<li><a class="dropdown-item" href="#!">설정</a></li>
-							<li><a class="dropdown-item" href="#!">로그아웃</a></li>
+							<li><a class="dropdown-item" href="/account/login">로그아웃</a></li>
 						</ul>
 					</li>
 				</ul>
