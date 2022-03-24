@@ -208,10 +208,14 @@
 	        		var unitChack = "${vo.unit}";
 	        		let strunit = "";
 	        		
-	        		if (unitChack == "1") {
-		        		strunit += '<option value="2">2</option>'
-					}else if(unitChack == "2"){
-						strunit += '<option value="1">1</option>'
+	        		if (unitChack == "m") {
+		        		strunit += '<option value="m">m</option>'
+					}else if(unitChack == "cm"){
+						strunit += '<option value="cm">cm</option>'
+					}else if(unitChack == "mm"){
+						strunit += '<option value="mm">mm</option>'
+					}else if(unitChack == "kg"){
+						strunit += '<option value="kg">kg</option>'
 					}
 	        		
 	        		$('#inputqua').append(strqua);

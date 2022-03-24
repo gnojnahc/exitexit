@@ -128,13 +128,18 @@ body:after {
 
 	<script>
 	
+	var aj_result; //ajax결과값 전역변수에 담기
+	
 	function join(){
 		var pw1 = document.getElementById('inputPassword').value;
 		var pw2 = document.getElementById('inputPasswordConfirm').value;
 		if(pw1 != pw2){
-			alert("비밀번호가 일치하지 않습니다.")			
-		}else if(pw1 == pw2){
+			alert("비밀번호가 일치하지 않습니다.");
+		}else if(aj_result != 0){
+			alert("아이디를 다시 확인해주세요.");
+		}else if(pw1 == pw2 && aj_result == 0){
 			$('form').submit();
+			alert("회원가입이 완료 되었습니다.");
 		}
 	}
 	
@@ -153,10 +158,12 @@ body:after {
     
     $('#inputID').on('keyup', function () {
     	$.ajax({
+    		async: false,
 			type: 'GET',
-			url : "/account/idsearch",
-			data : $("#form-sbm").serialize(),
+			url: "/account/idsearch",
+			data: $("#form-sbm").serialize(),
 			success : function(result){
+				aj_result = result; //전역변수에 담기
 				if(result == 0){
 					$('#IDmessage').html('사용가능한 아이디 입니다.').css('color', 'green');
 				}else if(result == 1){

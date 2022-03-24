@@ -21,7 +21,7 @@
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                                     <div class="card-header"><h3 class="text-center font-weight-light my-2"><b>검사자재 등록</b></h3></div>
                                     <div class="card-body">
-                                        <form action="/information/product/reg" method="post">
+                                        <form id="form-reg" action="/information/product/reg" method="post">
                                                 <div class="col-md-6">
                                                 	<div class="form-floating mb-3 mb-md-0">
                                                         <input class="form-control" id="inputcode" type="text" name="code" placeholder="자재코드" required/>
@@ -111,7 +111,7 @@
                                             	</div>
                                             
                                             <div class="mt-4 mb-0" style="text-align: right;">
-                                                <button class="btn btn-primary" type="submit">등록</button>
+                                                <button class="btn btn-primary" id="regbtn-sbm" type="submit">등록</button>
                                                 <a class="btn btn-danger" onclick="window.close()">취소</a>
                                             </div>
                                             <input class="SCheck" type="hidden" value="${ServiceCheck}">
@@ -142,6 +142,9 @@
 	        	};
 			});
 	        
+	        //form-reg
+	        //regbtn-sbm
+	        //inputcode
 	        
 	        
         </script>

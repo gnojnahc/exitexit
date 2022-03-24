@@ -11,7 +11,7 @@
         FROM 
         (SELECT idx, code, codeName, buyer, buyerName, purchasing, purchasingName
 		, buyCompany, buyCompanyName, inspectperson, currentInventory, price, inspect, disuse
-        FROM exit_product WHERE disuse='N' ORDER BY idx DESC)
+        FROM exit_product ORDER BY idx DESC)
 		]]>
 	</select>
 
@@ -44,7 +44,7 @@
 		UPDATE exit_product SET DISUSE = 'Y' WHERE code = #{code}
 	</update>
 	<insert id="delBackUpData">
-		INSERT INTO exit_product_del_save SELECT * FROM exit_product WHERE DISUSE = 'Y'
+		INSERT INTO exit_product_del_save SELECT * FROM exit_product WHERE code = #{code}
 	</insert>
 	<delete id="delComplete">
 		DELETE FROM exit_product WHERE code = #{code}

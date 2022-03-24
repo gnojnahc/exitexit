@@ -51,8 +51,8 @@ public class InformationServiceImpl implements InformationService {
 	}
 	
 	@Override
-	public void delBackUpData() {
-		mapper.delBackUpData();
+	public void delBackUpData(String code) {
+		mapper.delBackUpData(code);
 	}
 	
 	@Override

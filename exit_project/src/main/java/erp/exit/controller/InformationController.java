@@ -65,8 +65,7 @@ public class InformationController {
 	public String deletePost(ProductVO vo, Model md) {
 		log.info("Information 자재 삭제중..");
 		
-		service.delUpdateDD(vo.getCode());
-		service.delBackUpData();
+		service.delBackUpData(vo.getCode());
 		service.delComplete(vo.getCode());
 		
 		md.addAttribute("ServiceCheck", "success");

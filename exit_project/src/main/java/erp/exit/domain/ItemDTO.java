@@ -28,7 +28,7 @@ public class ItemDTO {
 	private float ucl; //UCL
 	private float cl; //CL
 	private float lcl; //LCL
-	private int unit; //단위
+	private String unit; //단위
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date creationDate; //생성일자
