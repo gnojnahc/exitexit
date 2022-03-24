@@ -18,5 +18,13 @@
 		select count(*) from exit_member where userId=#{userId} and userPass=#{userPass}	
 	]]>
 	</select>
+	
+	<select id="sessionData" resultType="erp.exit.domain.MemberDTO">
+		SELECT userid, username, useremail, regdate FROM exit_member WHERE userid = #{userId}
+	</select>
+	
+	<select id="idCheck" resultType="int">
+		SELECT COUNT(*) FROM exit_member WHERE userid = #{userId}
+	</select>
 
 </mapper>

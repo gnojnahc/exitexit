@@ -61,7 +61,7 @@ body:after {
                                     <div class="card-header">
        										<h3 class="text-center font-weight-light my-4">
                                        <a href="/" >
-       											<img src="/resources/assets/img/logo.png" class="container"/>
+       										<img src="/resources/assets/img/logo.png" class="container"/>
       								   </a>
        										</h3>
                                     

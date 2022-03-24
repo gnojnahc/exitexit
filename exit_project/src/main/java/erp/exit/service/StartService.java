@@ -1,5 +1,6 @@
 package erp.exit.service;
 
+import erp.exit.domain.MemberDTO;
 import erp.exit.domain.MemberVO;
 
 public interface StartService {
@@ -10,4 +11,9 @@ public interface StartService {
 	//회원가입
 	public void create(MemberVO vo);
 	
+	//세션정보
+	public MemberDTO sessionData(String userId);
+	
+	//아이디 중복검사 ajax
+	public int idCheck(String userId);
 }

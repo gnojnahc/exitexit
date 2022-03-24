@@ -2,6 +2,7 @@ package erp.exit.mapper;
 
 import org.apache.ibatis.annotations.Param;
 
+import erp.exit.domain.MemberDTO;
 import erp.exit.domain.MemberVO;
 
 public interface StartMapper {
@@ -12,4 +13,10 @@ public interface StartMapper {
 	
 	//회원가입 하기
 	public void create(MemberVO vo);
+	
+	//세션데이터 저장
+	public MemberDTO sessionData(String userId);
+	
+	//아이디 중복검사 ajax
+	public int idCheck(String userId);
 }

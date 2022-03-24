@@ -19,6 +19,15 @@ body:after {
     opacity : 0.5;
     z-index: -1;
 }
+
+.imgsize{
+	height: 20px;
+}
+
+#message{
+	vertical-align: text-top;
+}
+
 </style>
 
     <head>
@@ -45,12 +54,13 @@ body:after {
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                                     <div class="card-header"><h3 class="text-center font-weight-light my-4">Create Account</h3></div>
                                     <div class="card-body">
-                                        <form action="/account/create" method="post">
+                                        <form id="form-sbm" action="/account/create" method="post">
                                             <div class="#">
                                                 <div class="form-floating mb-3">
                                                     <div class="form-floating mb-3 mb-md-0">
                                                         <input class="form-control" id="inputID" name="userId" type="text" placeholder="아이디" />
                                                         <label for="inputID">아이디</label>
+                                                        <span id="IDmessage"></span> 
                                                     </div>
                                                 </div>
                                              <div class="row mb-3">
@@ -64,7 +74,7 @@ body:after {
                                                     <div class="form-floating mb-3 mb-md-0">
                                                         <input class="form-control" id="inputPasswordConfirm" name="checkUserPass" type="password" placeholder="비밀번호 재확인" />
                                                         <label for="inputPasswordConfirm">비밀번호 재확인</label> 
-                                                        <span id="message"></span>                                                	
+                                                        <span id="message"></span>                                             	
                                                     </div>
                                                 </div>
                                             </div>     
@@ -130,12 +140,36 @@ body:after {
 	
     
     $('#inputPassword, #inputPasswordConfirm').on('keyup', function () {
-           if ($('#inputPassword').val() == $('#inputPasswordConfirm').val()) {
-             $('#message').html('비밀번호가 같습니다').css('color', 'green');
-           } else 
-             $('#message').html('비밀번호가 다릅니다.').css('color', 'red');
+			if ($('#inputPassword').val() == $('#inputPasswordConfirm').val()) {
+				$('#message').html('<img src="/resources/assets/img/check-green.PNG" class="imgsize">');
+				$('#message').append(' 비밀번호가 같습니다').css('color', 'green');
+			}else if($('#inputPassword').val() != $('#inputPasswordConfirm').val()) {
+				$('#message').html('<img src="/resources/assets/img/check-red.PNG" class="imgsize">');
+				$('#message').append(' 비밀번호가 다릅니다.').css('color', 'red');
+			}else {
+				$('#message').html('예기치 못한 오류').css('color', 'red');
+			}
     });
-      
+    
+    $('#inputID').on('keyup', function () {
+    	$.ajax({
+			type: 'GET',
+			url : "/account/idsearch",
+			data : $("#form-sbm").serialize(),
+			success : function(result){
+				if(result == 0){
+					$('#IDmessage').html('사용가능한 아이디 입니다.').css('color', 'green');
+				}else if(result == 1){
+					$('#IDmessage').html('사용할 수 없는 아이디 입니다.').css('color', 'red');
+				}else if(result > 1){
+					$('#IDmessage').html('관리자에게 즉시 알려주세요.').css('color', 'red');
+				}else{
+					$('#IDmessage').html('예기치 못한 오류');
+				}
+				
+			}
+    	});
+	});
 	
 	</script>
 		

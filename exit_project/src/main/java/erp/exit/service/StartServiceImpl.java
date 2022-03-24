@@ -2,6 +2,7 @@ package erp.exit.service;
 
 import org.springframework.stereotype.Service;
 
+import erp.exit.domain.MemberDTO;
 import erp.exit.domain.MemberVO;
 import erp.exit.mapper.StartMapper;
 import lombok.AllArgsConstructor;
@@ -21,6 +22,16 @@ public class StartServiceImpl implements StartService {
 	@Override
 	public void create(MemberVO vo) {
 		mapper.create(vo);
+	}
+
+	@Override
+	public MemberDTO sessionData(String userId) {
+		return mapper.sessionData(userId);
+	}
+
+	@Override
+	public int idCheck(String userId) {
+		return mapper.idCheck(userId);
 	}
 
 }

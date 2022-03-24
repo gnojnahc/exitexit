@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <%  // 인증된 세션이 없는경우, 해당페이지를 볼 수 없게 함.
-    if (session.getAttribute("vo") == null) {
+    if (session.getAttribute("sdto") == null) {
         response.sendRedirect("/account/login");
     }
 %>     
@@ -43,15 +43,15 @@
             </form>
 
             <!-- Navbar-->
-            <span style="color: white;">관리자&nbsp;</span>
+            <span style="color: white;">${sdto.userName} 님&nbsp;</span>
 				<ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
 						<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
 							<li><a class="dropdown-item" href="#!">사용자 정보</a></li>
-							<li><a class="dropdown-item" href="#!">내 활동 기록</a></li>
 							<li><hr class="dropdown-divider" /></li>
 							<li><a class="dropdown-item" href="#!">설정</a></li>
+							<li><hr class="dropdown-divider" /></li>
 							<li><a class="dropdown-item" href="/account/login">로그아웃</a></li>
 						</ul>
 					</li>
@@ -127,8 +127,8 @@
 	                        </div>
 	                    </div>
 							<div class="sb-sidenav-footer">
-                        <div class="small">Logged in as:</div>
-                        Exit Page Admin
+                        <div class="small">로그인:</div>
+                        ${sdto.userName} 님
                     </div>
                 </nav>
             </div>
