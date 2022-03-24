@@ -23,4 +23,6 @@ public interface InspectionitemService {
 	
 	public List<ItemDTO> selectSearchList(String type, String keyword);
 	
+	//등록 시 검사항목 중복확인
+	public int regcheck(String inspectionItem);
 }

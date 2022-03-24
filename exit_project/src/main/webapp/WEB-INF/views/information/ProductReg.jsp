@@ -26,6 +26,7 @@
                                                 	<div class="form-floating mb-3 mb-md-0">
                                                         <input class="form-control" id="inputcode" type="text" name="code" placeholder="자재코드" required/>
                                                         <label for="inputcode">자재코드<span class="form-required">*</span></label>
+                                                        <span id="message" style="vertical-align: middle;"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
@@ -111,7 +112,7 @@
                                             	</div>
                                             
                                             <div class="mt-4 mb-0" style="text-align: right;">
-                                                <button class="btn btn-primary" id="regbtn-sbm" type="submit">등록</button>
+                                                <button class="btn btn-primary" id="regbtn-sbm" type="button">등록</button>
                                                 <a class="btn btn-danger" onclick="window.close()">취소</a>
                                             </div>
                                             <input class="SCheck" type="hidden" value="${ServiceCheck}">
@@ -130,23 +131,47 @@
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         
-        <script>
-            var schack = "${ServiceCheck}";
-            console.log(schack);
-
-	        $(document).ready(function(){
-	        	if(schack == "success") {
-	        		alert('등록 되었습니다.');
-	        		opener.location.href="/information/main";
-                    window.close();
-	        	};
-			});
-	        
-	        //form-reg
-	        //regbtn-sbm
-	        //inputcode
-	        
-	        
-        </script>
+	<script>
+		var schack = "${ServiceCheck}";
+		var aj_result;
+		
+        $(document).ready(function(){
+        	if(schack == "success") {
+        		alert('등록 되었습니다.');
+        		opener.location.href="/information/main";
+                   window.close();
+        	};
+		});
+        
+        $('#regbtn-sbm').on('click', function() {
+			if(aj_result == 0){
+				$('#form-reg').submit();
+			}else if(aj_result == 1){
+				alert('자재코드를 다시 확인해주세요.');
+			}else{
+				alert('관리자에게 문의 부탁드립니다.');
+			}
+		});
+        
+        $('#inputcode').on('keyup', function() {
+    		$.ajax({
+    			async: false,
+				type: 'GET',
+				url: "/information/product/regcheck",
+				data: $("#inputcode").serialize(),
+				success : function(result){
+					aj_result = result;
+					if(result == 1){
+						$('#message').html(' 이미 등록된 코드가 있습니다.').css('color', 'red');
+					}else if(result == 0){
+						$('#message').html(' 등록 가능한 코드 입니다.').css('color', 'green');
+					}else{
+						$('#message').html(' 예기치못한 오류: 관리자에게 문의하세요').css('color', 'blue');
+					}
+				}
+    		});
+		});
+	</script>
+	
     </body>
 </html>

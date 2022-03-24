@@ -82,5 +82,10 @@ public class InspectionitemServiceImpl implements InspectionitemService {
 	}
 	// 삭제&백업 서비스 끝
 
+	@Override
+	public int regcheck(String inspectionItem) {
+		return mapper.regcheck(inspectionItem);
+	}
+
 
 }

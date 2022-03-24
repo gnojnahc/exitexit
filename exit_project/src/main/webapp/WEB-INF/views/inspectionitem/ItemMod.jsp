@@ -177,10 +177,10 @@
             });
 	        $(document).ready(function(){
 	        	if(schack == "searchOK") {
-	        		alert('해당 제품코드의 조회가 완료되었습니다.');
-	        		
+
 	        		$('#inputidx').removeAttr('disabled');
-	        		$('#inputidx').attr('readonly');
+	        		$('#inputidx').attr('readonly', true);
+	        		$('#inputinspectionItem').attr('readonly', true);
 	        		
 	        		$('#inputinspectionItemName').removeAttr('disabled');
 	        		$('#inputqua').removeAttr('disabled');
@@ -195,31 +195,58 @@
 	        		let strqua = "";
 	        		var quaChack = "${vo.qua}";
 	        		if(quaChack == "정량"){
-	        			$('#inputac').removeAttr('disabled');
-		        		$('#inputre').removeAttr('disabled');
-		        		strqua += '<option value="정성">정성</option>'
-	        		}else if(quaChack == "정성"){
 	        			$('#inputusl').removeAttr('disabled');
 		        		$('#inputsl').removeAttr('disabled');
 		        		$('#inputlsl').removeAttr('disabled');
-		        		strqua += '<option value="정량">정량</option>'
+		        		strqua += '<option value="정성">정성</option>'
+		        		strqua += '<option selected value="정량">정량</option>'
+	        		}else if(quaChack == "정성"){
+	        			$('#inputac').removeAttr('disabled');
+		        		$('#inputre').removeAttr('disabled');
+		        		strqua += '<option selected value="정성">정성</option>'
+			        	strqua += '<option value="정량">정량</option>'
 	        		}
+	        		$('#inputqua').html(strqua);
 	        		
 	        		var unitChack = "${vo.unit}";
 	        		let strunit = "";
 	        		
 	        		if (unitChack == "m") {
-		        		strunit += '<option value="m">m</option>'
+	        			strunit += '<option selected value="m">m</option>'
+		        		strunit += '<option value="cm">cm</option>'
+		        		strunit += '<option value="mm">mm</option>'
+		        		strunit += '<option value="kg">kg</option>'
 					}else if(unitChack == "cm"){
-						strunit += '<option value="cm">cm</option>'
+	        			strunit += '<option value="m">m</option>'
+		        		strunit += '<option selected value="cm">cm</option>'
+		        		strunit += '<option value="mm">mm</option>'
+		        		strunit += '<option value="kg">kg</option>'
 					}else if(unitChack == "mm"){
-						strunit += '<option value="mm">mm</option>'
+	        			strunit += '<option value="m">m</option>'
+		        		strunit += '<option value="cm">cm</option>'
+		        		strunit += '<option selected value="mm">mm</option>'
+		        		strunit += '<option value="kg">kg</option>'
 					}else if(unitChack == "kg"){
-						strunit += '<option value="kg">kg</option>'
+	        			strunit += '<option value="m">m</option>'
+		        		strunit += '<option value="cm">cm</option>'
+		        		strunit += '<option value="mm">mm</option>'
+		        		strunit += '<option selected value="kg">kg</option>'
 					}
+        			$('#inputunit').html(strunit);
+        			
+        			var dispoChack = '${vo.disposal}';
+        			let strdispo = "";
+        			
+        			if(dispoChack == "Y"){
+        				strdispo += '<option selected value="Y">Y</option>'
+       					strdispo += '<option value="N">N</option>'
+        			}else if(dispoChack == "N"){
+        				strdispo += '<option value="Y">Y</option>'
+        				strdispo += '<option selected value="N">N</option>'
+        			}
+        			$('#inputdisposal').html(strdispo);
 	        		
-	        		$('#inputqua').append(strqua);
-        			$('#inputunit').append(strunit);
+        			alert('해당 제품코드의 조회가 완료되었습니다.');
 	        	}
 			});
 	        

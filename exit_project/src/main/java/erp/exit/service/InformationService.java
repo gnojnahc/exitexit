@@ -22,4 +22,7 @@ public interface InformationService {
 	
 	public List<ProductDTO> selectSearchList(String type, String keyword);
 	
+	// ajax 등록 코드 중복검사
+	public int regcheck(String code);
+	
 }

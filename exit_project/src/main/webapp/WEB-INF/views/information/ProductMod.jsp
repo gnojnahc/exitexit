@@ -163,8 +163,6 @@
 	        
 	        $(document).ready(function(){
 	        	if(schack == "searchOK") {
-	        		alert('해당 제품코드의 조회가 완료되었습니다.');
-	        		$('#inputcode').removeAttr('disabled');
 	        		$('#inputcodeName').removeAttr('disabled');
 	        		$('#inputbuyer').removeAttr('disabled');
 	        		$('#inputbuyerName').removeAttr('disabled');
@@ -178,11 +176,15 @@
 	        		$('#selectinspect').removeAttr('disabled');
 	        		$('#selectdisuse').removeAttr('disabled');
 	        		
+	        		$('#inputcode').attr('readonly', true);
+	        		
 	        		let str = "";
         			str += '<option value="Y">Y</option>'
         			str += '<option value="N">N</option>'
 	        		$('#selectinspect').html(str);
         			$('#selectdisuse').html(str);
+        			
+        			alert('해당 제품코드의 조회가 완료되었습니다.');
 	        	}
 			});
 	        
@@ -194,7 +196,7 @@
                     return false;
                 }
             });
-
+	        
         </script>
     </body>
 </html>

@@ -115,23 +115,23 @@ public class InspectionitemController {
 		return "/inspectionitem/ItemMod";
 	}
 	
-	// 삭제폼 조회
-		@PostMapping("/item/itemsearch")
-		public String searchItemPost(ItemVO vo, Model md) {
-			log.info("inspectionitem 삭제 항목 조회중..");
-			
-			ItemVO delVO = service.itemSearch(vo.getInspectionItem());
-			List<ItemVO> delVO2 = service.itemSearch2(vo.getInspectionItem());
-			
-			if(delVO2.size() == 0) {
-				md.addAttribute("ServiceCheck", "none");
-			}else {
-				md.addAttribute("ServiceCheck", "searchOK");
-				md.addAttribute("vo", delVO);
-			}
-			
-			return "/inspectionitem/ItemMod";
+	// 수정조회
+	@PostMapping("/item/itemsearch")
+	public String searchItemPost(ItemVO vo, Model md) {
+		log.info("inspectionitem 항목 조회중..");
+		
+		ItemVO delVO = service.itemSearch(vo.getInspectionItem());
+		List<ItemVO> delVO2 = service.itemSearch2(vo.getInspectionItem());
+		
+		if(delVO2.size() == 0) {
+			md.addAttribute("ServiceCheck", "none");
+		}else {
+			md.addAttribute("ServiceCheck", "searchOK");
+			md.addAttribute("vo", delVO);
 		}
+		
+		return "/inspectionitem/ItemMod";
+	}
 	
 	
 	/* /item/mod */
@@ -144,6 +144,16 @@ public class InspectionitemController {
 		List<ItemDTO> searchList = service.selectSearchList(dto.getType(), dto.getKeyword());
 		
 		return searchList;
+	}
+	
+	
+	// /item/regcheck
+	@ResponseBody
+	@GetMapping("/item/regcheck")
+	public int regcheck(ItemVO vo) {
+		log.info("inspectionitem Ajax 등록 중복확인");
+		int result = service.regcheck(vo.getInspectionItem());
+		return result;
 	}
 	
 	

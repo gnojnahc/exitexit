@@ -74,4 +74,8 @@
 		]]>
 	</select>
 	
+	<select id="regcheck" resultType="int">
+		SELECT COUNT(*) FROM exit_item WHERE inspectionitem = #{inspectionItem}
+	</select>
+	
 </mapper>

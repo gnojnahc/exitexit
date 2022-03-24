@@ -6,7 +6,6 @@ import org.apache.ibatis.annotations.Param;
 
 import erp.exit.domain.ItemDTO;
 import erp.exit.domain.ItemVO;
-import erp.exit.domain.ProductVO;
 
 public interface InspectionitemMapper {
 	
@@ -31,4 +30,7 @@ public interface InspectionitemMapper {
 	// 쿼리+ajax 검색기능
 	public List<ItemDTO> selectSearchList(@Param("type") String type, 
 			@Param("keyword") String keyword);
+	
+	//등록 시 검사항목 중복확인
+	public int regcheck(String inspectionItem);
 }

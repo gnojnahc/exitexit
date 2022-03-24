@@ -79,5 +79,10 @@ public class InformationServiceImpl implements InformationService {
 		mapper.modify(vo);
 	}
 
+	@Override
+	public int regcheck(String code) {
+		return mapper.regcheck(code);
+	}
+
 
 }

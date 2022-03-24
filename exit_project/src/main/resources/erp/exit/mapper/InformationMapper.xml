@@ -69,4 +69,8 @@
 		]]>
 	</select>
 	
+	<select id="regcheck" resultType="int">
+		SELECT COUNT(*) FROM exit_product WHERE code = #{code}
+	</select>
+	
 </mapper>

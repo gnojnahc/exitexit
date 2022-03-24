@@ -31,4 +31,7 @@ public interface InformationMapper {
 	public List<ProductDTO> selectSearchList(@Param("type") String type, 
 			@Param("keyword") String keyword);
 	
+	// ajax 등록 코드 중복검사
+	public int regcheck(String code);
+	
 }

@@ -22,12 +22,13 @@
                                     <div class="card-header"><h3 class="text-center font-weight-light my-2"><b>검사자재 등록</b></h3></div>
                                     <div class="card-body">
                                     
-                                        <form action="/inspection/item/reg" method="post">
+                                        <form id="form-reg" action="/inspection/item/reg" method="post">
                                         	<div class="row mb-3">
                                                 <div class="col-md-6">
                                                 	<div class="form-floating mb-3 mb-md-0">
                                                         <input class="form-control" id="inputinspectionItem" type="text" name="inspectionItem" placeholder="검사항목" required/>
                                                         <label for="inputinspectionItem">검사항목<span class="form-required">*</span></label>
+                                                        <span id="message" style="vertical-align: middle;"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
@@ -114,6 +115,7 @@
                                                     <div class="form-floating mb-3 mb-md-0">
                                                         <select class="dataTable-selector" id="inputdisposal" name="disposal" style="width: 100%">
 	                                                       	<option selected value="N">N</option>
+	                                                       	<option value="Y">Y</option>
                                                        	</select>
                                                        	<label for="inputdisposal">폐기여부</label>
                                                    	</div>
@@ -127,13 +129,13 @@
                                                 </div>
                                             
                                             <div class="mt-4 mb-0" style="text-align: right;">
-                                                <button class="btn btn-primary" type="submit">등록</button>
+                                                <button class="btn btn-primary" id="regbtn-sbm" type="button">등록</button>
                                                 <a class="btn btn-danger" onclick="window.close()">취소</a>
                                             </div>
                                             <input class="SCheck" type="hidden" value="${ServiceCheck}">
                                             </div>
-                                            </div>
 										</form>
+                                      </div>
                                     </div>
                                 </div>
                             </div>
@@ -188,6 +190,39 @@
 	                }
 	        	});
 	        });
+	        
+	        /* 중복 ajax 처리 */
+	        var aj_result;
+	        
+	        $('#regbtn-sbm').on('click', function() {
+				if(aj_result == 0){
+					$('#form-reg').submit();
+				}else if(aj_result == 1){
+					alert('검사항목을 다시 확인해주세요.');
+				}else{
+					alert('관리자에게 문의 부탁드립니다.');
+				}
+			});
+	        
+	        $('#inputinspectionItem').on('keyup', function() {
+	    		$.ajax({
+	    			async: false,
+					type: 'GET',
+					url: "/inspection/item/regcheck",
+					data: $("#inputinspectionItem").serialize(),
+					success : function(result){
+						aj_result = result;
+						if(result == 1){
+							$('#message').html(' 이미 등록된 검사항목이 있습니다.').css('color', 'red');
+						}else if(result == 0){
+							$('#message').html(' 등록 가능한 검사항목 입니다.').css('color', 'green');
+						}else{
+							$('#message').html(' 예기치못한 오류: 관리자에게 문의하세요').css('color', 'blue');
+						}
+					}
+	    		});
+			});
+	        
 	        
 	        /* document.getElementById('inputcreationDate').value = new Date().toISOString().substring(0, 10); */
         </script>

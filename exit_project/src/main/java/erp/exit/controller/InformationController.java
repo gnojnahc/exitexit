@@ -139,6 +139,15 @@ public class InformationController {
 		return searchList;
 	}
 	
+	// 테이블 Ajax 등록 중복검사
+	@ResponseBody
+	@GetMapping("/product/regcheck")
+	public int regcheck(ProductVO vo) {
+		log.info("Ajax ID 등록중 중복체크");
+		int result = service.regcheck(vo.getCode());
+		return result;
+	}
+	
 }
 
 
