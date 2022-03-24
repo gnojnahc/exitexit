@@ -33,5 +33,12 @@ public class StartServiceImpl implements StartService {
 	public int idCheck(String userId) {
 		return mapper.idCheck(userId);
 	}
-
+	@Override
+	public String checkpwd(String userId) {
+		return mapper.checkpwd(userId);
+		
+		
+	}
+	
+	
 }

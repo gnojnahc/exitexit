@@ -1,5 +1,8 @@
 package erp.exit.controller;
 
+import javax.inject.Inject;
+
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +26,10 @@ import lombok.extern.log4j.Log4j;
 @RequestMapping("/account/*")
 public class ExitController {
 	
+	
+	@Inject
+	BCryptPasswordEncoder pwdEncoder;
+	
 	public StartService	service;
 	
 	@GetMapping("/login")
@@ -34,7 +41,9 @@ public class ExitController {
 	
 	@PostMapping("/login")
 	public String login(@ModelAttribute MemberDTO dto, MemberVO vo, Model md) {
-		int cnt = service.login(vo.getUserId(), vo.getUserPass());
+		
+		String pwd = service.checkpwd(vo.getUserId());
+		int cnt = service.login(vo.getUserId(),pwd);
 		if(cnt==1) {
 			dto = service.sessionData(vo.getUserId()); //로그인 ID를 받아와서 세션DTO에 저장
 			md.addAttribute("sdto", dto); //세션DTO를 'sdto'라는 이름으로 웹에 전달
@@ -53,10 +62,11 @@ public class ExitController {
 	
 	@PostMapping("/create")
 	public String createPost(MemberVO vo) {
-		
 		log.info("회원가입 진행중");
 		log.info("create:"+vo);
-
+		String inputPass = vo.getUserPass();
+		String pwd = pwdEncoder.encode(inputPass);
+		vo.setUserPass(pwd);
 		service.create(vo);
 		return "/account/Login";
 	}

@@ -19,4 +19,7 @@ public interface StartMapper {
 	
 	//아이디 중복검사 ajax
 	public int idCheck(String userId);
+	
+	//회원비번가져오기
+	public String checkpwd(String userId);
 }

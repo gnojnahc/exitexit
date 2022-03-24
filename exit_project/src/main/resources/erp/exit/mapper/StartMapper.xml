@@ -27,4 +27,8 @@
 		SELECT COUNT(*) FROM exit_member WHERE userid = #{userId}
 	</select>
 
+	<select id="checkpwd" resultType="string">
+		select userPass from exit_member where userId=#{userId}
+	</select>
+	
 </mapper>
