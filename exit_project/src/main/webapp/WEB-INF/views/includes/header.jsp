@@ -82,6 +82,7 @@
 	                                    <a class="nav-link" id="ft_style" href="#">수입검사등록</a>
 	                                    <a class="nav-link" id="ft_style" href="#">수입검사현황</a>
 	                                    <a class="nav-link" id="ft_style" href="#">검사현황분석</a>
+	                                    
 	                                </nav>
 	                            </div>
 	                            
@@ -122,6 +123,7 @@
 	                                    <a class="nav-link" id="ft_style" href="#">검사표준관리</a>
 	                                    <a class="nav-link" id="ft_style" href="/information/main">검사자재등록</a>
 	                                    <a class="nav-link" id="ft_style" href="/inspection/main">검사항목등록</a>
+	                                    <a class="nav-link" id="ft_style" href="/infoinspectitem/main">자재별검사항목등록</a>
 	                                </nav>
 	                            </div>
 	                        </div>

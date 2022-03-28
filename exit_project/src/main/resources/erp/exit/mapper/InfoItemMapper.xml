@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="erp.exit.mapper.InfoItemMapper">
+
+	<select id="list" resultType="erp.exit.domain.InfoItemVO">
+	<![CDATA[
+		SELECT rownum "rn", idx, code, inspectionitem, inspectionitemname, qua, samplewater, ac
+		, re, usl, sl, lsl, ucl, cl, lcl, unit, note
+        FROM
+        (SELECT idx, code, inspectionitem, inspectionitemname, qua, samplewater, ac
+		, re, usl, sl, lsl, ucl, cl, lcl, unit, note 
+		FROM exit_infoitem ORDER BY idx DESC)
+		]]>
+	</select>
+
+	<insert id="register">
+	<![CDATA[
+		INSERT INTO exit_infoitem(idx, code, inspectionItem, inspectionItemName, qua, sampleWater, ac
+		, re, usl, sl, lsl, ucl, cl, lcl, unit, note) 
+		VALUES (INFOITEM_IDX_SEQ.nextval,#{code},#{inspectionItem},#{inspectionItemName},#{qua},#{sampleWater},#{ac}
+		,#{re},#{usl},#{sl},#{lsl},#{ucl},#{cl},#{lcl},#{unit},#{note})
+	]]>
+	</insert>
+	
+	<!-- 단일품목 조회 기능 -->
+	<select id="itemSearch" resultType="erp.exit.domain.InfoItemVO">
+	<![CDATA[
+		SELECT * FROM exit_infoitem WHERE infoitem = #{infoitem}
+      ]]>
+	</select>
+	
+	<select id="itemSearch2" resultType="erp.exit.domain.InfoItemVO">
+	<![CDATA[
+		SELECT * FROM exit_infoitem WHERE infoitem = #{infoitem}
+      ]]>
+	</select>
+	<!-- 단일품목 조회 기능 끝 -->
+	
+	
+	<!-- 삭제 & 백업 기능 -->
+	<update id="delUpdateDD">
+		UPDATE exit_infoitem SET deldate = SYSDATE WHERE INSPECTIONITEM = #{inspectionItem}
+	</update>
+	<insert id="delBackUpData">
+		INSERT INTO exit_infoitem_del_save SELECT * FROM exit_item WHERE code = '#{code}' and INSPECTIONITEM = '#{inspectionItem}'
+	</insert>
+	<delete id="delComplete">
+		DELETE FROM exit_infoitem WHERE code = '#{code}' and INSPECTIONITEM = '#{inspectionItem}'
+	</delete>
+	<!-- 삭제 & 백업 기능 끝 -->
+	
+	
+	<update id="modify">
+		UPDATE exit_infoitem SET inspectionitem = #{inspectionitem}
+		, inspectionitemname = #{inspectionitemName}
+        , qua = #{qua}, samplewater = #{sampleWater}, ac = #{ac}
+		, re = #{re}, usl = #{usl}, sl = #{sl}, lsl = #{lsl}, ucl = #{ucl}
+        , cl = #{cl}, lcl = #{lcl}, unit = #{unit}, modifieddate = sysdate
+		, disposal = #{disposal}, note = #{note}
+		WHERE idx = #{idx}
+	</update>
+	
+	<select id="selectSearchList" resultType="erp.exit.domain.InfoItemDTO">
+		<![CDATA[
+			SELECT rownum "rn", idx, inspectionitem, inspectionitemname, qua, samplewater, ac
+			, re, usl, sl, lsl, ucl, cl, lcl, unit, creationdate, modifieddate, deldate
+			, disposal, note 
+			FROM exit_item 
+			WHERE ${type} LIKE '%'||#{keyword}||'%' ORDER BY idx DESC
+		]]>
+	</select>
+	
+</mapper>
