@@ -42,8 +42,17 @@ public class ExitController {
 	@PostMapping("/login")
 	public String login(@ModelAttribute MemberDTO dto, MemberVO vo, Model md) {
 		
-		String pwd = service.checkpwd(vo.getUserId());
-		int cnt = service.login(vo.getUserId(),pwd);
+		String dbPW = service.checkpwd(vo.getUserId()); //DB에서 가져온거
+		String clientPW = vo.getUserPass(); //클라이언트가 입력한거
+		
+		int cnt = 0;
+		if(pwdEncoder.matches(clientPW, dbPW)) {
+			log.info("PW Success");
+			cnt = 1;
+		}else {
+			log.info("PW Failure");
+		}
+		
 		if(cnt==1) {
 			dto = service.sessionData(vo.getUserId()); //로그인 ID를 받아와서 세션DTO에 저장
 			md.addAttribute("sdto", dto); //세션DTO를 'sdto'라는 이름으로 웹에 전달
@@ -68,7 +77,7 @@ public class ExitController {
 		String pwd = pwdEncoder.encode(inputPass);
 		vo.setUserPass(pwd);
 		service.create(vo);
-		return "/account/Login";
+		return "redirect:/account/login";
 	}
 	
 	@ResponseBody

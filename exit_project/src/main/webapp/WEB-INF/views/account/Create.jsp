@@ -1,6 +1,5 @@
-<!DOCTYPE html>
-
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
 <style>
 body {
@@ -58,7 +57,7 @@ body:after {
                                             <div class="#">
                                                 <div class="form-floating mb-3">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputID" name="userId" type="text" placeholder="아이디" />
+                                                        <input class="form-control" id="inputID" name="userId" type="text" placeholder="아이디" minlength="6" maxlength="15" />
                                                         <label for="inputID">아이디</label>
                                                         <span id="IDmessage"></span> 
                                                     </div>
@@ -66,7 +65,7 @@ body:after {
                                              <div class="row mb-3">
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputPassword" name="userPass" type="password" placeholder="비밀번호" />
+                                                        <input class="form-control" id="inputPassword" name="userPass" type="password" placeholder="비밀번호"/>
                                                         <label for="inputPassword">비밀번호</label>
                                                     </div>
                                                 </div>
@@ -96,7 +95,7 @@ body:after {
                                        
                                             <div class="mt-4 mb-0">
                                                 <div class="d-grid">
-                                                	<input type="button" class="btn btn-primary btn-block" id="createjoin" onclick="join()" value="계정 생성"/>
+                                                	<button type="button" class="btn btn-primary btn-block" id="createjoin">계정생성</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -130,18 +129,28 @@ body:after {
 	
 	var aj_result; //ajax결과값 전역변수에 담기
 	
-	function join(){
-		var pw1 = document.getElementById('inputPassword').value;
-		var pw2 = document.getElementById('inputPasswordConfirm').value;
+	var id_len;
+	$('#inputID').on('keyup', function () {
+		console.log($('#inputID').val());
+		console.log($('#inputID').val().length);
+        id_len = $('#inputID').val().length;
+	});
+	
+	$('#createjoin').on('click', function() {
+		console.log(id_len);
+		var pw1 = $('#inputPassword').val();
+		var pw2 = $('#inputPasswordConfirm').val();
 		if(pw1 != pw2){
 			alert("비밀번호가 일치하지 않습니다.");
-		}else if(aj_result != 0){
-			alert("아이디를 다시 확인해주세요.");
-		}else if(pw1 == pw2 && aj_result == 0){
-			$('form').submit();
+		}else if(aj_result != "success"){
+			alert("사용하실 수 없는 아이디 입니다.");
+		}else if(id_len < 6 || id_len > 15){
+            alert("아이디 길이가 맞지 않습니다.");
+        }else if(pw1 == pw2 && aj_result == "success" && id_len > 6 && id_len < 16){
+			$('#form-sbm').submit();
 			alert("회원가입이 완료 되었습니다.");
 		}
-	}
+	});
 	
     
     $('#inputPassword, #inputPasswordConfirm').on('keyup', function () {
@@ -163,15 +172,19 @@ body:after {
 			url: "/account/idsearch",
 			data: $("#form-sbm").serialize(),
 			success : function(result){
-				aj_result = result; //전역변수에 담기
-				if(result == 0){
+				let lenID = $('#inputID').val().length;
+				if(result == 0 && lenID > 5){
 					$('#IDmessage').html('사용가능한 아이디 입니다.').css('color', 'green');
-				}else if(result == 1){
+					aj_result = "success"; //결과값 전역변수에 담기
+				}else if(result == 1 || lenID < 6 || lenID > 15){
 					$('#IDmessage').html('사용할 수 없는 아이디 입니다.').css('color', 'red');
+					aj_result = "fail"; //결과값 전역변수에 담기
 				}else if(result > 1){
 					$('#IDmessage').html('관리자에게 즉시 알려주세요.').css('color', 'red');
+					aj_result = "error"; //결과값 전역변수에 담기
 				}else{
-					$('#IDmessage').html('예기치 못한 오류');
+					$('#IDmessage').html('예기치 못한 오류').css('color', 'red');
+					aj_result = "error"; //결과값 전역변수에 담기
 				}
 				
 			}
