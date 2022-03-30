@@ -41,13 +41,13 @@ public class InfoItemServiceImpl implements InfoItemService{
 	}
 
 	@Override
-	public void delBackUpData(String infoItem) {
-		mapper.delBackUpData(infoItem);
+	public void delBackUpData(String code, String inspectionItem) {
+		mapper.delBackUpData(code,inspectionItem);
 	}
 
 	@Override
-	public void delComplete(String infoItem) {
-		mapper.delComplete(infoItem);
+	public void delComplete(String code, String inspectionItem) {
+		mapper.delComplete(code,inspectionItem);
 	}
 
 	@Override

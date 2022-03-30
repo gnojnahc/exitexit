@@ -60,7 +60,7 @@
 										<div class="col-md-6">
 											<div class="form-floating mb-3 mb-md-0">
 												<input class="form-control" id="inputinspectionItem"
-													type="text" name="inspectionItem" placeholder="검사항목명"
+													type="text" name="inspectionItem" placeholder="검사항목"
 													value="${vo.inspectionItem}" required /> <label
 													for="inputinspectionItem">검사항목<span
 													class="form-required">*</span></label>
@@ -91,7 +91,7 @@
 									<div class="form-floating mb-3 mb-md-0">
 										<select class="dataTable-selector" id="inputqua" name="qua"
 											style="width: 100%" disabled>
-											<option selected value="${vo.qua}">${vo.qua}</option>
+											<option id="quaopt" selected value="${vo.qua}">${vo.qua}</option>
 										</select> <label for="inputqua">정성정량</label>
 									</div>
 								</div>
@@ -163,9 +163,10 @@
 								<div class="col-md-6">
 									<div class="form-floating mb-3 mb-md-0">
 										<select class="dataTable-selector" id="inputunit" name="unit"
-											style="width: 100%">
-											<option selected value="m">m</option>
+											style="width: 100%" disabled>
+											<option id="unitopt" selected value="${vo.unit}">${vo.unit}</option>
 										</select>
+										<label for="inputqua">단위</label>
 									</div>
 								</div>
 
@@ -211,7 +212,6 @@
 				alert('조회된 제품코드가 없습니다.');
 			}
 		});
-
 		// searchcode .form-submit-switch/////////////////////////////////////////
 		$('#delsearch').on(
 				'click',
@@ -221,10 +221,8 @@
 						url : "/infoinspectitem/searchcode",
 						data : $('#form_sbm').serialize(),
 						success : function(result) {
-
-							$('#inputinspectionItemName').val(
-									result.inspectionItemName);
-							$('#inputqua').val(result.qua);
+							$('#inputinspectionItemName').val(result.inspectionItemName);
+							$('#quaopt').val(result.qua).html(result.qua);
 							$('#inputsampleWater').val(result.sampleWater);
 							$('#inputac').val(result.ac);
 							$('#inputre').val(result.re);
@@ -234,20 +232,16 @@
 							$('#inputucl').val(result.ucl);
 							$('#inputcl').val(result.cl);
 							$('#inputlcl').val(result.lcl);
-							$('#inputunit').val(result.unit);
+							$('#unitopt').val(result.unit).html(result.unit);
 							$('#inputnote').val(result.note);
-
 						}
 					});
 				});
 
 		// return confirm(\'제품코드 : '' \n정말로 삭제하시겠습니까?\')
-		$(document)
-				.on(
-						'click',
-						'#delete_sbm',
+		$(document).on('click','#delete_sbm',
 						function(e) {
-							if (confirm('자재코드 : ${vo.code} \n 검사항목 : ${vo.inspectionItem} \n정말로 삭제하시겠습니까?')) {
+							if (confirm("제품코드 : "+$('#inputcode').val()+"\n검사항목 : "+$('#inputinspectionItem').val()+"\n정말로 삭제하시겠습니까?")) {
 								return $('.form-submit-switch').submit();
 							} else {
 								return false;

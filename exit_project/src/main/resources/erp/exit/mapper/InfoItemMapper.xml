@@ -49,17 +49,14 @@
 	<!-- 삭제 조회 기능 끝 -->
 	
 	
-	<!-- 삭제 & 백업 기능 -->
-	<update id="delUpdateDD">
-		UPDATE exit_infoitem SET deldate = SYSDATE WHERE INSPECTIONITEM = #{inspectionItem}
-	</update>
+	<!-- 백업 & 삭제 기능 -->
 	<insert id="delBackUpData">
-		INSERT INTO exit_infoitem_del_save SELECT * FROM exit_item WHERE code = '#{code}' and INSPECTIONITEM = '#{inspectionItem}'
+		INSERT INTO exit_infoitem_del_save SELECT * FROM exit_infoitem WHERE code = #{code} and INSPECTIONITEM = #{inspectionItem}
 	</insert>
 	<delete id="delComplete">
-		DELETE FROM exit_infoitem WHERE code = '#{code}' and INSPECTIONITEM = '#{inspectionItem}'
+		DELETE FROM exit_infoitem WHERE code = #{code} and INSPECTIONITEM = #{inspectionItem}
 	</delete>
-	<!-- 삭제 & 백업 기능 끝 -->
+	<!-- 백업 & 삭제 기능 끝 -->
 	
 	
 	<update id="modify">

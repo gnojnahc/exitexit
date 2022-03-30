@@ -80,7 +80,7 @@ public class InfoItemController {
 		return "/infoinspectitem/InfoItemReg";
 	}
 
-	// 자재 삭제폼 팝업실행
+	//삭제 팝업실행
 	@GetMapping("/del")
 	public String deleteGet(InfoItemVO vo, Model md) {
 		log.info("infoitem 자재 삭제창 띄움 ..");
@@ -88,7 +88,7 @@ public class InfoItemController {
 		return "/infoinspectitem/InfoItemDel";
 	}
 
-	// 삭제 조회 기능
+	//삭제 조회 기능
 	@ResponseBody
 	@PostMapping("/searchcode")
 	public InfoItemVO searchcodePost(InfoItemVO vo, Model md) {
@@ -98,6 +98,20 @@ public class InfoItemController {
 
 		return delVO;
 	}
+	
+	//백업 및 삭제 기능
+	@PostMapping("/del")
+	public String deletePost(InfoItemVO vo, Model md) {
+		log.info("삭제중...");
+		
+		service.delBackUpData(vo.getCode(), vo.getInspectionItem());
+		service.delComplete(vo.getCode(), vo.getCode());
+		
+		md.addAttribute("ServiceCheck","success");
+		
+		return "/infoinspectitem/InfoItemDel";
+	}
+	
 
 	// 자재 수정 팝업실행
 	@GetMapping("/mod")

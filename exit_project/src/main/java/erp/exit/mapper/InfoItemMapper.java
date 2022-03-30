@@ -24,17 +24,19 @@ public interface InfoItemMapper {
 	public List<InfoItemDTO> selectSearchList(@Param("type") String type, 
 			@Param("keyword") String keyword);	
 
-	//검사항목 확인해서 삭제하기
-	public void delBackUpData(String infoItem); //데이터 삭제테이블에 백업
-	public void delComplete(String infoItem); //본 데이터 삭제
+	//삭제 자재코드 자동완성
+	public List<InfoItemVO> search(String code);
+	//삭제 검사항목 자동완성
+	public List<InfoItemVO> search2(@Param("code") String code,@Param("inspectionItem") String inspectionItem);
+	
+	//데이터 삭제테이블에 백업
+	public void delBackUpData(@Param("code") String code,@Param("inspectionItem") String inspectionItem);
+	//본 데이터 삭제
+	public void delComplete(@Param("code") String code,@Param("inspectionItem") String inspectionItem);
+	
 	
 	//수정
 	public void modify(InfoItemVO vo);	
 	
-	//자재코드 자동완성
-	public List<InfoItemVO> search(String code);
-	
-	//검사항목 자동완성
-	public List<InfoItemVO> search2(@Param("code") String code,@Param("inspectionItem") String inspectionItem);
 
 }

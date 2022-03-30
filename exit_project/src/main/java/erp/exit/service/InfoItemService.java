@@ -16,8 +16,8 @@ public interface InfoItemService {
 	public InfoItemVO codeSearch(String code, String inspectionItem);
 			
 	//삭제
-	public void delBackUpData(String infoItem); //데이터 삭제테이블에 백업
-	public void delComplete(String infoItem); //본 데이터 삭제
+	public void delBackUpData(String code, String inspectionItem); //데이터 삭제테이블에 백업
+	public void delComplete(String code, String inspectionItem); //본 데이터 삭제
 	
 	//수정
 	public void modify(InfoItemVO vo);

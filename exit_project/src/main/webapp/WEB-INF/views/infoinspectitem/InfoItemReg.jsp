@@ -108,10 +108,10 @@
                                                <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
                                                         <select class="dataTable-selector" id="inputunit" name="unit" style="width: 100%">
-                                                        	<option selected value="m">m</option>
-                                                        	<option value="cm">cm</option>
-                                                        	<option value="mm">mm</option>
-                                                        	<option value="kg">kg</option>
+                                                        	<option selected value="M">M</option>
+                                                        	<option value="CM">CM</option>
+                                                        	<option value="MM">MM</option>
+                                                        	<option value="KG">KG</option>
                                                         </select>
                                                         <label for="inputunit">단위</label>
                                                     </div>
