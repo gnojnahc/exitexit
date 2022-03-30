@@ -93,7 +93,7 @@ public class InfoItemController {
 		log.info("삭제중...");
 		
 		service.delBackUpData(vo.getCode(), vo.getInspectionItem());
-		service.delComplete(vo.getCode(), vo.getCode());
+		service.delComplete(vo.getCode(), vo.getInspectionItem());
 		
 		md.addAttribute("ServiceCheck","success");
 		
