@@ -242,7 +242,7 @@
 		$(document).on('click','#delete_sbm',
 						function(e) {
 							if (confirm("제품코드 : "+$('#inputcode').val()+"\n검사항목 : "+$('#inputinspectionItem').val()+"\n정말로 삭제하시겠습니까?")) {
-								return $('.form-submit-switch').submit();
+								return $('#form_sbm').submit();
 							} else {
 								return false;
 							}
