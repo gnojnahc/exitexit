@@ -9,9 +9,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
+
 import erp.exit.domain.InfoItemDTO;
 import erp.exit.domain.InfoItemVO;
+import erp.exit.domain.ProductVO;
 import erp.exit.service.InfoItemService;
+import erp.exit.service.InformationService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
@@ -20,9 +24,36 @@ import lombok.extern.log4j.Log4j;
 @RequestMapping("/infoinspectitem/*")
 @Controller
 public class InfoItemController {
-	
+
 	public InfoItemService service;
-	
+
+	// 자재코드 검사자동완성
+	@ResponseBody
+	@GetMapping("/search")
+	public String search(InfoItemVO vo) {
+		Gson js = new Gson(); // json으로 변환하기위해 사용한 함수
+		List<InfoItemVO> result = service.search(vo.getCode());
+
+		log.info("자재코드 받아온값" + vo.getCode());
+		log.info("json : " + js.toJson(result));
+
+		return js.toJson(result);
+	}
+
+	// 검사항목 자동완성
+	@ResponseBody
+	@GetMapping("/search2")
+	public String search2(InfoItemVO vo) {
+		Gson js = new Gson(); // json으로 변환하기위해 사용한 함수
+		List<InfoItemVO> result = service.search2(vo.getCode(), vo.getInspectionItem());
+
+		log.info("자재코드 받아온값: " + vo.getCode());
+		log.info("검사항목 받아온값 : " + vo.getInspectionItem());
+		log.info("json : " + js.toJson(result));
+
+		return js.toJson(result);
+	}
+
 	// 검사자재 등록&조회 페이지 실행
 	@GetMapping("/main")
 	public String registerMainGet(InfoItemVO vo, Model md) {
@@ -30,103 +61,83 @@ public class InfoItemController {
 		md.addAttribute("list", service.list());
 		return "/infoinspectitem/InfoItemMain";
 	}
-	
+
 	// 자재 등록 팝업실행
-	@GetMapping("/infoinspectitem/reg")
+	@GetMapping("/reg")
 	public String registerGet(InfoItemVO vo, Model md) {
 		log.info("InfoItem 자재 등록창 띄움 ..");
 		return "/infoinspectitem/InfoItemReg";
 	}
-	
+
 	// 자재 등록기능
-	@PostMapping("/infoinspectitem/reg")
+	@PostMapping("/reg")
 	public String registerPost(InfoItemVO vo, Model md) {
 		log.info("Information 자재 등록중..");
 		service.register(vo);
-		
+
 		md.addAttribute("ServiceCheck", "success");
-		
+
 		return "/infoinspectitem/InfoItemReg";
 	}
-	
+
 	// 자재 삭제폼 팝업실행
-	@GetMapping("/infoinspectitem/del")
+	@GetMapping("/del")
 	public String deleteGet(InfoItemVO vo, Model md) {
 		log.info("infoitem 자재 삭제창 띄움 ..");
-		
+
 		return "/infoinspectitem/InfoItemDel";
 	}
-	
-	// 자재 제품코드 조회
-		@PostMapping("/infoinspectitem/searchcode")
-		public String searchcodePost(InfoItemVO vo, Model md) {
-			log.info("infoitem 자재 조회중..");
-			
-			InfoItemVO delVO = service.codeSearch(vo.getCode());
-			List<InfoItemVO> delVO2 = service.codeSearch2(vo.getCode());
-			
-			if(delVO2.size() == 0) {
-				md.addAttribute("ServiceCheck", "none");
-			}else {
-				md.addAttribute("vo", delVO);
-			}
-			
-			return "/infoinspectitem/InfoItemDel";
-		}
+
+	// 삭제 조회 기능
+	@ResponseBody
+	@PostMapping("/searchcode")
+	public InfoItemVO searchcodePost(InfoItemVO vo, Model md) {
+		log.info("infoitem 자재 조회중..");
 		
-		// 자재 수정 팝업실행
-		@GetMapping("/infoinspectitem/mod")
-		public String modifyGet(InfoItemVO vo, Model md) {
-			log.info("infoitem 자재 수정창 띄움 ..");
-			
-			return "/infoinspectitem/InfoItemMod";
-		}
-		
-		// 자재 수정기능
-		@PostMapping("/infoinspectitem/mod")
-		public String modifyPost(InfoItemVO vo, Model md) {
-			log.info("infoitem 자재 수정중..");
-			
-			service.modify(vo);
-			
-			md.addAttribute("ServiceCheck", "success");
-			
-			return "/infoinspectitem/InfoItemMod";
-		}
-		
-		// 자재수정 코드 조회
-		@PostMapping("/infoinspectitem/modsearchcode")
-		public String modSearchCodePost(InfoItemVO vo, Model md) {
-			log.info("infoitem 자재 조회중..");
-			
-			InfoItemVO delVO = service.codeSearch(vo.getCode());
-			List<InfoItemVO> delVO2 = service.codeSearch2(vo.getCode());
-			
-			if(delVO2.size() == 0) {
-				md.addAttribute("ServiceCheck", "none");
-			}else {
-				md.addAttribute("ServiceCheck", "searchOK");
-				md.addAttribute("vo", delVO);
-			}
-			
-			return "/infoinspectitem/InfoItem";
-		}
-		
-		// 테이블 Ajax 검색 조회
-		@GetMapping("/infoinspectitem/getSearchList")
-		@ResponseBody
-		public List<InfoItemDTO> getSearchList(InfoItemDTO dto, Model md) {
-			log.info("infoitem 테이블 Ajax검색 진행");
-			
-			List<InfoItemDTO> searchList = service.selectSearchList(dto.getType(), dto.getKeyword());
-			
-			return searchList;
-		}
-		
+		InfoItemVO delVO = service.codeSearch(vo.getCode(), vo.getInspectionItem());
+
+		return delVO;
 	}
-	
-	
-	
-	
 
+	// 자재 수정 팝업실행
+	@GetMapping("/mod")
+	public String modifyGet(InfoItemVO vo, Model md) {
+		log.info("infoitem 자재 수정창 띄움 ..");
 
+		return "/infoinspectitem/InfoItemMod";
+	}
+
+	// 자재 수정기능
+	@PostMapping("/mod")
+	public String modifyPost(InfoItemVO vo, Model md) {
+		log.info("infoitem 자재 수정중..");
+
+		service.modify(vo);
+
+		md.addAttribute("ServiceCheck", "success");
+
+		return "/infoinspectitem/InfoItemMod";
+	}
+
+	// 자재수정 코드 조회
+	@PostMapping("/modsearchcode")
+	public String modSearchCodePost(InfoItemVO vo, Model md) {
+		log.info("infoitem 자재 조회중..");
+
+		InfoItemVO delVO = service.codeSearch(vo.getCode(), vo.getInspectionItem());
+
+		return "/infoinspectitem/InfoItem";
+	}
+
+	// 테이블 Ajax 검색 조회
+	@GetMapping("/getSearchList")
+	@ResponseBody
+	public List<InfoItemDTO> getSearchList(InfoItemDTO dto, Model md) {
+		log.info("infoitem 테이블 Ajax검색 진행");
+
+		List<InfoItemDTO> searchList = service.selectSearchList(dto.getType(), dto.getKeyword());
+
+		return searchList;
+	}
+
+}

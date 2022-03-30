@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import erp.exit.domain.InfoItemDTO;
 import erp.exit.domain.InfoItemVO;
+import erp.exit.domain.ProductVO;
 
 public interface InfoItemMapper {
 	
@@ -16,8 +17,9 @@ public interface InfoItemMapper {
 	public List<InfoItemVO> list();
 	
 	//검사항목 검색해서 데이터 가져오기
-	public InfoItemVO InfoitemSearch(String infoItem);
-	public List<InfoItemVO> InfoitemSearch2(String infoItem);
+	public InfoItemVO itemSearch(@Param("code") String code,@Param("inspectionItem") String inspectionItem);
+	public List<InfoItemVO> InfoitemSearch2(InfoItemVO vo);
+	
 	// 쿼리+ajax 검색기능
 	public List<InfoItemDTO> selectSearchList(@Param("type") String type, 
 			@Param("keyword") String keyword);	
@@ -28,5 +30,11 @@ public interface InfoItemMapper {
 	
 	//수정
 	public void modify(InfoItemVO vo);	
+	
+	//자재코드 자동완성
+	public List<InfoItemVO> search(String code);
+	
+	//검사항목 자동완성
+	public List<InfoItemVO> search2(@Param("code") String code,@Param("inspectionItem") String inspectionItem);
 
 }

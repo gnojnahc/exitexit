@@ -4,6 +4,21 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="erp.exit.mapper.InfoItemMapper">
 
+	<!--자재코드 자동완성 쿼리   -->
+	<select id="search" resultType="erp.exit.domain.InfoItemVO">
+	<![CDATA[
+		select DISTINCT(code) from exit_infoitem WHERE code LIKE '%'||#{code}||'%'
+		]]>
+	</select>
+	
+	<!--검사항목 자동완성 쿼리   -->
+	<select id="search2" resultType="erp.exit.domain.InfoItemVO">
+	<![CDATA[
+		select DISTINCT(inspectionItem) from exit_infoitem WHERE code Like #{code} and INSPECTIONITEM Like '%'||#{inspectionItem}||'%'
+		]]>
+	</select>
+
+
 	<select id="list" resultType="erp.exit.domain.InfoItemVO">
 	<![CDATA[
 		SELECT rownum "rn", idx, code, inspectionitem, inspectionitemname, qua, samplewater, ac
@@ -24,19 +39,14 @@
 	]]>
 	</insert>
 	
-	<!-- 단일품목 조회 기능 -->
+	<!-- 삭제 조회 기능 -->
 	<select id="itemSearch" resultType="erp.exit.domain.InfoItemVO">
 	<![CDATA[
-		SELECT * FROM exit_infoitem WHERE infoitem = #{infoitem}
+		SELECT * FROM exit_infoitem WHERE code = #{code} and INSPECTIONITEM = #{inspectionItem}
       ]]>
 	</select>
-	
-	<select id="itemSearch2" resultType="erp.exit.domain.InfoItemVO">
-	<![CDATA[
-		SELECT * FROM exit_infoitem WHERE infoitem = #{infoitem}
-      ]]>
-	</select>
-	<!-- 단일품목 조회 기능 끝 -->
+
+	<!-- 삭제 조회 기능 끝 -->
 	
 	
 	<!-- 삭제 & 백업 기능 -->

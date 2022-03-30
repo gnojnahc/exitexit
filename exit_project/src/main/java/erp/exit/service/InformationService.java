@@ -10,7 +10,7 @@ public interface InformationService {
 	public void register(ProductVO vo);
 	
 	public List<ProductVO> list();
-
+	
 	public ProductVO codeSearch(String code);
 	public List<ProductVO> codeSearch2(String code);
 	

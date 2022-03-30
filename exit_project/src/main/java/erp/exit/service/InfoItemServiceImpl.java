@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import erp.exit.domain.InfoItemDTO;
 import erp.exit.domain.InfoItemVO;
+import erp.exit.domain.ProductVO;
 import erp.exit.mapper.InfoItemMapper;
 import lombok.AllArgsConstructor;
 
@@ -27,17 +28,12 @@ public class InfoItemServiceImpl implements InfoItemService{
 		return mapper.list();
 	}
 	
-	//검색
+	//삭제 조회
 	@Override
-	public InfoItemVO codeSearch(String code) {
-		return mapper.InfoitemSearch(code);
+	public InfoItemVO codeSearch(String code, String inspectionItem) {
+		return mapper.itemSearch(code,inspectionItem);
 	}
-	
-	//검색
-	@Override
-	public List<InfoItemVO> codeSearch2(String code) {
-		return mapper.InfoitemSearch2(code);
-	}
+
 
 	@Override
 	public List<InfoItemDTO> selectSearchList(String type, String keyword) {
@@ -58,6 +54,16 @@ public class InfoItemServiceImpl implements InfoItemService{
 	public void modify(InfoItemVO vo) {
 		mapper.modify(vo);
 	}
-	
+
+	@Override
+	public List<InfoItemVO> search(String code) {
+		return mapper.search(code);
+	}
+
+	@Override
+	public List<InfoItemVO> search2(String code,String inspectionItem) {
+		return mapper.search2(code,inspectionItem);
+	}
+
 	
 }
