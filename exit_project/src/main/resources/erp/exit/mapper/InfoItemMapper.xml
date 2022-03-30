@@ -79,4 +79,35 @@
 		]]>
 	</select>
 	
+	
+	<!-- [자동완성 기능] 1주차 Code 가져오기 -->
+	<select id="regInfoSearch" resultType="erp.exit.domain.InfoItemVO">
+		<![CDATA[
+			SELECT DISTINCT(code) FROM exit_product WHERE code LIKE '%'||#{code}||'%'
+		]]>
+	</select>
+	
+	<!-- [자동완성 기능] 2주차 Item 가져오기 -->
+	<select id="regItemSearch" resultType="erp.exit.domain.InfoItemVO">
+		<![CDATA[
+			SELECT DISTINCT(INSPECTIONITEM) FROM exit_item WHERE INSPECTIONITEM LIKE '%'||#{inspectionItem}||'%'
+		]]>
+	</select>
+	
+	<!-- 해당 2주차 ItemVO 가져오기 -->
+	<select id="regItemData" resultType="erp.exit.domain.ItemVO">
+		SELECT * FROM exit_item WHERE INSPECTIONITEM = #{inspectionItem}
+	</select>
+	
+	<!-- Data 중복체크 (리스트로 리턴하는 이유는 .size()로 측정하려고 함. -->
+	<select id="regCheck" resultType="erp.exit.domain.InfoItemVO">
+		SELECT * FROM exit_infoitem WHERE code = #{code} AND INSPECTIONITEM = #{inspectionItem}
+	</select>
+	
+	<!-- 각 code, item Data가 실제 있는 데이터인지 체크 (리스트로 리턴하는 이유는 .size()로 측정하려고 함. -->
+	<select id="regDataCheck" resultType="erp.exit.domain.InfoItemVO">
+		SELECT p.code, i.inspectionitem FROM exit_product p, exit_item i 
+		WHERE p.code = #{code} AND i.inspectionitem = #{inspectionItem}
+	</select>
+	
 </mapper>

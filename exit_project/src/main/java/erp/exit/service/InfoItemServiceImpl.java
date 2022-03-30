@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import erp.exit.domain.InfoItemDTO;
 import erp.exit.domain.InfoItemVO;
-import erp.exit.domain.ProductVO;
+import erp.exit.domain.ItemVO;
 import erp.exit.mapper.InfoItemMapper;
 import lombok.AllArgsConstructor;
 
@@ -65,5 +65,32 @@ public class InfoItemServiceImpl implements InfoItemService{
 		return mapper.search2(code,inspectionItem);
 	}
 
+	
+	// 등록기능 자동완성 [1주차 Code 가져오기]
+	@Override
+	public List<InfoItemVO> regInfoSearch(String code) {
+		return mapper.regInfoSearch(code);
+	}
+	
+	// 등록기능 자동완성 [2주차 Item 가져오기]
+	@Override
+	public List<InfoItemVO> regItemSearch(String inspectionItem) {
+		return mapper.regItemSearch(inspectionItem);
+	}
+
+	@Override
+	public ItemVO regItemData(String inspectionItem) {
+		return mapper.regItemData(inspectionItem);
+	}
+
+	@Override
+	public List<InfoItemVO> regCheck(String code, String inspectionItem) {
+		return mapper.regCheck(code, inspectionItem);
+	}
+
+	@Override
+	public List<InfoItemVO> regDataCheck(String code, String inspectionItem) {
+		return mapper.regDataCheck(code, inspectionItem);
+	}
 	
 }

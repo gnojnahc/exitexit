@@ -13,9 +13,8 @@ import com.google.gson.Gson;
 
 import erp.exit.domain.InfoItemDTO;
 import erp.exit.domain.InfoItemVO;
-import erp.exit.domain.ProductVO;
+import erp.exit.domain.ItemVO;
 import erp.exit.service.InfoItemService;
-import erp.exit.service.InformationService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
@@ -66,17 +65,6 @@ public class InfoItemController {
 	@GetMapping("/reg")
 	public String registerGet(InfoItemVO vo, Model md) {
 		log.info("InfoItem 자재 등록창 띄움 ..");
-		return "/infoinspectitem/InfoItemReg";
-	}
-
-	// 자재 등록기능
-	@PostMapping("/reg")
-	public String registerPost(InfoItemVO vo, Model md) {
-		log.info("Information 자재 등록중..");
-		service.register(vo);
-
-		md.addAttribute("ServiceCheck", "success");
-
 		return "/infoinspectitem/InfoItemReg";
 	}
 
@@ -152,6 +140,70 @@ public class InfoItemController {
 		List<InfoItemDTO> searchList = service.selectSearchList(dto.getType(), dto.getKeyword());
 
 		return searchList;
+	}
+	
+	// 자재 등록기능
+	@PostMapping("/reg")
+	public String registerPost(InfoItemVO vo, Model md) {
+		log.info("Information 자재 등록중..");
+		
+		int overlapCheck = service.regCheck(vo.getCode(), vo.getInspectionItem()).size();
+		log.info("기존 데이터 중복검사 사이즈: "+overlapCheck);
+		int dataCheck = service.regDataCheck(vo.getCode(), vo.getInspectionItem()).size();
+		log.info("code, item 데이터 사이즈: "+dataCheck);
+		
+		if(overlapCheck > 0) {
+			md.addAttribute("ServiceCheck", "overlap");
+		}else if(dataCheck == 0){
+			md.addAttribute("ServiceCheck", "false");
+		}else if(overlapCheck == 0 || dataCheck == 1) {
+			service.register(vo);
+			md.addAttribute("ServiceCheck", "success");
+		}else {
+			md.addAttribute("ServiceCheck", "error");
+		}
+		
+		return "/infoinspectitem/InfoItemReg";
+	}
+	
+	// 1주차 데이터 Code 가져오기. [자재코드 검사자동완성]
+	@ResponseBody
+	@GetMapping("/infosearch")
+	public String infosearch(InfoItemVO vo) {
+		Gson js = new Gson();
+		List<InfoItemVO> code = service.regInfoSearch(vo.getCode());
+		return js.toJson(code);
+	}
+
+	// 2주차 데이터 Item 가져오기. [자재코드 검사자동완성]
+	@ResponseBody
+	@GetMapping("/itemsearch")
+	public String itemsearch(InfoItemVO vo) {
+		Gson js = new Gson();
+		List<InfoItemVO> item = service.regItemSearch(vo.getInspectionItem());
+		return js.toJson(item);
+	}
+	
+	// 해당하는 2주차 데이터 ItemVO 가져오기
+	@ResponseBody
+	@GetMapping(value = "/regsearchcodeitem", produces = "application/text; charset=UTF-8")
+	public String regSearchCodeItem(String code, String inspectionItem) {
+		// GetMapping에 produces 써준 이유는 json 타입으로 보낼 때 인코딩방식 설정을 해주기 위함.
+		// 저렇게 안해주면 한글이 '?'로 다 깨져서 보내짐. [한글오류 해결]
+		// 굳이 이렇게 하면서 까지 json으로 해준 이유는 return값을 String타입 으로 보낼 수 있기 때문!!
+		Gson js = new Gson();
+		ItemVO vo = service.regItemData(inspectionItem);
+		int dataCheck = service.regDataCheck(code, inspectionItem).size();
+		log.info("사이즈: "+dataCheck);
+		
+		if(dataCheck == 1) {
+			return js.toJson(vo);
+		}else if(dataCheck == 0) {
+			return js.toJson("false");
+		}else {
+			return js.toJson("error");
+		}
+		
 	}
 
 }

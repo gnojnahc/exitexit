@@ -4,6 +4,7 @@ import java.util.List;
 
 import erp.exit.domain.InfoItemDTO;
 import erp.exit.domain.InfoItemVO;
+import erp.exit.domain.ItemVO;
 import erp.exit.domain.ProductVO;
 
 public interface InfoItemService {
@@ -30,5 +31,18 @@ public interface InfoItemService {
 	
 	//검사항목 자동완성
 	public List<InfoItemVO> search2(String code,String inspectionItem);
+	
+	
+	//등록전용 자재코드 자동완성
+	public List<InfoItemVO> regInfoSearch(String code);
+	//등록전용 검사항목 자동완성
+	public List<InfoItemVO> regItemSearch(String inspectionItem);
+	//등록전용 검사항목 자동완성
+	public ItemVO regItemData(String inspectionItem);
+	
+	// code, item 중복검사
+	public List<InfoItemVO> regCheck(String code, String inspectionItem);
+	// code, item이 실제 있는 data인지 검사
+	public List<InfoItemVO> regDataCheck(String code, String inspectionItem);
 	
 }
