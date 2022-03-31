@@ -92,5 +92,11 @@ public class InfoItemServiceImpl implements InfoItemService{
 	public List<InfoItemVO> regDataCheck(String code, String inspectionItem) {
 		return mapper.regDataCheck(code, inspectionItem);
 	}
+
+	@Override
+	public int codeSearch2(String code, String inspectionItem) {
+		// TODO Auto-generated method stub
+		return mapper.InfoitemSearch2(code, inspectionItem);
+	}
 	
 }

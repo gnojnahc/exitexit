@@ -39,11 +39,18 @@
 	]]>
 	</insert>
 	
-	<!-- 삭제 조회 기능 -->
+	<!-- 삭제 &수정 조회 기능 -->
 	<select id="itemSearch" resultType="erp.exit.domain.InfoItemVO">
 	<![CDATA[
 		SELECT * FROM exit_infoitem WHERE code = #{code} and INSPECTIONITEM = #{inspectionItem}
       ]]>
+	</select>
+
+<!--수정부분  -->
+	<select id="InfoitemSearch2" resultType="int">
+			<![CDATA[
+			SELECT count(*) FROM exit_infoitem WHERE code = #{code} and inspectionItem = #{inspectionItem}
+			  ]]>
 	</select>
 
 	<!-- 삭제 조회 기능 끝 -->
@@ -59,14 +66,13 @@
 	<!-- 백업 & 삭제 기능 끝 -->
 	
 	
-	<update id="modify">
-		UPDATE exit_infoitem SET inspectionitem = #{inspectionitem}
-		, inspectionitemname = #{inspectionitemName}
+<update id="modify">
+		UPDATE exit_infoitem SET inspectionItemName = #{inspectionItemName}
         , qua = #{qua}, samplewater = #{sampleWater}, ac = #{ac}
 		, re = #{re}, usl = #{usl}, sl = #{sl}, lsl = #{lsl}, ucl = #{ucl}
-        , cl = #{cl}, lcl = #{lcl}, unit = #{unit}, modifieddate = sysdate
-		, disposal = #{disposal}, note = #{note}
-		WHERE idx = #{idx}
+        , cl = #{cl}, lcl = #{lcl}, unit = #{unit}
+		, note = #{note}
+		WHERE code = #{code} AND inspectionItem = #{inspectionItem}
 	</update>
 	
 	<select id="selectSearchList" resultType="erp.exit.domain.InfoItemDTO">

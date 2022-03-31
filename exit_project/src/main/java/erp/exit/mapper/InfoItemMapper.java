@@ -19,6 +19,7 @@ public interface InfoItemMapper {
 	//검사항목 검색해서 데이터 가져오기
 	public InfoItemVO itemSearch(@Param("code") String code,@Param("inspectionItem") String inspectionItem);
 	public List<InfoItemVO> InfoitemSearch2(InfoItemVO vo);
+	public int InfoitemSearch2(@Param("code") String code,@Param("inspectionItem") String inspectionItem);
 	
 	// 쿼리+ajax 검색기능
 	public List<InfoItemDTO> selectSearchList(@Param("type") String type, 

@@ -8,7 +8,7 @@ public class InfoItemVO {
 	private long rn; //넘버링
 	private long idx; //시퀀스 고유값
 	private String code; //자재코드
-	private String inspectionItem; //검사항목 
+	private String inspectionItem; //검사항목  inspectioniteminspectionitem
 	private String inspectionItemName; //검사항목명
 	private String qua; //정성정량 
 	private int sampleWater; //시료수 

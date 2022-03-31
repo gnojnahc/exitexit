@@ -101,35 +101,57 @@ public class InfoItemController {
 	}
 	
 
-	// 자재 수정 팝업실행
-	@GetMapping("/mod")
-	public String modifyGet(InfoItemVO vo, Model md) {
-		log.info("infoitem 자재 수정창 띄움 ..");
+	// 자재수정 코드& 검사항목 조회
+		@ResponseBody
+		@PostMapping(value = "/modsearchcode", produces = "applicaion/text; charset=UTF-8")
+		public String modSearchCodePost(InfoItemVO vo, Model md) {
+			log.info("수정infoitem 자재 조회중..");
+			log.info(service.codeSearch(vo.getCode(),vo.getInspectionItem()));
+			Gson js = new Gson();
+			InfoItemVO modVO = service.codeSearch(vo.getCode(), vo.getInspectionItem());
+			log.info("서비스실행을 위한 VO : "+modVO);
+			int modVO2 = service.codeSearch2(vo.getCode(), vo.getInspectionItem());
+			log.info("서비스사이즈: "+modVO2);
+			
+			if(modVO2 == 1) {
+				return js.toJson(modVO);
+			}else if (modVO2 ==0) {
+				return js.toJson("없어");
+			}else {
+				return js.toJson("error");
+			}
+		
+			
+			
+			
+			
+			
+			
 
-		return "/infoinspectitem/InfoItemMod";
-	}
+		}
+		
+		
+		// 자재 수정 팝업실행
+		@GetMapping("/mod")
+		public String modifyGet(InfoItemVO vo, Model md) {
+			log.info("infoitem 자재 수정창 띄움 ..");
 
-	// 자재 수정기능
-	@PostMapping("/mod")
-	public String modifyPost(InfoItemVO vo, Model md) {
-		log.info("infoitem 자재 수정중..");
+			return "/infoinspectitem/InfoItemMod";
+		}
 
-		service.modify(vo);
+		// 자재 수정기능
+		@PostMapping("/mod")
+		public String modifyPost(InfoItemVO vo, Model md) {
+			log.info("infoitem 자재 수정중..");
+			log.info(vo);
 
-		md.addAttribute("ServiceCheck", "success");
+			service.modify(vo);
 
-		return "/infoinspectitem/InfoItemMod";
-	}
+			md.addAttribute("ServiceCheck", "success");
+			md.addAttribute("SeviceCheck", "fail");
 
-	// 자재수정 코드 조회
-	@PostMapping("/modsearchcode")
-	public String modSearchCodePost(InfoItemVO vo, Model md) {
-		log.info("infoitem 자재 조회중..");
-
-		InfoItemVO delVO = service.codeSearch(vo.getCode(), vo.getInspectionItem());
-
-		return "/infoinspectitem/InfoItem";
-	}
+			return "/infoinspectitem/InfoItemMod";
+		}
 
 	// 테이블 Ajax 검색 조회
 	@GetMapping("/getSearchList")

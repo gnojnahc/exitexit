@@ -10,7 +10,26 @@
         <meta name="author" content="" />
         <title>자재별 검사항목 수정</title>
         <link href="/resources/css/styles.css" rel="stylesheet" />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+       
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- Auto complete -->
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"
+	crossorigin="anonymous"></script>
+
+
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+	crossorigin="anonymous"></script>
+<script src="/resources/js/scripts.js"></script>
+    
     </head>
     
     <body style="background-color: gray; font-size: 100%">
@@ -22,37 +41,47 @@
                                     <div class="card-header"><h3 class="text-center font-weight-light my-2"><b>자재별 검사항목 수정</b></h3></div>
                                     <div class="card-body">
                                     
-                                        <form class="form-submit-switch" action="/infoinspectitem/mod" method="post" onsubmit="">
-                                            <div class="row mb-3">
-                                            
-	                                            <div class="col-md-6">
-	                                                    <div class="form-floating mb-3 mb-md-0" style="float: left; width: 380px">
-	                                                    
-	                                                    	<%-- 하이든 처리 해서 idx 기준으로 DB내용을 수정처리 하려고 만듬 --%>
-	                                                    	<input id="inputidx" name="idx" type="hidden" value="${vo.idx}" disabled>
-	                                                    	<%-- 하이든 처리 해서 idx 기준으로 DB내용을 수정처리 하려고 만듬 --%>
-	                                                    	
-	                                                    	<input class="form-control" id="inputcode" type="text" name="code" placeholder="자재코드" value="${vo.code}" required/>
-	                                                        <label for="inputcode">검사항목<span class="form-required">*</span></label>
-	                                                    </div>
-	                                                    	
-	                                                        <input class="form-control" id="inputinspectionItem" type="text" name="inspectionItem" placeholder="검사항목" value="${vo.inspectionItem}" required/>
-	                                                        <label for="inputinspectionItem">검사항목<span class="form-required">*</span></label>
-	                                                    </div>
-	                                                    <div style="float: right;">
-	                                                    	<button class="btn btn-primary" id="itemsearch" type="button" style="height: 58px; width: 80px;"><b>조회</b></button>
-	                                                    </div>
-	                                                </div>
+                                        <form class="form-submit-switch" id="form_sbm" action="/infoinspectitem/mod" method="post">
+								<div class="row mb-3">
+
+
+									<div class="col-md-6">
+										<div class="form-floating mb-3 mb-md-0">
+											<input class="form-control" id="inputcode" type="text"
+												name="code" placeholder="자재코드" value="${vo.code}" required />
+											<label for="inputcode">자재코드<span
+												class="form-required">*</span></label>
+										</div>
+
+										<div class="col-md-6">
+											<div class="form-floating mb-3 mb-md-0">
+												<input class="form-control" id="inputinspectionItem"
+													type="text" name="inspectionItem" placeholder="검사항목명"
+													value="${vo.inspectionItem}" required /> <label
+													for="inputinspectionItem">검사항목<span
+													class="form-required">*</span></label>
+											</div>
+										</div>
+
+										<div style="width: 100%"disabled">
+											<button class="btn btn-primary" id="modsearch" type="button"
+												style="width: 100%"disabled">
+												<b>조회</b>
+											</button>
+										</div>
+									</div>
+								</div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control required" id="inputinspectionItemName" type="text" name="inspectionItemName" placeholder="검사항목명" value="${vo.inspectionItemName}" disabled />
+                                                        <input class="form-control required" id="inputinspectionItemName" type="text" name="inspectionItemName" placeholder="검사항목명" value="${vo.inspectionItemName}" data-name="검사항목명" disabled  />
                                                         <label for="inputinspectionItemName">검사항목명</label>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
+                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
-                                                        <select class="dataTable-selector" id="inputqua" name="qua" style="width: 100%" disabled>
-                                                        	<option selected value="${vo.qua}">${vo.qua}</option>
+                                                        <select class="dataTable-selector" id="inputqua" name="qua" style="width: 100%" onchange="" disabled >
+                                                        	<option selected value="정성">정성</option>
+                                                        	<option value="정량">정량</option>
                                                         </select>
                                                         <label for="inputqua">정성정량</label>
                                                     </div>
@@ -111,7 +140,17 @@
                                                         <label for="inputlcl">LCL</label>
                                                     </div>
                                                 </div>
-                                                                           	
+                                                <div class="col-md-6">
+                                                    <div class="form-floating mb-3 mb-md-0">
+                                                        <select class="dataTable-selector" id="inputunit" name="unit" style="width: 100%" disabled>
+                                                        	<option selected value="M">M</option>
+                                                        	<option value="CM">CM</option>
+                                                        	<option value="MM">MM</option>
+                                                        	<option value="KG">KG</option>
+                                                        </select>
+                                                        <label for="inputunit">단위</label>
+                                                    </div>
+                                                </div>
                                                	<div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
                                                         <textarea class="form-control" id="inputnote" name="note" placeholder="비고" style="height: 160px;" disabled>${vo.note}</textarea>
@@ -120,26 +159,106 @@
                                                 </div>
                                             
                                             <div class="mt-4 mb-0" style="text-align: right;">
-                                                <button class="btn btn-primary" id="delete_sbm" type="button">수정</button>
+                                                <button class="btn btn-primary" id="modify_sbm" type="button">수정</button>
                                                 <a class="btn btn-danger" onclick="window.close()">취소</a>
                                             </div>
                                             <input class="SCheck" type="hidden" value="${ServiceCheck}">
+                                           </form>
                                             </div>
-                                        </form>
+                                       
                                         
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                
                 </main>
                 <br>
                 <br>
-                
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="/resources/js/scripts.js"></script>
+      <!--자재코드 자동완성  -->          
+                	<script>
+		$("#inputcode").autocomplete({
+			source : function(request, response) {
+				$.ajax({
+					url : "/infoinspectitem/search",
+					type : "GET",
+					data : {
+						code : $("#inputcode").val()
+					} // 검색 키워드
+					,
+					dataType : "json",
+					success : function(data) { // 성공
+						response($.map(data, function(item) {
+							return {
+								label : item.code //목록에 표시되는 값
+								,
+								value : item.code
+							//선택 시 input창에 표시되는 값
+							};
+						})); //response
+					},
+					error : function() { //실패
+						alert("통신에 실패했습니다.");
+					}
+				});
+			},
+			minLength : 1,
+			autoFocus : false,
+			select : function(evt, ui) {
+				console.log("전체 data: " + JSON.stringify(ui));
+				console.log("검색 데이터 : " + ui.item.value);
+			},
+			focus : function(evt, ui) {
+				return false;
+			},
+			close : function(evt) {
+			}
+		});
+	</script>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<!--자재항목 자동완성  -->
+	<script>
+		$("#inputinspectionItem").autocomplete({
+			source : function(request, response) {
+				$.ajax({
+					url : "/infoinspectitem/search2",
+					type : "GET",
+					data : {
+						code : $("#inputcode").val(),
+						inspectionItem : $("#inputinspectionItem").val()
+					} // 검색 키워드
+					,
+					dataType : "json",
+					success : function(data) { // 성공
+						response($.map(data, function(item) {
+							return {
+								label : item.inspectionItem //목록에 표시되는 값
+								,
+								value : item.inspectionItem
+							//선택 시 input창에 표시되는 값
+							};
+						})); //response
+					},
+					error : function() { //실패
+						alert("통신에 실패했습니다.");
+					}
+				});
+			},
+			minLength : 1,
+			autoFocus : false,
+			select : function(evt, ui) {
+				console.log("전체 data: " + JSON.stringify(ui));
+				console.log("검색 데이터 : " + ui.item.value);
+			},
+			focus : function(evt, ui) {
+				return false;
+			},
+			close : function(evt) {
+			}
+		});
+	</script>
+
+ 
         
         <script>
             var schack = "${ServiceCheck}";
@@ -152,78 +271,115 @@
                     window.close();
 	        	}
 			});
-	        
-	        $(document).ready(function(){
-	        	if(schack == "none") {
-	        		alert('조회된 제품코드가 없습니다.');
-	        	}
-			});
-	        
-	        // searchcode .form-submit-switch
-	        $(document).on('click', '#infoitemsearch', function (e){
-				$('form').attr('action', '/infoitem/infoitem/infoitemsearch').submit();
-            });
-	        $(document).ready(function(){
-	        	if(schack == "searchOK") {
-	        		alert('해당 제품코드의 조회가 완료되었습니다.');
-	        		
-	        		$('#inputidx').removeAttr('disabled');
-	        		$('#inputidx').attr('readonly');
-	        		
-	        		$('#inputinspectionItemName').removeAttr('disabled');
-	        		$('#inputqua').removeAttr('disabled');
-	        		$('#inputsampleWater').removeAttr('disabled');
-	        		$('#inputucl').removeAttr('disabled');
-	        		$('#inputcl').removeAttr('disabled');
-	        		$('#inputlcl').removeAttr('disabled');
-	        		$('#inputunit').removeAttr('disabled');
-	        		$('#inputdisposal').removeAttr('disabled');
-	        		$('#inputnote').removeAttr('disabled');
-	        		
-	        		let strqua = "";
-	        		var quaChack = "${vo.qua}";
-	        		if(quaChack == "정량"){
-	        			$('#inputac').removeAttr('disabled');
-		        		$('#inputre').removeAttr('disabled');
-		        		strqua += '<option value="정성">정성</option>'
-	        		}else if(quaChack == "정성"){
-	        			$('#inputusl').removeAttr('disabled');
-		        		$('#inputsl').removeAttr('disabled');
-		        		$('#inputlsl').removeAttr('disabled');
-		        		strqua += '<option value="정량">정량</option>'
-	        		}
-	        		
-	        		var unitChack = "${vo.unit}";
-	        		let strunit = "";
-	        		
-	        		if (unitChack == "m") {
-		        		strunit += '<option value="m">m</option>'
-					}else if(unitChack == "cm"){
-						strunit += '<option value="cm">cm</option>'
-					}else if(unitChack == "mm"){
-						strunit += '<option value="mm">mm</option>'
-					}else if(unitChack == "kg"){
-						strunit += '<option value="kg">kg</option>'
-					}
-	        		
-	        		$('#inputqua').append(strqua);
-        			$('#inputunit').append(strunit);
-	        	}
-			});
+
+
+	         $('#modsearch').on('click',
+					function() {
+						$.ajax({
+							type : 'POST',
+							url : "/infoinspectitem/modsearchcode",
+							data : $('#form_sbm').serialize(),
+							dataType: "json",
+							success : function(result) {
+								
+								if(result=="없어"){
+									alert("유효한 자재코드나 검사항목이 아닙니다. ")
+								}else if(result=="error"){
+									alert("예기치 못한 오류입니다. \n 관리자에게 문의해주세요.")
+								}else{
+									$('#inputcode').attr('readonly', true);
+									$('#inputinspectionItem').attr('readonly', true);
+									$('#inputinspectionItemName').val(result.inspectionItemName);			
+									$('#inputqua').val(result.qua).prop("selected", true);
+									$('#inputsampleWater').val(result.sampleWater);
+									$('#inputac').val(result.ac);
+									$('#inputre').val(result.re);
+									$('#inputusl').val(result.usl);
+									$('#inputsl').val(result.sl);
+									$('#inputlsl').val(result.lsl);
+									$('#inputucl').val(result.ucl);
+									$('#inputcl').val(result.cl);
+									$('#inputlcl').val(result.lcl);
+									$('#inputunit').val(result.unit).prop("selected", true);
+									$('#inputnote').val(result.note);
+									
+						        	if(result.qua == "정량") {
+					                    $('#inputinspectionItemName').removeAttr('disabled');
+					                    $('#inputqua').removeAttr('disabled');
+					                    $('#inputsampleWater').removeAttr('disabled');
+					                    $('#inputusl').removeAttr('disabled');
+					                    $('#inputsl').removeAttr('disabled');
+					                    $('#inputlsl').removeAttr('disabled');
+					                    $('#inputucl').removeAttr('disabled');
+					                    $('#inputcl').removeAttr('disabled');
+					                    $('#inputlcl').removeAttr('disabled');
+					                    $('#inputunit').removeAttr('disabled');
+					                    $('#inputnote').removeAttr('disabled');
+						        	}else if(result.qua == "정성"){
+						        		$('#inputinspectionItemName').removeAttr('disabled');
+					                    $('#inputqua').removeAttr('disabled');
+					                    $('#inputsampleWater').removeAttr('disabled');
+					                    $('#inputac').removeAttr('disabled');
+					                    $('#inputre').removeAttr('disabled');
+					                    $('#inputucl').removeAttr('disabled');
+					                    $('#inputcl').removeAttr('disabled');
+					                    $('#inputlcl').removeAttr('disabled');
+					                    $('#inputunit').removeAttr('disabled');
+					                    $('#inputnote').removeAttr('disabled');
+					                }
+								}
+					        	
+							}
+						});
+					});      
 	        
 	        // 수정 물어보기
-	        $(document).on('click', '#delete_sbm', function (e){
-                if(confirm('검사항목 : ${vo.inspectionItem} \n현재 내용으로 수정하시겠습니까?')){
-                    return $('.form-submit-switch').submit();
+	 /*        
+	         $(function(){
+	        	 $("modify_sbm").on('click',function(){
+            var isRight = true;
+            $("#form_sbm").find("input[type=text]").each(function(index, item){
+                // 아무값없이 띄어쓰기만 있을 때도 빈 값으로 체크되도록 trim() 함수 호출
+                if ($(this).val().trim() == '') {
+                    alert($(this).attr("data-name")+" 항목을 입력하세요.");
+                    isRight = false;
+                    return false;
+                }
+            });
+
+            if (!isRight) {
+                return;
+            }
+
+            S
+        });
+
+    }); */
+	      
+	        
+	        
+
+	        
+	        
+	        
+	        
+	        
+	        $('#modify_sbm').on('click', function (e){
+                if(confirm('현재 내용으로 수정하시겠습니까?')){
+                	
+                    return $('#form_sbm').submit();
                 }else{
+                	alert('값을 입력해주세요')
                     return false;
                 }
             });
 	        
-	        $(document).ready(function(){
+ 	        $(document).ready(function(){
 	        	$('#inputqua').change(function(e) {
 		        	let optval = $('#inputqua option:selected').val();
-		        	/* console.log(optval); */
+		        	
+		        	
+		        	//console.log(optval); 
 		        	
 		        	if(optval == "정량") {
 	                    $('#inputac').attr('disabled', 'true');
@@ -246,8 +402,13 @@
 	                    $('#inputre').removeAttr('disabled');
 	                }
 	        	});
-	        });
+	        }); 
+
+
 
         </script>
+        
+      
+
     </body>
 </html>

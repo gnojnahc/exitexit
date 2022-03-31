@@ -22,7 +22,8 @@ public interface InfoItemService {
 	
 	//수정
 	public void modify(InfoItemVO vo);
-	
+	public int codeSearch2(String code, String inspectionItem); 
+
 	//쿼리+ajax 검색기능
 	public List<InfoItemDTO> selectSearchList(String type, String keyword);
 
