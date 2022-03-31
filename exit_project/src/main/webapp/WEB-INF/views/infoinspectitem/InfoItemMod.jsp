@@ -41,7 +41,7 @@
                                     <div class="card-header"><h3 class="text-center font-weight-light my-2"><b>자재별 검사항목 수정</b></h3></div>
                                     <div class="card-body">
                                     
-                                        <form class="form-submit-switch" id="form_sbm" action="/infoinspectitem/mod" method="post">
+                                        <form class="form-submit-switch" id="form_sbm" name="frmTest" action="/infoinspectitem/mod" method="post">
 								<div class="row mb-3">
 
 
@@ -63,7 +63,7 @@
 											</div>
 										</div>
 
-										<div style="width: 100%"disabled">
+										<div style="width: 100%">
 											<button class="btn btn-primary" id="modsearch" type="button"
 												style="width: 100%"disabled">
 												<b>조회</b>
@@ -332,44 +332,41 @@
 							}
 						});
 					});      
-	        
-	        // 수정 물어보기
-	 /*        
-	         $(function(){
-	        	 $("modify_sbm").on('click',function(){
-            var isRight = true;
-            $("#form_sbm").find("input[type=text]").each(function(index, item){
-                // 아무값없이 띄어쓰기만 있을 때도 빈 값으로 체크되도록 trim() 함수 호출
-                if ($(this).val().trim() == '') {
-                    alert($(this).attr("data-name")+" 항목을 입력하세요.");
-                    isRight = false;
-                    return false;
-                }
-            });
 
-            if (!isRight) {
-                return;
-            }
-
-            S
-        });
-
-    }); */
-	      
-	        
-	        
 
 	        
-	        
+	/* 
+         $(function() {
+	        	    $("button[type=submit]").click(function() {
+	        	        var result = $("input[type=number]").val();
+	        	        if (!result) {
+	        	          alert("입력하십시오");
+	        	        }
+	        	    })
+	        	})  */
 	        
 	        
 	        
 	        $('#modify_sbm').on('click', function (e){
-                if(confirm('현재 내용으로 수정하시겠습니까?')){
-                	
-                    return $('#form_sbm').submit();
-                }else{
-                	alert('값을 입력해주세요')
+	        	
+                if(confirm('현재 내용으로 수정하시겠습니까?')){      	
+                   
+                	if(frmTest.inspectionItemName.value==""||
+                			frmTest.sampleWater.value==""||
+                			 	frmTest.ac.value==""||
+                					frmTest.re.value==""||
+                						frmTest.usl.value==""||
+                							frmTest.sl.value==""||
+                								frmTest.lsl.value==""||
+                									frmTest.ucl.value==""||
+                										frmTest.cl.value==""||
+                											frmTest.lcl.value==""
+                			){
+                	  		alert("데이터를 입력해주세요");
+                   }else{
+                		return $('#form_sbm').submit();                	   
+                   }
+                }else{               	
                     return false;
                 }
             });
