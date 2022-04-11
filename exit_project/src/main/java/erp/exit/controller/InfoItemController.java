@@ -120,13 +120,6 @@ public class InfoItemController {
 			}else {
 				return js.toJson("error");
 			}
-		
-			
-			
-			
-			
-			
-			
 
 		}
 		

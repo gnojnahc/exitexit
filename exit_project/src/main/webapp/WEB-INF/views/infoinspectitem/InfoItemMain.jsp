@@ -122,7 +122,7 @@
 		function getSearchList(){
 			$.ajax({
 				type: 'GET',
-				url : "/inspection/item/getSearchList",
+				url : "/infoinspectitem/getSearchList",
 				data : $("form[name=search-form]").serialize(),
 				success : function(result){
 					//테이블 초기화
@@ -132,21 +132,21 @@
 						result.forEach(function(item){
 							str+='<tr>'
 								str+='<td style="text-align: center; font-weight: bold; font-size: 10pt;">'+item.rn+'</td>'
-								str+="<td>"+infoitem.code+"</td>"
-								str+="<td>"+infoitem.inspectionItem+"</td>"
-								str+="<td>"+infoitem.inspectionItemName+"</td>"
-								str+="<td>"+infoitem.qua+"</td>"
-								str+="<td>"+infoitem.sampleWater+"</td>"
-								str+="<td>"+infoitem.ac+"</td>"
-								str+="<td>"+infoitem.re+"</td>"
-								str+="<td>"+infoitem.usl+"</td>"
-								str+="<td>"+infoitem.sl+"</td>"
-								str+="<td>"+infoitem.lsl+"</td>"
-								str+="<td>"+infoitem.ucl+"</td>"
-								str+="<td>"+infoitem.cl+"</td>"
-								str+="<td>"+infoitem.lcl+"</td>"
-								str+="<td>"+infoitem.unit+"</td>"
-								str+="<td>"+infoitem.note+"</td>"
+								str+="<td>"+item.code+"</td>"
+								str+="<td>"+item.inspectionItem+"</td>"
+								str+="<td>"+item.inspectionItemName+"</td>"
+								str+="<td>"+item.qua+"</td>"
+								str+="<td>"+item.sampleWater+"</td>"
+								str+="<td>"+item.ac+"</td>"
+								str+="<td>"+item.re+"</td>"
+								str+="<td>"+item.usl+"</td>"
+								str+="<td>"+item.sl+"</td>"
+								str+="<td>"+item.lsl+"</td>"
+								str+="<td>"+item.ucl+"</td>"
+								str+="<td>"+item.cl+"</td>"
+								str+="<td>"+item.lcl+"</td>"
+								str+="<td>"+item.unit+"</td>"
+								str+="<td>"+item.note+"</td>"
 							str+="</tr>"
 		        		});
 						$('#resultTable > tbody').html(str);

@@ -77,10 +77,9 @@
 	
 	<select id="selectSearchList" resultType="erp.exit.domain.InfoItemDTO">
 		<![CDATA[
-			SELECT rownum "rn", idx, inspectionitem, inspectionitemname, qua, samplewater, ac
-			, re, usl, sl, lsl, ucl, cl, lcl, unit, creationdate, modifieddate, deldate
-			, disposal, note 
-			FROM exit_item 
+			SELECT rownum "rn", idx, code, inspectionitem, inspectionitemname, qua, samplewater, ac
+			, re, usl, sl, lsl, ucl, cl, lcl, unit, note 
+			FROM exit_infoitem 
 			WHERE ${type} LIKE '%'||#{keyword}||'%' ORDER BY idx DESC
 		]]>
 	</select>
