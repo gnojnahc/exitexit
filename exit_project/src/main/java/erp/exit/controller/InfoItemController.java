@@ -83,7 +83,8 @@ public class InfoItemController {
 		log.info("infoitem 자재 조회중..");
 		
 		InfoItemVO delVO = service.codeSearch(vo.getCode(), vo.getInspectionItem());
-
+		md.addAttribute("ServiceCheck", "success");
+		
 		return delVO;
 	}
 	
@@ -120,12 +121,6 @@ public class InfoItemController {
 			}else {
 				return js.toJson("error");
 			}
-		
-			
-			
-			
-			
-			
 			
 
 		}

@@ -205,13 +205,11 @@
 				window.close();
 			}
 		});
+		
+		
+		
 
-		/*삭제 조회  */
-		$(document).ready(function() {
-			if (schack == "none") {
-				alert('조회된 제품코드가 없습니다.');
-			}
-		});
+		/*삭제 조회 누르면 아래항목들 나오게  */
 		// searchcode .form-submit-switch/////////////////////////////////////////
 		$('#delsearch').on(
 				'click',
@@ -237,6 +235,7 @@
 						}
 					});
 				});
+		
 
 		// return confirm(\'제품코드 : '' \n정말로 삭제하시겠습니까?\')
 		$(document).on('click','#delete_sbm',
@@ -257,27 +256,31 @@
 				$.ajax({
 					url : "/infoinspectitem/search",
 					type : "GET",
-					data : {
-						code : $("#inputcode").val()
-					} // 검색 키워드
-					,
+					data : {code : $("#inputcode").val()}, // 검색 키워드
 					dataType : "json",
 					success : function(data) { // 성공
-						response($.map(data, function(item) {
-							return {
-								label : item.code //목록에 표시되는 값
-								,
-								value : item.code
-							//선택 시 input창에 표시되는 값
-							};
-						})); //response
-					},
-					error : function() { //실패
-						alert("통신에 실패했습니다.");
-					}
-				});
-			},
-			minLength : 1,
+						if(!data.length){
+							var result = [{label : '자재코드없음'}];
+							response(result);
+						}else{
+							response(
+									$.map(data, function(item) {
+										return {
+											label : item.code, //목록에 표시되는 값
+											value : item.code	//선택 시 input창에 표시되는 값
+										};
+									})
+								); //response
+							}					
+						},
+						
+						error : function() { //실패
+							alert("통신에 실패했습니다.");
+						}
+					});
+				},			
+						
+			minLength: 1,
 			autoFocus : false,
 			select : function(evt, ui) {
 				console.log("전체 data: " + JSON.stringify(ui));
@@ -289,6 +292,12 @@
 			close : function(evt) {
 			}
 		});
+		
+/* 		$("#inputcode").autocomplete.setOptions({ 
+		    paramName: selectedOption, 
+		    params: {} 
+		});
+		 */
 	</script>
 
 	<!--자재항목 자동완성  -->
@@ -301,19 +310,24 @@
 					data : {
 						code : $("#inputcode").val(),
 						inspectionItem : $("#inputinspectionItem").val()
-					} // 검색 키워드
-					,
+					}, // 검색 키워드
 					dataType : "json",
 					success : function(data) { // 성공
-						response($.map(data, function(item) {
-							return {
-								label : item.inspectionItem //목록에 표시되는 값
-								,
-								value : item.inspectionItem
-							//선택 시 input창에 표시되는 값
-							};
-						})); //response
-					},
+						if(!data.length){
+							var result = [{label : '검사항목없음'}];							
+							response(result);
+							
+						}else{
+							response(
+									$.map(data, function(item) {
+										return {
+											label : item.inspectionItem, //목록에 표시되는 값
+											value : item.inspectionItem	//선택 시 input창에 표시되는 값
+										};
+									})
+								); //response
+							}					
+						},
 					error : function() { //실패
 						alert("통신에 실패했습니다.");
 					}
@@ -331,6 +345,7 @@
 			close : function(evt) {
 			}
 		});
+
 	</script>
 
 
