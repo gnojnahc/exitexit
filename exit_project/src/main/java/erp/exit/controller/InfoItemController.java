@@ -83,7 +83,6 @@ public class InfoItemController {
 		log.info("infoitem 자재 조회중..");
 		
 		InfoItemVO delVO = service.codeSearch(vo.getCode(), vo.getInspectionItem());
-		md.addAttribute("ServiceCheck", "success");
 		
 		return delVO;
 	}
@@ -122,7 +121,6 @@ public class InfoItemController {
 				return js.toJson("error");
 			}
 			
-
 		}
 		
 		
@@ -185,7 +183,7 @@ public class InfoItemController {
 	
 	// 1주차 데이터 Code 가져오기. [자재코드 검사자동완성]
 	@ResponseBody
-	@GetMapping("/infosearch")
+	@GetMapping(value = "/infosearch", produces="text/plain;charset=UTF-8")
 	public String infosearch(InfoItemVO vo) {
 		Gson js = new Gson();
 		List<InfoItemVO> code = service.regInfoSearch(vo.getCode());
@@ -194,7 +192,7 @@ public class InfoItemController {
 
 	// 2주차 데이터 Item 가져오기. [자재코드 검사자동완성]
 	@ResponseBody
-	@GetMapping("/itemsearch")
+	@GetMapping(value = "/itemsearch", produces="text/plain;charset=UTF-8")
 	public String itemsearch(InfoItemVO vo) {
 		Gson js = new Gson();
 		List<InfoItemVO> item = service.regItemSearch(vo.getInspectionItem());

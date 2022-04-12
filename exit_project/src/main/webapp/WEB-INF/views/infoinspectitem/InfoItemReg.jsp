@@ -15,7 +15,8 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 		
 		<!-- Auto complete -->
-		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		<link href="/resources/css/jquery-ui.css" rel="stylesheet" />
+		<!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
 		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     </head>
@@ -33,13 +34,13 @@
                                         	<div class="row mb-3">
                                                 <div class="col-md-6">
                                                 	<div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputcode" type="text" name="code" placeholder="자재코드" required/>
+                                                        <input class="form-control" id="inputcode" type="text" name="code" placeholder="자재코드" autocomplete="off" required/>
                                                         <label for="inputcode">자재코드<span class="form-required">*</span></label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                 	<div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputinspectionItem" type="text" name="inspectionItem" placeholder="검사항목" required/>
+                                                        <input class="form-control" id="inputinspectionItem" type="text" name="inspectionItem" placeholder="검사항목" autocomplete="off" required/>
                                                         <label for="inputinspectionItem">검사항목<span class="form-required">*</span></label>
                                                     </div>
                                                 </div>
@@ -267,6 +268,16 @@
 		});
         </script>
         
+        <script>
+        	$('#inputcode').on('keyup', function () {
+        		/* ui-menu-item-wrapper */
+        		var codeval = $('#inputcode').val();
+        		
+        		
+			});
+        	
+        </script>
+        
 <!-- 자재코드 자동완성  -->
 		<script>
 			$("#inputcode").autocomplete({
@@ -274,29 +285,36 @@
 					$.ajax({
 						url : "/infoinspectitem/infosearch",
 						type : "GET",
-						data : {code : $("#inputcode").val()} // 검색 키워드
-						,dataType : "json",
+						data : {code : $("#inputcode").val()}, // 검색 키워드
+						dataType : "json",
 						success : function(data) { // 성공
-							response($.map(data, function(item) {
-								return {
-									label : item.code, //목록에 표시되는 값
-									value : item.code  //선택 시 input창에 표시되는 값
-								};
-							})); //response
+							if(!data.length){
+                                var result = [{label : '검색 결과가 없습니다'}];
+                                response(result);
+                            }else {
+                                response(
+                                    $.map(data, function(item) {
+                                        return {
+                                            label : item.code, //목록에 표시되는 값
+                                            value : item.code  //선택 시 input창에 표시되는 값
+                                        };
+									})
+								); //response
+                            }
 						},
 						error : function() { //실패
 							alert("통신에 실패했습니다.");
 						}
 					});
 				},
-				minLength : 1,
+				minLength : 1, //조회를 위한 최소 글자 수
 				autoFocus : false,
-				select : function(evt, ui) {
+				select : function(evt, ui) { //검색리스트에서 선택하였을 때, 선택한 데이터에 의한 이벤트발생
 					console.log("전체 data: " + JSON.stringify(ui));
 					console.log("검색 데이터 : " + ui.item.value);
 				},
 				focus : function(evt, ui) {
-					return false;
+					return false; //한글오류 방지
 				},
 				close : function(evt) {
 				}
@@ -313,12 +331,19 @@
 						data : {code : $("#inputcode").val(), inspectionItem : $("#inputinspectionItem").val()}, // 검색 키워드
 						dataType : "json",
 						success : function(data) { // 성공
-							response($.map(data, function(item) {
-								return {
-									label : item.inspectionItem,
-									value : item.inspectionItem
-								};
-							})); //response
+							if(!data.length){
+                                var result = [{label : '검색 결과가 없습니다'}];
+                                response(result);
+                            }else {
+								response(
+									$.map(data, function(item) {
+										return {
+											label : item.inspectionItem,
+											value : item.inspectionItem
+										};
+									})
+								); //response
+                            }
 						},
 						error : function() { //실패
 							alert("통신에 실패했습니다.");
