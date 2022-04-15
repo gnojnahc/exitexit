@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import erp.exit.domain.InfoItemVO;
 import erp.exit.domain.LotVO;
+import erp.exit.domain.ProductVO;
 import erp.exit.mapper.LotMapper;
 import lombok.AllArgsConstructor;
 
@@ -33,4 +34,9 @@ public class LotServiceImpl implements LotService {
 		return mapper.codeSearch(code);
 	}
 	
+	@Override
+	public List<ProductVO> autoCode(String code) {
+		// TODO Auto-generated method stub
+		return mapper.autoCode(code);
+	}
 }

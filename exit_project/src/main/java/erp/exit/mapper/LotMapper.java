@@ -4,6 +4,7 @@ import java.util.List;
 
 import erp.exit.domain.InfoItemVO;
 import erp.exit.domain.LotVO;
+import erp.exit.domain.ProductVO;
 
 public interface LotMapper {
 	
@@ -16,7 +17,8 @@ public interface LotMapper {
 	//3주차 자재코드 검색해서 보여주기
 	public InfoItemVO codeSearch(String code);
 	
-	
+	//자재코드 자동완성
+	public List<ProductVO> autoCode(String code);
 	
 	
 }

@@ -28,5 +28,10 @@
 			SELECT DISTINCT(code) FROM exit_infoitem WHERE code LIKE '%'||#{code}||'%'
 		]]>
 	</select> 
+	<select id="autoCode" resultType="erp.exit.domain.LotVO">
+		<![CDATA[
+			SELECT DISTINCT(code) FROM exit_product WHERE code LIKE '%'||#{code}||'%'
+		]]>
+	</select> 
 	
 </mapper>

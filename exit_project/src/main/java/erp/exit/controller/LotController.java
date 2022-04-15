@@ -1,14 +1,19 @@
 package erp.exit.controller;
 
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
 
 import erp.exit.domain.LotVO;
+import erp.exit.domain.ProductVO;
 import erp.exit.service.LotService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -45,6 +50,14 @@ public class LotController {
 			return "/lot/LotReg";
 		}
 
+		//자재코드 자동완성
+		@ResponseBody
+		@GetMapping(value = "/codesearch", produces="text/plain;charset=UTF-8")
+		public String autoCode(ProductVO vo) {
+			Gson js = new Gson();
+			List<ProductVO> code = service.autoCode(vo.getCode());
+			return js.toJson(code);
+		}
 
 
 	

@@ -120,98 +120,12 @@
 			});
 	        
 	        
-	        $(document).ready(function(){
-	        	$('#inputqua').change(function(e) {
-		        	let optval = $('#inputqua option:selected').val();
-		        	/* console.log(optval); */
-		        	
-		        	if(optval == "정량") {
-	                    $('#inputac').attr('disabled', 'true');
-	                    $('#inputre').attr('disabled', 'true');
-	                    $('#inputac').val('');
-	                    $('#inputre').val('');
-
-	                    $('#inputusl').removeAttr('disabled');
-	                    $('#inputsl').removeAttr('disabled');
-	                    $('#inputlsl').removeAttr('disabled');
-		        	}else if(optval == "정성"){
-	                    $('#inputusl').attr('disabled', 'true');
-	                    $('#inputsl').attr('disabled', 'true');
-	                    $('#inputlsl').attr('disabled', 'true');
-	                    $('#inputusl').val('');
-	                    $('#inputsl').val('');
-	                    $('#inputlsl').val('');
-	                    
-	                    $('#inputac').removeAttr('disabled');
-	                    $('#inputre').removeAttr('disabled');
-	                }
-	        	});
-	        });
+	
 	        
 	        /* document.getElementById('inputcreationDate').value = new Date().toISOString().substring(0, 10); */
         </script>
         
-<!-- 항목데이터 가져오기 -->
-        <script>
-        $('#reg-search').on('click', function() {
-			$.ajax({
-				type : 'GET',
-				url : "/infoinspectitem/regsearchcodeitem",
-				data : $('#form_sbm').serialize(),
-				dataType: "json",
-				success : function(result) {
-					
-					console.log(result);
-					
-					if(result == "false"){
-						alert("자재코드나 검사항목이 유효하지 않습니다.\n다시 확인 후 입력해주세요.");
-					}else if(result == "error"){
-						alert("예기치못한 오류\n관리자에게 문의해주세요.");
-					}else{
-						/* DB에서 데이터 가져와서 클라이언트에 입력해주기 */
-						$('#inputinspectionItemName').val(result.inspectionItemName);
-						$('#inputqua').val(result.qua).prop("selected", true);
-						$('#inputsampleWater').val(result.sampleWater);
-						$('#inputac').val(result.ac);
-						$('#inputre').val(result.re);
-						$('#inputusl').val(result.usl);
-						$('#inputsl').val(result.sl);
-						$('#inputlsl').val(result.lsl);
-						$('#inputucl').val(result.ucl);
-						$('#inputcl').val(result.cl);
-						$('#inputlcl').val(result.lcl);
-						$('#inputunit').val(result.unit).prop("selected", true);
-						$('#inputnote').val(result.note);
-						
-						/* 정성, 정량 가져온 값에 따라 입력폼 disabled을 재정의함. */
-						let optval = $('#inputqua option:selected').val();
-			        	
-			        	if(optval == "정량") {
-		                    $('#inputac').attr('disabled', 'true');
-		                    $('#inputre').attr('disabled', 'true');
-		                    $('#inputac').val('');
-		                    $('#inputre').val('');
-	
-		                    $('#inputusl').removeAttr('disabled');
-		                    $('#inputsl').removeAttr('disabled');
-		                    $('#inputlsl').removeAttr('disabled');
-			        	}else if(optval == "정성"){
-		                    $('#inputusl').attr('disabled', 'true');
-		                    $('#inputsl').attr('disabled', 'true');
-		                    $('#inputlsl').attr('disabled', 'true');
-		                    $('#inputusl').val('');
-		                    $('#inputsl').val('');
-		                    $('#inputlsl').val('');
-		                    
-		                    $('#inputac').removeAttr('disabled');
-		                    $('#inputre').removeAttr('disabled');
-		                }
-					}//if문 마지막
-					
-				}
-			});
-		});
-        </script>
+
         
         <script>
         	$('#inputcode').on('keyup', function () {
@@ -228,7 +142,7 @@
 			$("#inputcode").autocomplete({
 				source : function(request, response) {
 					$.ajax({
-						url : "/infoinspectitem/infosearch",
+						url : "/lot/codesearch",
 						type : "GET",
 						data : {code : $("#inputcode").val()}, // 검색 키워드
 						dataType : "json",
@@ -266,14 +180,14 @@
 			});
 		</script>
 
-<!-- 자재항목 자동완성  -->
+<!-- 자재명 자동완성  -->
 		<script>
-			$("#inputinspectionItem").autocomplete({
+			$("#inputcodeName").autocomplete({
 				source : function(request, response) {
 					$.ajax({
-						url : "/infoinspectitem/itemsearch",
+						url : "/lot/codenamesearch",
 						type : "GET",
-						data : {code : $("#inputcode").val(), inspectionItem : $("#inputinspectionItem").val()}, // 검색 키워드
+						data : {codeName : $("#inputcodeName").val()}, // 검색 키워드
 						dataType : "json",
 						success : function(data) { // 성공
 							if(!data.length){
@@ -283,8 +197,8 @@
 								response(
 									$.map(data, function(item) {
 										return {
-											label : item.inspectionItem,
-											value : item.inspectionItem
+											label : item.inputcodeName,
+											value : item.inputcodeName
 										};
 									})
 								); //response
