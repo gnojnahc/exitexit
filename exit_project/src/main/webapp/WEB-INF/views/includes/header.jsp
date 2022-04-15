@@ -119,11 +119,10 @@
 	                            </a>
 	                            <div class="collapse show" id="collapseLayouts4" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 	                                <nav class="sb-sidenav-menu-nested nav">
-	                                    <a class="nav-link" id="ft_style" href="#">검사항목관리</a>
-	                                    <a class="nav-link" id="ft_style" href="#">검사표준관리</a>
 	                                    <a class="nav-link" id="ft_style" href="/information/main">검사자재등록</a>
 	                                    <a class="nav-link" id="ft_style" href="/inspection/main">검사항목등록</a>
 	                                    <a class="nav-link" id="ft_style" href="/infoinspectitem/main">자재별검사항목등록</a>
+	                                    <a class="nav-link" id="ft_style" href="/lot/main">Lot별 검사결과입력</a>
 	                                </nav>
 	                            </div>
 	                        </div>

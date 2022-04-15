@@ -15,20 +15,18 @@
 
 		<select id="searchList" resultType="erp.exit.domain.LotVO">
 	<![CDATA[
-		SELECT rownum "rn", idx, idx, lot_no, lot_size, code, codeName, pass_or_fail
+		SELECT rownum "rn", idx, lot_no, lot_size, code, codeName, pass_or_fail
 		, constructor, creationDate,note
         FROM
-        (SELECT idx, idx, lot_no, lot_size, code, codeName, pass_or_fail
-		, constructor, creationDate,note
-		FROM exit_search_lot ORDER BY idx DESC)
+        (SELECT idx, lot_no, lot_size, code, codeName, pass_or_fail
+		, constructor, creationDate,note FROM exit_search_lot ORDER BY idx DESC)
 		]]>
 	</select>
 	
-		<select id="codeSearch" resultType="erp.exit.domain.LotVO">
+ 		<select id="codeSearch" resultType="erp.exit.domain.LotVO">
 		<![CDATA[
 			SELECT DISTINCT(code) FROM exit_infoitem WHERE code LIKE '%'||#{code}||'%'
 		]]>
-	</select>
-
+	</select> 
 	
 </mapper>
