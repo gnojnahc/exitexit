@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="erp.exit.mapper.LotMapper">
+
+	<insert id="register">
+	<![CDATA[
+		INSERT INTO exit_search_lot(idx, lot_no, lot_size, code, codeName, pass_or_fail
+		, constructor, creationDate,note) 
+		VALUES (SEARCH_LOT_SEQ.nextval,#{lot_no},#{lot_size},#{code},#{codeName},#{pass_or_fail},
+		#{constructor},#{creationDate},#{note})
+	]]>
+	</insert>
+
+		<select id="searchList" resultType="erp.exit.domain.LotVO">
+	<![CDATA[
+		SELECT rownum "rn", idx, idx, lot_no, lot_size, code, codeName, pass_or_fail
+		, constructor, creationDate,note
+        FROM
+        (SELECT idx, idx, lot_no, lot_size, code, codeName, pass_or_fail
+		, constructor, creationDate,note
+		FROM exit_search_lot ORDER BY idx DESC)
+		]]>
+	</select>
+	
+		<select id="codeSearch" resultType="erp.exit.domain.LotVO">
+		<![CDATA[
+			SELECT DISTINCT(code) FROM exit_infoitem WHERE code LIKE '%'||#{code}||'%'
+		]]>
+	</select>
+
+	
+</mapper>
