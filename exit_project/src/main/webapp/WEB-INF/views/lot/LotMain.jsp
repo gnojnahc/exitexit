@@ -98,7 +98,7 @@
                             </div>
 
                             <div class="card-body-table-two">
-								<table id="resultTable" class="dataTable-table">
+								<table id="resultTable_2" class="dataTable-table">
 									<thead>
                                         <tr>
                                         	<th>No</th>
@@ -117,7 +117,7 @@
 										</tr>
                                     </thead>
                                     <tbody>
-                                        <c:forEach var="vo" items="${list}">
+                                        <c:forEach var="vo" items="${itemList}">
 											<tr>
 												<td style="text-align: center; font-weight: bold; font-size: 10pt;">${vo.rn}</td>
 												<td>${vo.code}</td>
@@ -128,10 +128,10 @@
 												<td>${vo.ac}</td>
 												<td>${vo.re}</td>
 												<td>${vo.usl}</td>		
-												<td>${vo.usl}</td>	
-												<td>${vo.usl}</td>	
-												<td>${vo.usl}</td>	
-												<td>${vo.usl}</td>							
+												<td>${vo.sl}</td>	
+												<td>${vo.lsl}</td>	
+												<td>${vo.unit}</td>	
+												<td>${vo.note}</td>							
 											</tr>
 										</c:forEach>
                                     </tbody>
@@ -153,7 +153,7 @@
                             </div>
 
                             <div class="card-body-table-two">
-								<table id="resultTable" class="dataTable-table">
+								<table id="resultTable_3" class="dataTable-table">
 									<thead>
                                         <tr>
                                         	<th>No</th>
@@ -186,37 +186,7 @@
 
 	<%@ include file="../includes/footer.jsp" %>
 	
-	<script>
-		// getSearchList
-		function getSearchList(){
-			$.ajax({
-				type: 'GET',
-				url : "/infoinspectitem/getSearchList",
-				data : $("form[name=search-form]").serialize(),
-				success : function(result){
-					//테이블 초기화
-					$('#resultTable > tbody').empty();
-					if(result.length >= 1){
-						let str = "";
-						result.forEach(function(item){
-							str+='<tr>'
-								str+='<td style="text-align: center; font-weight: bold; font-size: 10pt;">'+item.rn+'</td>'
-								str+="<td>"+item.code+"</td>"
-								str+="<td>"+item.inspectionItem+"</td>"
-								str+="<td>"+item.inspectionItemName+"</td>"
-								str+="<td>"+item.qua+"</td>"
-								str+="<td>"+item.sampleWater+"</td>"
-								str+="<td>"+item.ac+"</td>"
-								str+="<td>"+item.re+"</td>"
-								str+="<td>"+item.usl+"</td>"
-							str+="</tr>"
-		        		});
-						$('#resultTable > tbody').html(str);
-					}
-				}
-			});
-		}
-	</script>
+
 	
 	<script>
 	function fnExcelReport(id, title) {
@@ -257,6 +227,49 @@
 	        document.body.removeChild(elem);
 	    }
 	}
+	</script>
+	
+	<script>
+	$('#resultTable tr').click(function(){
+			// 현재 클릭된 Row(<tr>)
+			var tr = $(this);
+			var td = tr.children();
+			// td.eq(index)를 통해 값을 가져올 수도 있다.
+			var code = 'code='+td.eq(3).text();
+			console.log("code 값 : "+code);
+					$.ajax({
+						type: 'GET',
+						url : "/lot/itemlist",
+						data : code,
+						success : function(result){
+							console.log(result);
+							//테이블 초기화
+							$('#resultTable_2 > tbody').empty();
+							if(result.length >= 1){
+								let str = "";
+								result.forEach(function(item){
+									str+='<tr>'
+										str+='<td style="text-align: center; font-weight: bold; font-size: 10pt;">'+item.rn+'</td>'
+										str+="<td>"+item.code+"</td>"
+										str+="<td>"+item.inspectionItem+"</td>"
+										str+="<td>"+item.inspectionItemName+"</td>"
+										str+="<td>"+item.qua+"</td>"
+										str+="<td>"+item.sampleWater+"</td>"
+										str+="<td>"+item.ac+"</td>"
+										str+="<td>"+item.re+"</td>"
+										str+="<td>"+item.usl+"</td>"
+										str+="<td>"+item.sl+"</td>"
+										str+="<td>"+item.lsl+"</td>"
+										str+="<td>"+item.unit+"</td>"
+										str+="<td>"+item.note+"</td>"
+									str+="</tr>"
+				        		});
+								$('#resultTable_2 > tbody').html(str);
+						}
+					}
+				});
+		});
+	
 	</script>
 		
 </html>

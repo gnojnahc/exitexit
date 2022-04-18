@@ -28,15 +28,16 @@ public class LotServiceImpl implements LotService {
 		return mapper.searchList();
 	}
 	
-	//등록할때 자재코드 검색
-	@Override
-	public InfoItemVO codeSearch(String code) {
-		return mapper.codeSearch(code);
-	}
-	
+	//자재코드 자동완성
 	@Override
 	public List<ProductVO> autoCode(String code) {
-		// TODO Auto-generated method stub
 		return mapper.autoCode(code);
 	}
+	
+	//item별 검사항목 리스트
+	@Override
+	public List<InfoItemVO> itemList(String code) {
+		return mapper.itemList(code);
+	}
+	
 }

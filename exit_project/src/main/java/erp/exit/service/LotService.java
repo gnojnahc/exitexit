@@ -14,9 +14,10 @@ public interface LotService {
 	//검사결과 검색내역 가져오기
 	public List<LotVO> searchList();
 	
-	//검사결과 자재코드 검색해서 가져오기
-	public InfoItemVO codeSearch(String code);
-	
 	//자재코드 자동완성
 	public List<ProductVO> autoCode(String code);
+	
+	//item별 검사항목 리스트
+	public List<InfoItemVO> itemList(String code);
+	
 }

@@ -14,11 +14,10 @@ public interface LotMapper {
 	//검사결과 검색내역 리스트
 	public List<LotVO> searchList();
 	
-	//3주차 자재코드 검색해서 보여주기
-	public InfoItemVO codeSearch(String code);
-	
-	//자재코드 자동완성
+	//팝업창 3주차 자재코드 검색해서 보여주기
 	public List<ProductVO> autoCode(String code);
 	
+	//item별 검사항목 리스트
+	public List<InfoItemVO> itemList(String code);
 	
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 
+import erp.exit.domain.InfoItemVO;
 import erp.exit.domain.LotVO;
 import erp.exit.domain.ProductVO;
 import erp.exit.service.LotService;
@@ -59,7 +60,16 @@ public class LotController {
 			return js.toJson(code);
 		}
 
-
+		//item별 검사항목 리스트
+		@ResponseBody
+		@GetMapping("/itemlist")
+		public List<InfoItemVO> item(String code) {
+			log.info(code+" 출력준비중..");
+			
+			return service.itemList(code);
+		}
+		
+		
 	
 
 }

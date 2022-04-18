@@ -180,7 +180,7 @@
 			});
 		</script>
 
-<!-- 자재명 자동완성  -->
+<!-- 자재명 자동완성  
 		<script>
 			$("#inputcodeName").autocomplete({
 				source : function(request, response) {
@@ -221,7 +221,7 @@
 				close : function(evt) {
 				}
 			});
-		</script>
+		</script> -->
         
         
     </body>
