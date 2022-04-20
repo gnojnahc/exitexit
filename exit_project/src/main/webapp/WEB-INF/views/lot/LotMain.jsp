@@ -166,6 +166,18 @@
 										</tr>
                                     </thead>
                                     <tbody>
+                                    	<!-- ddddddddddddddddddd -->
+                                   		<tr>
+											<td style="text-align: center; font-weight: bold; font-size: 10pt;">1</td>
+											<td>5</td>
+											<td>2</td>
+											<td>test</td>
+											<td>test</td>
+											<td style="text-align: center;"><input type="number" name="ispt_result" placeholder="결과값을 입력 해주세요." style="text-align: center; width: 80%; border: 1px solid rgba(0, 0, 0, 0.125);"></td>
+											<td>합격</td>
+										</tr>
+										<!-- ddddddddddddddddddddddd -->
+										
                                         <c:forEach var="vo" items="${list}">
 											<tr>
 												<td style="text-align: center; font-weight: bold; font-size: 10pt;">${vo.rn}</td>
@@ -188,7 +200,7 @@
 	
 
 	
-	<script>
+	<script> /* 엑셀 다운로드 기능 */
 	function fnExcelReport(id, title) {
 	    var tab_text = '<html xmlns:x="urn:schemas-microsoft-com:office:excel">';
 	    tab_text = tab_text + '<head><meta http-equiv="content-type" content="application/vnd.ms-excel; charset=UTF-8">';
@@ -229,46 +241,82 @@
 	}
 	</script>
 	
+	
 	<script>
-	$('#resultTable tr').click(function(){
+	
+	/* 1테이블 td 클릭시 2테이블 데이터 Ajax 출력 */
+	$(document).ready(function () {
+		$(document).on('click', '#resultTable tr', function(){
 			// 현재 클릭된 Row(<tr>)
 			var tr = $(this);
 			var td = tr.children();
 			// td.eq(index)를 통해 값을 가져올 수도 있다.
 			var code = 'code='+td.eq(3).text();
 			console.log("code 값 : "+code);
-					$.ajax({
-						type: 'GET',
-						url : "/lot/itemlist",
-						data : code,
-						success : function(result){
-							console.log(result);
-							//테이블 초기화
-							$('#resultTable_2 > tbody').empty();
-							if(result.length >= 1){
-								let str = "";
-								result.forEach(function(item){
-									str+='<tr>'
-										str+='<td style="text-align: center; font-weight: bold; font-size: 10pt;">'+item.rn+'</td>'
-										str+="<td>"+item.code+"</td>"
-										str+="<td>"+item.inspectionItem+"</td>"
-										str+="<td>"+item.inspectionItemName+"</td>"
-										str+="<td>"+item.qua+"</td>"
-										str+="<td>"+item.sampleWater+"</td>"
-										str+="<td>"+item.ac+"</td>"
-										str+="<td>"+item.re+"</td>"
-										str+="<td>"+item.usl+"</td>"
-										str+="<td>"+item.sl+"</td>"
-										str+="<td>"+item.lsl+"</td>"
-										str+="<td>"+item.unit+"</td>"
-										str+="<td>"+item.note+"</td>"
-									str+="</tr>"
-				        		});
-								$('#resultTable_2 > tbody').html(str);
-						}
+				$.ajax({
+					type: 'GET',
+					url : "/lot/itemlist",
+					data : code,
+					success : function(result){
+						console.log(result);
+						$('#resultTable_2 > tbody').empty();
+						if(result.length >= 1){
+							let str = "";
+							let cnt = 0;
+							result.forEach(function(item){
+								cnt++;
+								str+='<tr>'
+									str+='<td style="text-align: center; font-weight: bold; font-size: 10pt;">'+item.rn+'</td>'
+									str+="<td>"+item.code+"</td>"
+									str+="<td>"+item.inspectionItem+"</td>"
+									str+="<td>"+item.inspectionItemName+"</td>"
+									str+="<td>"+item.qua+"</td>"
+									str+="<td>"+item.sampleWater+"</td>"
+									str+="<td>"+item.ac+"</td>"
+									str+="<td>"+item.re+"</td>"
+									str+="<td>"+item.usl+"</td>"
+									str+="<td>"+item.sl+"</td>"
+									str+="<td>"+item.lsl+"</td>"
+									str+="<td>"+item.unit+"</td>"
+									str+="<td>"+item.note+"</td>"
+								str+="</tr>"
+			        		});
+						$('#resultTable_2 > tbody').html(str);
 					}
-				});
+				}
+			});
 		});
+	});
+	
+	/* 2테이블 td 클릭시 3테이블 데이터 Ajax 출력 */
+	$(document).ready(function () {
+		$(document).on('click', '#resultTable_2 tr', function(){
+			var tr = $(this);
+			var td = tr.children();
+			var code = 'code='+td.eq(1).text();
+			let sampleWater = Number(td.eq(5).text());
+			console.log(typeof sampleWater);
+			
+ 			console.log("code 값 : "+code);
+			console.log("sampleWater 값 : "+sampleWater);
+			$('#resultTable_3 > tbody').empty();
+			let str = "";
+			for (var i = 1; i > sampleWater; i++) {
+				str+='<tr>'
+					str+="<td>"+ i +"</td>"
+					str+="<td>"+ i +"</td>"
+					str+="<td>"+"test"+"</td>"
+					str+="<td>"+"test"+"</td>"
+					str+="<td>"+"test"+"</td>"
+					str+="<td style='text-align: center;'><input type='number' name='ispt_result' placeholder='결과값을 입력 해주세요.' style='text-align: center; width: 80%; border: 1px solid rgba(0, 0, 0, 0.125);'></td>"
+					str+="<td>" + "합격" + "</td>"
+				str+="</tr>"
+			}
+			console.log(str);
+			$('#resultTable_3 > tbody').html(str);
+			
+		});
+	});
 	
 	</script>
 		
