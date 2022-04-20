@@ -117,23 +117,7 @@
 										</tr>
                                     </thead>
                                     <tbody>
-                                        <c:forEach var="vo" items="${itemList}">
-											<tr>
-												<td style="text-align: center; font-weight: bold; font-size: 10pt;">${vo.rn}</td>
-												<td>${vo.code}</td>
-												<td>${vo.inspectionItem}</td>
-												<td>${vo.inspectionItemName}</td>
-												<td>${vo.qua}</td>
-												<td>${vo.sampleWater}</td>
-												<td>${vo.ac}</td>
-												<td>${vo.re}</td>
-												<td>${vo.usl}</td>		
-												<td>${vo.sl}</td>	
-												<td>${vo.lsl}</td>	
-												<td>${vo.unit}</td>	
-												<td>${vo.note}</td>							
-											</tr>
-										</c:forEach>
+                                    <%-- item별 검사항목 출력부분 --%>
                                     </tbody>
                                 </table>
                             </div>
@@ -166,29 +150,7 @@
 										</tr>
                                     </thead>
                                     <tbody>
-                                    	<!-- ddddddddddddddddddd -->
-                                   		<tr>
-											<td style="text-align: center; font-weight: bold; font-size: 10pt;">1</td>
-											<td>5</td>
-											<td>2</td>
-											<td>test</td>
-											<td>test</td>
-											<td style="text-align: center;"><input type="number" name="ispt_result" placeholder="결과값을 입력 해주세요." style="text-align: center; width: 80%; border: 1px solid rgba(0, 0, 0, 0.125);"></td>
-											<td>합격</td>
-										</tr>
-										<!-- ddddddddddddddddddddddd -->
-										
-                                        <c:forEach var="vo" items="${list}">
-											<tr>
-												<td style="text-align: center; font-weight: bold; font-size: 10pt;">${vo.rn}</td>
-												<td>${vo.code}</td>
-												<td>${vo.inspectionItem}</td>
-												<td>${vo.inspectionItemName}</td>
-												<td>${vo.qua}</td>
-												<td>${vo.sampleWater}</td>
-												<td>${vo.ac}</td>							
-											</tr>
-										</c:forEach>
+                                    <%-- 검사실적 출력부분 --%>
                                     </tbody>
                                 </table>
                             </div>
@@ -252,19 +214,20 @@
 			var td = tr.children();
 			// td.eq(index)를 통해 값을 가져올 수도 있다.
 			var code = 'code='+td.eq(3).text();
+			// {code=TEST01}
+			// /lot/itemlist?codd=TEST01
 			console.log("code 값 : "+code);
 				$.ajax({
-					type: 'GET',
-					url : "/lot/itemlist",
+					type: 'GET', //method = "get"
+					url : "/lot/itemlist", //action="/lot/itemlist"
+					// <form action="/lot/itemlist" method = "get">
 					data : code,
 					success : function(result){
 						console.log(result);
 						$('#resultTable_2 > tbody').empty();
 						if(result.length >= 1){
 							let str = "";
-							let cnt = 0;
 							result.forEach(function(item){
-								cnt++;
 								str+='<tr>'
 									str+='<td style="text-align: center; font-weight: bold; font-size: 10pt;">'+item.rn+'</td>'
 									str+="<td>"+item.code+"</td>"
@@ -300,10 +263,11 @@
  			console.log("code 값 : "+code);
 			console.log("sampleWater 값 : "+sampleWater);
 			$('#resultTable_3 > tbody').empty();
-			let str = "";
-			for (var i = 1; i > sampleWater; i++) {
+			var str = "";
+			
+			for (var i = 1; i <= sampleWater; i++) {
 				str+='<tr>'
-					str+="<td>"+ i +"</td>"
+					str+='<td style="text-align: center; font-weight: bold; font-size: 10pt;">'+i+'</td>'
 					str+="<td>"+ i +"</td>"
 					str+="<td>"+"test"+"</td>"
 					str+="<td>"+"test"+"</td>"
@@ -312,7 +276,6 @@
 					str+="<td>" + "합격" + "</td>"
 				str+="</tr>"
 			}
-			console.log(str);
 			$('#resultTable_3 > tbody').html(str);
 			
 		});

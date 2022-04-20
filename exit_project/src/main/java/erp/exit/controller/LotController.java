@@ -68,8 +68,5 @@ public class LotController {
 			
 			return service.itemList(code);
 		}
-		
-		
 	
-
 }
