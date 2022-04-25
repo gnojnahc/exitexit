@@ -269,19 +269,7 @@
 	/* 2테이블 td 클릭시 3테이블 데이터 출력 */
 	 $(document).ready(function () {
 		$(document).on('click', '#resultTable_2 tr', function(){
-			
-			$("#resultTable_3").on('keyup', function testing(val){
-				var text = $("#resultTable_3 tr td input").eq(6).text();
-				console.log(text)
-				var value = val.value;
-				
-				if(value <= 50){
-					document.getElementById('pass').value = "합격";
-			    }else{
-			        document.getElementById('pass').value = "불합격";
-			    }
-			});
-			
+									
 			var tr = $(this);
 			var td = tr.children();
 			
@@ -296,9 +284,6 @@
 			
 			$('#resultTable_3 > tbody').empty();
 			var str = "";
-			
-			
-			
 			
 			for (var i = 1; i <= sampleWater; i++) {
 				str+='<tr>'
@@ -328,6 +313,18 @@
 		    }
 			
 		};
+		
+		$("#resultTable_3").on('keyup', function testing(val){
+			var text = $("#resultTable_3 tr td input").eq(6).text();
+			console.log(text)
+			var value = val.value;
+			
+			if(value <= 50){
+				document.getElementById('pass').value = "합격";
+		    }else{
+		        document.getElementById('pass').value = "불합격";
+		    }
+		});
 	
 /* 		$(document).ready(function () {
 			$("#resultTable_3").on('keyup', function testing(val){
