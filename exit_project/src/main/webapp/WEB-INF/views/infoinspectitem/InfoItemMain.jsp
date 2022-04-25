@@ -59,7 +59,7 @@
 									<b>항목 검색내역</b>
 								</div>
 
-								<div class="btn btn-success" onclick="fnExcelReport('resultTable','item_List');" style="float: right;">
+								<div class="btn btn-success" onclick="fnExcelReport('resultTable','InfoItem_List');" style="float: right;">
 									<i class="fas fa-table me-1"></i>
 									<a>Excel 다운로드</a>
 								</div>

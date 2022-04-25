@@ -26,4 +26,9 @@ public class LotVO {
 	   
 		// 날짜 포맷 적용
 		private String df_creationDate;
+		
+
+	    
+	    
+		
 }

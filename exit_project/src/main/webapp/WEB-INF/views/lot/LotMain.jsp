@@ -117,23 +117,7 @@
 										</tr>
                                     </thead>
                                     <tbody>
-                                        <c:forEach var="vo" items="${itemList}">
-											<tr>
-												<td style="text-align: center; font-weight: bold; font-size: 10pt;">${vo.rn}</td>
-												<td>${vo.code}</td>
-												<td>${vo.inspectionItem}</td>
-												<td>${vo.inspectionItemName}</td>
-												<td>${vo.qua}</td>
-												<td>${vo.sampleWater}</td>
-												<td>${vo.ac}</td>
-												<td>${vo.re}</td>
-												<td>${vo.usl}</td>		
-												<td>${vo.sl}</td>	
-												<td>${vo.lsl}</td>	
-												<td>${vo.unit}</td>	
-												<td>${vo.note}</td>							
-											</tr>
-										</c:forEach>
+                                    <%-- item별 검사항목 출력부분 --%>
                                     </tbody>
                                 </table>
                             </div>
@@ -166,17 +150,7 @@
 										</tr>
                                     </thead>
                                     <tbody>
-                                        <c:forEach var="vo" items="${list}">
-											<tr>
-												<td style="text-align: center; font-weight: bold; font-size: 10pt;">${vo.rn}</td>
-												<td>${vo.code}</td>
-												<td>${vo.inspectionItem}</td>
-												<td>${vo.inspectionItemName}</td>
-												<td>${vo.qua}</td>
-												<td>${vo.sampleWater}</td>
-												<td>${vo.ac}</td>							
-											</tr>
-										</c:forEach>
+                     				<%--  검사실적 출력부분 --%>
                                     </tbody>
                                 </table>
                             </div>
@@ -188,7 +162,7 @@
 	
 
 	
-	<script>
+	<script> /* 엑셀 다운로드 기능 */
 	function fnExcelReport(id, title) {
 	    var tab_text = '<html xmlns:x="urn:schemas-microsoft-com:office:excel">';
 	    tab_text = tab_text + '<head><meta http-equiv="content-type" content="application/vnd.ms-excel; charset=UTF-8">';
@@ -229,54 +203,148 @@
 	}
 	</script>
 	
+	
 	<script>
-	$('#resultTable tr').click(function(){
+	
+	let lot_no_t1 = "";
+	
+	/* 1테이블 td 클릭시 2테이블 데이터 Ajax 출력 */
+	$(document).ready(function () {
+		$(document).on('click', '#resultTable tr', function(){
 			// 현재 클릭된 Row(<tr>)
 			var tr = $(this);
 			var td = tr.children();
 			// td.eq(index)를 통해 값을 가져올 수도 있다.
 			var code = 'code='+td.eq(3).text();
+			lot_no_t1 = td.eq(1).text();
+			// {code=TEST01}
+			// /lot/itemlist?codd=TEST01
 			console.log("code 값 : "+code);
-					$.ajax({
-						type: 'GET',
-						url : "/lot/itemlist",
-						data : code,
-						success : function(result){
-							console.log(result);
-							//테이블 초기화
-							$('#resultTable_2 > tbody').empty();
-							if(result.length >= 1){
-								let str = "";
-								result.forEach(function(item){
-									str+='<tr>'
-										str+='<td style="text-align: center; font-weight: bold; font-size: 10pt;">'+item.rn+'</td>'
-										str+="<td>"+item.code+"</td>"
-										str+="<td>"+item.inspectionItem+"</td>"
-										str+="<td>"+item.inspectionItemName+"</td>"
-										str+="<td>"+item.qua+"</td>"
-										str+="<td>"+item.sampleWater+"</td>"
-										str+="<td>"+item.ac+"</td>"
-										str+="<td>"+item.re+"</td>"
-										str+="<td>"+item.usl+"</td>"
-										str+="<td>"+item.sl+"</td>"
-										str+="<td>"+item.lsl+"</td>"
-										str+="<td>"+item.unit+"</td>"
-										str+="<td>"+item.note+"</td>"
-									str+="</tr>"
-				        		});
-								$('#resultTable_2 > tbody').html(str);
-						}
+				$.ajax({
+					type: 'GET', //method = "get"
+					url : "/lot/itemlist", //action="/lot/itemlist"
+					// <form action="/lot/itemlist" method = "get">
+					data : code,
+					success : function(result){
+						console.log(result);
+						$('#resultTable_2 > tbody').empty();
+						$('#resultTable_3 > tbody').empty();
+						if(result.length >= 1){
+							let str = "";
+							result.forEach(function(item){
+								str+='<tr>'
+									str+='<td style="text-align: center; font-weight: bold; font-size: 10pt;">'+item.rn+'</td>'
+									str+="<td>"+item.code+"</td>"
+									str+="<td>"+item.inspectionItem+"</td>"
+									str+="<td>"+item.inspectionItemName+"</td>"
+									str+="<td>"+item.qua+"</td>"
+									str+="<td>"+item.sampleWater+"</td>"
+									str+="<td>"+item.ac+"</td>"
+									str+="<td>"+item.re+"</td>"
+									str+="<td>"+item.usl+"</td>"
+									str+="<td>"+item.sl+"</td>"
+									str+="<td>"+item.lsl+"</td>"
+									str+="<td>"+item.unit+"</td>"
+									str+="<td>"+item.note+"</td>"
+								str+="</tr>"
+			        		});
+						$('#resultTable_2 > tbody').html(str);
 					}
-				});
+				}
+			});
 		});
-	</script>
+	});
 	
-	<script>
-	// 테이블의 Row 클릭시 값 가져오기
+	
+	$('textarea').on('keyup', function(){
+		  // 남은 글자 수를 구한다.
+		  var letterLength = $(this).val().length;
+		  var remain = 200 - letterLength;
+		  
+		  // 문서 객체에 입력한다.
+		  $('h1').html(remain);
+		});
+	
+	
+	/* 2테이블 td 클릭시 3테이블 데이터 출력 */
+	 $(document).ready(function () {
+		$(document).on('click', '#resultTable_2 tr', function(){
+			
+			$("#resultTable_3").on('keyup', function testing(val){
+				var text = $("#resultTable_3 tr td input").eq(6).text();
+				console.log(text)
+				var value = val.value;
+				
+				if(value <= 50){
+					document.getElementById('pass').value = "합격";
+			    }else{
+			        document.getElementById('pass').value = "불합격";
+			    }
+			});
+			
+			var tr = $(this);
+			var td = tr.children();
+			
+			var code = td.eq(1).text();
+ 			console.log("자재코드 값 : "+code);
 
+ 			var inspectionItem = td.eq(2).text();
+ 			console.log("검사항목 값 : "+inspectionItem);
+			
+ 			let sampleWater = Number(td.eq(5).text());
+			console.log("시료수 : "+sampleWater);
+			
+			$('#resultTable_3 > tbody').empty();
+			var str = "";
+			
+			
+			
+			
+			for (var i = 1; i <= sampleWater; i++) {
+				str+='<tr>'
+					str+='<td style="text-align: center; font-weight: bold; font-size: 10pt;">'+i+'</td>'
+					str+="<td>"+ i +"</td>"
+					str+="<td>"+lot_no_t1+"</td>"
+					str+="<td>"+code+"</td>"
+					str+="<td>"+inspectionItem+"</td>"
+					str+="<td style='text-align: center;'><input type='text' onkeyup='testing(this.value)' name='ispt_result' id='valuetest' placeholder='결과값을 입력 해주세요.' style='text-align: center; width: 80%; border: 1px solid rgba(0, 0, 0, 0.125);'></td>"
+					str+="<td input type='text' id='pass' disabled/> </td>"
+				str+="</tr>"
+				}
+			$('#resultTable_3 > tbody').html(str);
+			
+			
+		});
+	}); 
+	
+	 function testing() {
+
+			var name = document.getElementById('valuetest').value;
+			console.log(name)
+			if(name < "50"){
+				document.getElementById('pass').innerText = "불합격";
+		    }else{
+		        document.getElementById('pass').innerText = "합격";
+		    }
+			
+		};
+	
+/* 		$(document).ready(function () {
+			$("#resultTable_3").on('keyup', function testing(val){
+			var text = $("#resultTable_3 tr td input").eq(6).text();
+			console.log(text)
+			var value = val.value;
+			
+			if(value <= 50){
+				document.getElementById('pass').value = "합격";
+		    }else{
+		        document.getElementById('pass').value = "불합격";
+		    }
+				
+		});
+	}); */
 	
 	</script>
-
 
 		
 </html>

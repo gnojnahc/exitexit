@@ -20,4 +20,6 @@ public interface LotService {
 	//item별 검사항목 리스트
 	public List<InfoItemVO> itemList(String code);
 	
+
+	
 }

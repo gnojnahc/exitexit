@@ -13,7 +13,7 @@
 	]]>
 	</insert>
 
-		<select id="searchList" resultType="erp.exit.domain.LotVO">
+	<select id="searchList" resultType="erp.exit.domain.LotVO">
 	<![CDATA[
 		SELECT rownum "rn", idx, lot_no, lot_size, code, codeName, pass_or_fail
 		, constructor, creationDate,note
@@ -22,15 +22,15 @@
 		, constructor, creationDate,note FROM exit_search_lot ORDER BY idx DESC)
 		]]>
 	</select>
-	
- 		
+
+
 	<select id="autoCode" resultType="erp.exit.domain.LotVO">
 		<![CDATA[
 			SELECT DISTINCT(code) FROM exit_product WHERE code LIKE '%'||#{code}||'%'
 		]]>
 	</select>
-	
-	 	<select id="itemList" resultType="erp.exit.domain.InfoItemVO">
+
+	<select id="itemList" resultType="erp.exit.domain.InfoItemVO">
 	<![CDATA[
 		SELECT rownum "rn", idx, code, inspectionitem, inspectionitemname, qua, samplewater, ac
 		, re, usl, sl, lsl, unit, note
@@ -38,5 +38,7 @@
 		ac,re,usl,sl,lsl,unit,note FROM exit_infoitem WHERE code LIKE #{code} ORDER BY idx DESC)
 		]]>
 	</select>
-	
+
+
+
 </mapper>
