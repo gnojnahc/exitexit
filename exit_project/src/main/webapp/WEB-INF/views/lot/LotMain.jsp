@@ -207,6 +207,7 @@
 	<script>
 	
 	let lot_no_t1 = "";
+	sampleWater = "";
 	
 	/* 1테이블 td 클릭시 2테이블 데이터 Ajax 출력 */
 	$(document).ready(function () {
@@ -256,14 +257,14 @@
 	});
 	
 	
-	$('textarea').on('keyup', function(){
+/* 	$('textarea').on('keyup', function(){
 		  // 남은 글자 수를 구한다.
 		  var letterLength = $(this).val().length;
 		  var remain = 200 - letterLength;
 		  
 		  // 문서 객체에 입력한다.
 		  $('h1').html(remain);
-		});
+		}); */
 	
 	
 	/* 2테이블 td 클릭시 3테이블 데이터 출력 */
@@ -292,8 +293,8 @@
 					str+="<td>"+lot_no_t1+"</td>"
 					str+="<td>"+code+"</td>"
 					str+="<td>"+inspectionItem+"</td>"
-					str+="<td style='text-align: center;'><input type='text' onkeyup='testing(this.value)' name='ispt_result' id='valuetest' placeholder='결과값을 입력 해주세요.' style='text-align: center; width: 80%; border: 1px solid rgba(0, 0, 0, 0.125);'></td>"
-					str+="<td input type='text' id='pass' disabled/> </td>"
+					str+="<td style='text-align: center;'><input type='number' onkeyup='testing(this.value)' name='ispt_result' id='valuetest' placeholder='결과값을 입력 해주세요.' style='text-align: center; width: 80%; border: 1px solid rgba(0, 0, 0, 0.125);'></td>"
+					str+="<td style='text-align: center;'><input type='text' id='pass' disabled/ style='text-align: center; width: 80%; border: 1px solid rgba(0, 0, 0, 0.125);> </td>"
 				str+="</tr>"
 				}
 			$('#resultTable_3 > tbody').html(str);
@@ -301,47 +302,27 @@
 			
 		});
 	}); 
-	
-	 function testing() {
-
-			var name = document.getElementById('valuetest').value;
-			console.log(name)
-			if(name < "50"){
-				document.getElementById('pass').innerText = "불합격";
-		    }else{
-		        document.getElementById('pass').innerText = "합격";
-		    }
-			
-		};
 		
-		$("#resultTable_3").on('keyup', function testing(val){
-			var text = $("#resultTable_3 tr td input").eq(6).text();
-			console.log(text)
-			var value = val.value;
-			
-			if(value <= 50){
-				document.getElementById('pass').value = "합격";
-		    }else{
-		        document.getElementById('pass').value = "불합격";
-		    }
-		});
-	
-/* 		$(document).ready(function () {
-			$("#resultTable_3").on('keyup', function testing(val){
-			var text = $("#resultTable_3 tr td input").eq(6).text();
-			console.log(text)
-			var value = val.value;
-			
-			if(value <= 50){
-				document.getElementById('pass').value = "합격";
-		    }else{
-		        document.getElementById('pass').value = "불합격";
-		    }
+		
+		function testing() { 
+			window.addEventListener('keyup', (e) => {
+				console.log('시작해 볼까?');
 				
+				var a=$(':focus').val();
+				console.log(a);
+				
+				if(a < 50){
+					$(":focus").parent().siblings().find("#pass").val("불합격");
+			    }else{
+			    	$(":focus").parent().siblings().find("#pass").val("합격");
+			    }
 		});
-	}); */
-	
+			
+	};		
+		
+
 	</script>
+
 
 		
 </html>
