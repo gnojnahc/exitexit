@@ -207,7 +207,6 @@
 	<script>
 	
 	let lot_no_t1 = "";
-	sampleWater = "";
 	
 	/* 1테이블 td 클릭시 2테이블 데이터 Ajax 출력 */
 	$(document).ready(function () {
@@ -233,20 +232,20 @@
 						if(result.length >= 1){
 							let str = "";
 							result.forEach(function(item){
-								str+='<tr>'
+								str+="<tr>"
 									str+='<td style="text-align: center; font-weight: bold; font-size: 10pt;">'+item.rn+'</td>'
-									str+="<td>"+item.code+"</td>"
-									str+="<td>"+item.inspectionItem+"</td>"
-									str+="<td>"+item.inspectionItemName+"</td>"
-									str+="<td>"+item.qua+"</td>"
-									str+="<td>"+item.sampleWater+"</td>"
-									str+="<td>"+item.ac+"</td>"
-									str+="<td>"+item.re+"</td>"
-									str+="<td>"+item.usl+"</td>"
-									str+="<td>"+item.sl+"</td>"
-									str+="<td>"+item.lsl+"</td>"
-									str+="<td>"+item.unit+"</td>"
-									str+="<td>"+item.note+"</td>"
+									str+='<td>'+item.code+'</td>'
+									str+='<td>'+item.inspectionItem+'</td>'
+									str+='<td>'+item.inspectionItemName+'</td>'
+									str+='<td>'+item.qua+'</td>'
+									str+='<td>'+item.sampleWater+'</td>'
+									str+='<td>'+item.ac+'</td>'
+									str+='<td>'+item.re+'</td>'
+									str+='<td>'+item.usl+'</td>'
+									str+='<td>'+item.sl+'</td>'
+									str+='<td>'+item.lsl+'</td>'
+									str+='<td>'+item.unit+'</td>'
+									str+='<td>'+item.note+'</td>'
 								str+="</tr>"
 			        		});
 						$('#resultTable_2 > tbody').html(str);
@@ -267,56 +266,57 @@
 		}); */
 	
 	
-	/* 2테이블 td 클릭시 3테이블 데이터 출력 */
-	 $(document).ready(function () {
-		$(document).on('click', '#resultTable_2 tr', function(){
-									
-			var tr = $(this);
-			var td = tr.children();
-			
-			var code = td.eq(1).text();
- 			console.log("자재코드 값 : "+code);
+		   /* 2테이블 td 클릭시 3테이블 데이터 출력 */
+	    $(document).ready(function () {
+	      $(document).on('click', '#resultTable_2 tr', function(){
+	                           
+	         var tr = $(this);
+	         var td = tr.children();
+	         
+	         var code = td.eq(1).text();
+	          console.log("자재코드 값 : "+code);
 
- 			var inspectionItem = td.eq(2).text();
- 			console.log("검사항목 값 : "+inspectionItem);
-			
- 			let sampleWater = Number(td.eq(5).text());
-			console.log("시료수 : "+sampleWater);
-			
-			$('#resultTable_3 > tbody').empty();
-			var str = "";
-			
-			for (var i = 1; i <= sampleWater; i++) {
-				str+='<tr>'
-					str+='<td style="text-align: center; font-weight: bold; font-size: 10pt;">'+i+'</td>'
-					str+="<td>"+ i +"</td>"
-					str+="<td>"+lot_no_t1+"</td>"
-					str+="<td>"+code+"</td>"
-					str+="<td>"+inspectionItem+"</td>"
-					str+="<td style='text-align: center;'><input type='number' onkeyup='testing(this.value)' name='ispt_result' id='valuetest' placeholder='결과값을 입력 해주세요.' style='text-align: center; width: 80%; border: 1px solid rgba(0, 0, 0, 0.125);'></td>"
-					str+="<td style='text-align: center;'><input type='text' id='pass' disabled/ style='text-align: center; width: 80%; border: 1px solid rgba(0, 0, 0, 0.125);> </td>"
-				str+="</tr>"
-				}
-			$('#resultTable_3 > tbody').html(str);
-			
-			
-		});
-	}); 
+	          var inspectionItem = td.eq(2).text();
+	          console.log("검사항목 값 : "+inspectionItem);
+	         
+	          let sampleWater = Number(td.eq(5).text());
+	         console.log("시료수 : "+sampleWater);
+	         
+	         sw_no = Number(td.eq(5).text());
+	         
+	         $('#resultTable_3 > tbody').empty();
+	         var str = "";
+	         
+	         for (var i = 1; i <= sampleWater; i++) {
+	            str+='<tr>'
+	               str+="<td id='t_no" + i + "' style='text-align: center; font-weight: bold; font-size: 10pt;'>"+i+"</td>"
+	               str+="<td>"+ i +"</td>"
+	               str+="<td>"+lot_no_t1+"</td>"
+	               str+="<td>"+code+"</td>"
+	               str+="<td>"+inspectionItem+"</td>"
+	               str+="<td style='text-align: center;'><input type='number' onkeyup='testing()' placeholder='결과값을 입력 해주세요.' style='text-align: center; width: 80%; border: 1px solid rgba(0, 0, 0, 0.125);'></td>"
+	               str+="<td style='text-align: center;'><input type='text' id='pass' style='text-align: center; width: 80%; border: 1px solid rgba(0, 0, 0, 0.125);' disabled/</td>"
+	            str+="</tr>"
+	            }
+	         $('#resultTable_3 > tbody').html(str);
+	         
+	      });
+	   });
 		
 		
 		function testing() { 
-			window.addEventListener('keyup', (e) => {
+		//	window.addEventListener('keyup', (e) => {
 				console.log('시작해 볼까?');
 				
-				var a=$(':focus').val();
+				var a=$(":focus").val();
 				console.log(a);
 				
 				if(a < 50){
-					$(":focus").parent().siblings().find("#pass").val("불합격");
+					$(":focus").parent().parent().find("#pass").val("불합격");
 			    }else{
-			    	$(":focus").parent().siblings().find("#pass").val("합격");
+			    	$(":focus").parent().parent().find("#pass").val("합격");
 			    }
-		});
+	//	});
 			
 	};		
 		
